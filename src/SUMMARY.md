@@ -4,7 +4,7 @@
 - [はじめに](./getting-started.md)
   - [Hello World!](./hello-world.md)
   - [Next Steps](./next-steps.md)
-- [Data Types](./data-types.md)
+- [データ型](./data-types.md)
   - [Primitives](./primitive-types.md)
   - [Tuples](./tuples.md)
   - [Enums](./enums.md)

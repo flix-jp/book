@@ -1,0 +1,41 @@
+name: PR Notify to Discord
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # UTC 01:00 = JST 10:00
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get open PRs and notify Discord
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        run: |
+          # オープンなPRのURLを取得
+          PR_URLS=$(gh pr list --state open --json url --jq '.[].url')
+          PR_COUNT=$(echo "$PR_URLS" | grep -c . || echo 0)
+
+          # PRがなければ終了
+          if [ "$PR_COUNT" -eq 0 ]; then
+            echo "No open PRs. Skipping notification."
+            exit 0
+          fi
+
+          # PR URLをリスト形式に整形
+          PR_LIST=$(echo "$PR_URLS" | sed 's/^/- /')
+
+          # メッセージ作成
+          MESSAGE="📢 【PR定期通知】現在オープンしているプルリクエストは ${PR_COUNT} 件です。レビューをお願いします！
+
+          ${PR_LIST}"
+
+          # Discord Webhookに送信
+          curl -X POST "$DISCORD_WEBHOOK" \
+            -H "Content-Type: application/json" \
+            -d "{\"content\": $(echo "$MESSAGE" | jq -Rs .)}"

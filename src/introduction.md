@@ -2,7 +2,7 @@
 
 > 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/introduction.html)を参照してください。
 
-Flix は、[オーフス大学](https://cs.au.dk/)で開発され、[オープンソースコントリビューター](https://github.com/flix/flix)のコミュニティによって、[ウォータールー大学](https://uwaterloo.ca/)、[テュービンゲン大学](https://uni-tuebingen.de/)、[コペンハーゲン大学](https://di.ku.dk/)の研究者と協力して開発されている、原則に基づいた関数型・論理型・命令型プログラミング言語です。
+Flix は、[オーフス大学](https://cs.au.dk/)、[オープンソースコントリビューター](https://github.com/flix/flix)、[ウォータールー大学](https://uwaterloo.ca/)、[テュービンゲン大学](https://uni-tuebingen.de/)、[コペンハーゲン大学](https://di.ku.dk/)の研究者と協力して開発されている、原則に基づいた関数型・論理型・命令型プログラミング言語です。
 
 Flix は OCaml と Haskell に触発されており、Rust と Scala からのアイデアも取り入れています。Flix は Scala に似た見た目ですが、その型システムは完全な型推論をサポートする Hindley-Milner に基づいています。Flix は以下のような複数の革新的な機能を備えた*最先端*のプログラミング言語です：
 

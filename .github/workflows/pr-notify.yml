@@ -38,4 +38,4 @@ jobs:
           # Discord Webhookに送信
           curl -X POST "$DISCORD_WEBHOOK" \
             -H "Content-Type: application/json" \
-            -d "{\"content\": $(echo "$MESSAGE" | jq -Rs .)}"
+            -d "$(jq -n --arg msg "$MESSAGE" '{content: $msg}')"

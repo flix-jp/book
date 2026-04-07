@@ -1,6 +1,6 @@
 # Summary
 
-- [Introduction to Flix](./introduction.md)
+- [Flix へようこそ](./introduction.md)
 - [Getting Started](./getting-started.md)
   - [Hello World!](./hello-world.md)
   - [Next Steps](./next-steps.md)

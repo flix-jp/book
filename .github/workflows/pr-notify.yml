@@ -2,7 +2,7 @@ name: PR Notify to Discord
 
 on:
   schedule:
-    - cron: '0 1 * * *'  # UTC 01:00 = JST 10:00
+    - cron: '45 1 * * *'  # UTC 01:45 = JST 10:45
   workflow_dispatch:
 
 jobs:

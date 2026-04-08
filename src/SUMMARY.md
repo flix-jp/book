@@ -7,7 +7,7 @@
 - [データ型](./data-types.md)
   - [プリミティブ型](./primitive-types.md)
   - [タプル](./tuples.md)
-  - [Enums](./enums.md)
+  - [列挙型](./enums.md)
   - [Type Aliases](./type-aliases.md)
 - [Functions](./functions.md)
 - [Immutable Data](./immutable-data.md)

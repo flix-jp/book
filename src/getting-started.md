@@ -1,3 +1,228 @@
+# はじめに
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/getting-started.html)を参照してください。
+
+Flix を始めるのは簡単です。必要なのは [Java バージョン 21 以上](https://adoptium.net/temurin/releases/)だけです。
+
+Java がインストールされているかどうか、またそのバージョンを確認するには、以下のコマンドを入力します：
+
+```shell
+$ java -version
+```
+
+以下のような出力が表示されるはずです：
+
+```
+openjdk version "21" 2023-09-19 LTS
+OpenJDK Runtime Environment Temurin-21+35 (build 21+35-LTS)
+OpenJDK 64-Bit Server VM Temurin-21+35 (build 21+35-LTS, mixed mode, sharing)
+```
+
+Java がインストールされていない場合や、バージョンが古い場合は、[Adoptium](https://adoptium.net/temurin/releases/) から新しいバージョンをダウンロードできます。
+
+Java 21 以上をインストールしたら、以下の2つの方法で進めることができます：
+
+- [Flix VSCode 拡張機能](https://marketplace.visualstudio.com/items?itemName=flix.flix)を使用する（__強く推奨__）、または
+- コマンドラインから Flix コンパイラを実行する。
+
+## VSCode で Flix を使う
+
+Flix にはフル機能の VSCode プラグインが付属しています。以下の手順で始めましょう：
+
+> 1. 新しい空のフォルダを作成します（例：`my-flix-project`）。
+> 2. VSCode を開き、`File -> Open Folder` を選択します。
+> 3. フォルダ内に `Main.flix` という名前の新しいファイルを作成します。
+> 4. VSCode がマーケットプレイスで拡張機能を検索するかどうか尋ねてきます。「Yes」と答えてください。
+> 5. Flix _拡張機能_ がダウンロードされ、インストールされます。完了すると、Flix _コンパイラ_ をダウンロードするかどうか尋ねてきます。再び「Yes」と答えてください。
+> 6. 「Starting Flix」に続いて「Flix Ready!」と表示されたら、準備完了です。
+
+Flix Visual Studio Code 拡張機能の動作中のスクリーンショット：
+
+![Visual Studio Code1](images/vscode1.png)
+
+## Neovim で Flix を使う
+
+Flix は [Neovim](https://neovim.io/) からも使用できます。以下の手順で始めましょう：
+- [公式プラグイン](https://github.com/flix/nvim)は Neovim 0.11 でリリースされた機能に依存しています
+- インストールされている Neovim のバージョンを確認してください
+
+```shell
+nvim --version
+```
+
+### Neovim プラグイン
+
+ネイティブ Neovim LSP 用の LSP 設定と、Flix CLI と対話するためのいくつかの関数を提供する Lua [プラグイン](https://github.com/flix/nvim)があります。リポジトリには詳細なインストールと設定手順があります。
+お好みのプラグインマネージャーでインストールするか、Neovim のランタイムパスにローカルでクローンできます。
+
+プラグインはキーマッピングを提供しませんが、Flix LSP サーバーをセットアップし、デフォルトの LSP マッピングで動作するようにします。nvim 0.11 での LSP キーマッピングの設定例を以下に示します。`LspAttach` autocmd を設定すると、キーマッピングは*すべて*の設定された LSP サーバーに適用されます。
+
+```lua
+-- LSP サーバーがバッファにアタッチしたときにトリガーされる autocmd を作成
+vim.api.nvim_create_autocmd('LspAttach', {
+  -- autocmd の競合を防ぐために名前を付ける
+  group = vim.api.nvim_create_augroup('my.lsp', {}),
+  -- サーバーがアタッチしたときに実行する関数
+  callback = function(args)
+    -- オプションの説明文字列を持つキーバインディングオプションを設定するヘルパー関数
+    -- !!! 重要 !!!
+    -- `buffer` はこれらのマッピングを autocmd をトリガーするバッファのみに設定する
+    local function get_opts(desc)
+      return { desc = desc, buffer = args.buf, noremap = true, silent = true }
+    end
+    -- キーバインディングを設定する前に LSP クライアントが機能をサポートしているか確認
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    if client:supports_method('textDocument/format') then
+      vim.keymap.set('n', '<leader>=', vim.lsp.buf.format, get_opts('format buffer'))
+    end
+    if client:supports_method('textDocument/rename') then
+      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, get_opts('rename'))
+    end
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, get_opts("lsp code action"))
+    vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, get_opts("lsp codelens run"))
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, get_opts("lsp references"))
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, get_opts("lsp definition"))
+    vim.keymap.set("n", "<leader>h", vim.lsp.buf.document_highlight, get_opts("lsp document highlight"))
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, get_opts("lsp hover"))
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, get_opts("lsp buf implementation"))
+    vim.keymap.set('i', '<C-a>', '<C-x><C-o>', get_opts("manual expand completion"))
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, get_opts(""))
+    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, get_opts("diagnostic open float"))
+    vim.keymap.set("n", "<leader>ws", vim.lsp.buf.workspace_symbol, get_opts("lsp workspace symbol"))
+    vim.keymap.set("n", "<leader>ds", vim.lsp.buf.document_symbol, get_opts("lsp doc symbol"))
+  end
+})
+```
+
+上記のスニペットは以下のキーバインディングを提供します。
+
+| キーバインド      | アクション                   |
+|-----------------|--------------------------|
+| `gd`            | 定義へ移動         |
+| `gi`            | 実装へ移動     |
+| `gr`            | 参照を検索          |
+| `ctrl+a`        | 自動補完をトリガー    |
+| `shift+k`       | ホバー                    |
+| `<leader>rn`    | シンボルの名前変更            |
+| `<leader>ca`    | コードアクション             |
+| `<leader>cl`    | コードレンズを実行            |
+| `<leader>ws`    | ワークスペースシンボルを表示   |
+| `<leader>ds`    | ドキュメントシンボルを表示    |
+| `<leader>d`     | 診断を表示         |
+| `<leader>h`     | ドキュメントハイライトを表示  |
+
+> 以前は [lspconfig](https://github.com/neovim/nvim-lspconfig) が Neovim に LSP 機能と設定を提供していました。しかし、バージョン 0.11 以降、Neovim には LSP が組み込まれており、lspconfig は一般的な LSP サーバーの設定のみを提供します。これにより、インストールの必要性は減りましたが、まだ推奨されています。
+
+![Visual Studio Code1](images/neovim.png)
+
+### 手動設定
+
+LSP サーバーを自分でセットアップしたい場合、プラグインのコードは以下の通りです。
+
+1. nvim にどのファイルタイプが Flix ファイルかを伝える
+
+```lua
+vim.filetype.add({
+  extension = {
+    flix = "flix",
+  }
+})
+```
+
+2. Neovim のネイティブ LSP クライアント用に Flix LSP を設定する
+
+```lua
+-- "flix" が既にセットアップされているか確認
+if not vim.lsp.config["flix"] then
+  -- ネイティブ LSP 用の Flix LSP 設定を作成
+  vim.lsp.config('flix', {
+    -- `cmd` 定義のいずれか1つを選択
+    -- プロジェクトローカルの `flix.jar` 用（プロジェクトのルートに flix.jar がインストールされている場合）
+    cmd = { "java", "-jar", "flix.jar", "lsp" },
+    -- グローバルな Flix インストール用（"homebrew" や "nix" など）
+    cmd = {"flix", "lsp"},
+    filetypes = { "flix" },
+    root_markers = { "flix.toml" }, -- ルートディレクトリを設定する場所
+    cmd_cwd = vim.fs.root(0, { 'flix.toml' }),
+    root_dir = vim.fs.root(0, { 'flix.toml' }),
+})
+end
+```
+
+3. コメントやインデントなどの Flix のデフォルト設定を行い、Flix バッファが変更されるたびにコードレンズを実行する autocmd を作成する。
+
+```lua
+-- autocmd
+-- autocmd の競合を防ぐために名前付き「グループ」を作成
+local flix = vim.api.nvim_create_augroup("flix.ft", { clear = true })
+local flix_lsp = vim.api.nvim_create_augroup("flix.lsp", { clear = true })
+-- "flix" バッファに入ったときにアクティブになる autocmd
+vim.api.nvim_create_autocmd("FileType", {
+  group = flix,
+  pattern = "flix",
+  callback = function(args)
+    vim.api.nvim_clear_autocmds({ group = flix_lsp, buffer = args.buf }) -- 重複を防ぐ
+    -- Flix のデフォルト設定
+    vim.opt_local.tabstop = 4
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.softtabstop = 4
+    vim.bo.commentstring = "// %s"
+    -- コードレンズを更新
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+      group = flix_lsp,
+      buffer = args.buf,
+      callback = function()
+        vim.lsp.codelens.refresh({ bufnr = args.buf })
+      end
+    })
+  end
+})
+```
+
+> このコードを `$HOME/.config/nvim/init.lua` または Neovim で LSP を設定している場所に配置してください。
+
+## Emacs で Flix を使う
+
+Flix は [Emacs](https://www.gnu.org/software/emacs/) からも使用できます。[flix-mode](https://codeberg.org/mdiin/flix-mode) パッケージをインストールしてください。そこに記載されている手順に従って、Emacs で Flix コードを書き始めましょう。
+
+## コマンドラインで Flix を使う
+
+Flix はコマンドラインからも使用できます。以下の手順に従ってください：
+
+> 1. 新しい空のフォルダを作成します（例：`my-flix-project`）。
+> 2. 最新の `flix.jar` を [https://github.com/flix/flix/releases/latest](https://github.com/flix/flix/releases/latest) からダウンロードし、フォルダに配置します。
+> 3. 作成したディレクトリに移動し（例：`cd my-flix-project`）、`java -jar flix.jar init` を実行して空の Flix プロジェクトを作成します。
+> 4. `java -jar flix.jar run` を実行してプロジェクトをコンパイルし、実行します。
+
+## Nix で Flix をインストールする
+
+Flix は [nix パッケージマネージャー](https://nixos.org/)を使用してインストールすることもできます。
+現在実行中のシェルにインストールするには、以下を実行します：
+
+```shell
+$ nix-shell -p flix
+```
+
+または、グローバルにインストールするには：
+
+```shell
+$ nix-env -i flix
+```
+
+その後、プロジェクトディレクトリで `flix run` を実行します。
+
+## トラブルシューティング
+
+Flix が動作しない最も一般的な原因は、(a) `java` コマンドが `PATH` に含まれていない、(b) `JAVA_HOME` 環境変数が設定されていないか、間違って設定されている、(c) 間違ったバージョンの Java がインストールされている、のいずれかです。これらの問題をデバッグするには、以下を確認してください：
+
+- コマンド `java -version` が正しい Java バージョンを表示すること。
+- `JAVA_HOME` 環境変数が正しく設定されていること。
+    - Windows では、`echo %JAVA_HOME%` と入力して変数を表示できます。
+    - Mac および Linux では、`echo $JAVA_HOME` と入力して変数を表示できます。
+
+まだ問題が解決しない場合は、[Gitter](https://gitter.im/flix/Lobby) でヘルプを求めることができます。
+
+<!--
 # Getting Started
 
 Getting started with Flix is straightforward. All you need is [Java version 21+](https://adoptium.net/temurin/releases/).
@@ -226,3 +451,4 @@ debug these issues, ensure that:
     - On Mac and Linux, you can print the variable by typing `echo $JAVA_HOME`.
 
 If you are still stuck, you can ask for help on [Gitter](https://gitter.im/flix/Lobby).
+-->

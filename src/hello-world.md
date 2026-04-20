@@ -2,7 +2,7 @@
 
 > 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/hello-world.html)を参照してください。
 
-`src/Main.flix` ファイルで有名な _Hello World_ プログラムを見てみましょう：
+それでは、`src/Main.flix` ファイルにある、かの有名な _Hello World_ プログラムを見てみましょう：
 
 ```flix
 def main(): Unit \ IO =

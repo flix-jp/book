@@ -66,7 +66,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     -- オプションの説明文字列を持つキーバインディングオプションを設定するヘルパー関数
     -- !!! 重要 !!!
-    -- `buffer` はこれらのマッピングを autocmd をトリガーするバッファにローカルにする
+    -- `buffer` はこれらのマッピングを autocmd をトリガーするバッファのみに設定する
     local function get_opts(desc)
       return { desc = desc, buffer = args.buf, noremap = true, silent = true }
     end

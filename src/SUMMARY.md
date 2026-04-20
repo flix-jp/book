@@ -1,7 +1,7 @@
 # Summary
 
 - [Flix へようこそ](./introduction.md)
-- [Getting Started](./getting-started.md)
+- [はじめに](./getting-started.md)
   - [Hello World!](./hello-world.md)
   - [Next Steps](./next-steps.md)
 - [Data Types](./data-types.md)

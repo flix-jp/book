@@ -5,7 +5,7 @@
   - [Hello World!](./hello-world.md)
   - [Next Steps](./next-steps.md)
 - [データ型](./data-types.md)
-  - [Primitives](./primitive-types.md)
+  - [プリミティブ型](./primitive-types.md)
   - [Tuples](./tuples.md)
   - [Enums](./enums.md)
   - [Type Aliases](./type-aliases.md)

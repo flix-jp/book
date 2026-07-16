@@ -82,3 +82,5 @@
 | 部分適用 | Partial application |
 | 匿名クラス | Anonymous class |
 | スーパーメソッド呼び出し | Super method call |
+| ネストクラス | Nested class |
+| 内部クラス | Inner class |

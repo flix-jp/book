@@ -46,3 +46,5 @@
 | トークンバケット | Token bucket |
 | スライディングウィンドウ | Sliding window |
 | ジッター | Jitter |
+| 構造化ログ | Structured logging |
+| 重大度 | Severity |

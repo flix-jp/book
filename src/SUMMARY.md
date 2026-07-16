@@ -108,7 +108,7 @@
 ---
 
 - [追加情報](./additional-information.md)
-  - [Research Literature](./research-literature.md)
+  - [研究文献](./research-literature.md)
   - [Blog Posts](./blog-posts.md)
   - [Videos](./videos.md)
   - [For LLMs](./for-llms.md)

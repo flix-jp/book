@@ -51,7 +51,7 @@
   - [コンパニオンモジュール](./companion-modules.md)
 - [トレイト](./traits.md)
   - [必須のトレイト](./essential-traits.md)
-  - [Automatic Derivation](./automatic-derivation.md)
+  - [自動導出](./automatic-derivation.md)
   - [Associated Types](./associated-types.md)
   - [Associated Effects](./associated-effects.md)
   - [Higher-Kinded Types](./higher-kinded-types.md)

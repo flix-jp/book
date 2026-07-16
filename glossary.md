@@ -129,3 +129,7 @@
 | 依存関係解決 | Dependency resolution |
 | 推移的依存関係 | Transitive dependency |
 | アーティファクト | Artifact |
+| 検査付きキャスト | Checked cast |
+| 未検査キャスト | Unchecked cast |
+| 純粋性リフレクション | Purity reflection |
+| 停止性検査 | Termination checking |

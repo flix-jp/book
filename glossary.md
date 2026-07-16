@@ -50,3 +50,4 @@
 | 重大度 | Severity |
 | 擬似乱数 | Pseudorandom number |
 | シード | Seed |
+| 再送出 | Re-raise |

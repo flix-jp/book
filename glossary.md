@@ -141,3 +141,8 @@
 | 遅延評価 | Lazy evaluation |
 | 先行評価 | Eager evaluation |
 | 純粋性 | Purity |
+| 型レベルプログラミング | Type-level programming |
+| ファントム型 | Phantom type |
+| 篩型 | Refinement type |
+| 依存型 | Dependent type |
+| パラメトリック多相 | Parametric polymorphism |

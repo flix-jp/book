@@ -96,7 +96,7 @@
   - [バグと到達不能コード](./bug-and-unreachable.md)
   - [遅延評価](./laziness.md)
   - [純粋性リフレクション](./purity-reflection.md)
-  - [Type-Level Programming](./type-level-programming.md)
+  - [型レベルプログラミング](./type-level-programming.md)
   - [Termination Checking](./termination-checking.md)
 
 ---

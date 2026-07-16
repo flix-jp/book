@@ -140,3 +140,4 @@
 | 不変条件 | Invariant |
 | 遅延評価 | Lazy evaluation |
 | 先行評価 | Eager evaluation |
+| 純粋性 | Purity |

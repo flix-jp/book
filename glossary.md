@@ -136,3 +136,4 @@
 | アップキャスト | Upcast |
 | サブタイピング | Sub-typing |
 | サブエフェクティング | Sub-effecting |
+| エフェクトキャスト | Effect cast |

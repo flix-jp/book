@@ -90,7 +90,7 @@
   - [古くなったパッケージの確認](./outdated.md)
 ---
 
-- [Advanced Features](./advanced-features.md)
+- [高度な機能](./advanced-features.md)
   - [Checked Casts](./checked-casts.md)
   - [Unchecked Casts](./unchecked-casts.md)
   - [Bugs and Unreachable Code](./bug-and-unreachable.md)

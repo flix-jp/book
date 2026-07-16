@@ -50,7 +50,7 @@
   - [モジュールの使用](./using-modules.md)
   - [コンパニオンモジュール](./companion-modules.md)
 - [トレイト](./traits.md)
-  - [Essential Traits](./essential-traits.md)
+  - [必須のトレイト](./essential-traits.md)
   - [Automatic Derivation](./automatic-derivation.md)
   - [Associated Types](./associated-types.md)
   - [Associated Effects](./associated-effects.md)

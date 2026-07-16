@@ -59,3 +59,4 @@
 | トレイトシグネチャ | Trait signature |
 | 重複するインスタンス | Overlapping instances |
 | 型コンストラクタ | Type constructor |
+| 文字列補間 | String interpolation |

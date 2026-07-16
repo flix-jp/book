@@ -67,3 +67,4 @@
 | 多引数型クラス | Multi-parameter type classes |
 | デフォルト型 | Default type |
 | カインド注釈 | Kind annotation |
+| 高カインド型 | Higher-kinded types |

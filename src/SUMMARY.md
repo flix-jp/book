@@ -54,7 +54,7 @@
   - [自動導出](./automatic-derivation.md)
   - [関連型](./associated-types.md)
   - [関連エフェクト](./associated-effects.md)
-  - [Higher-Kinded Types](./higher-kinded-types.md)
+  - [高カインド型](./higher-kinded-types.md)
 - [Structured Concurrency](./concurrency.md)
 - [Parallelism](./parallelism.md)
 - [Interoperability with Java](./interoperability.md)

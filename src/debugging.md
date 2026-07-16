@@ -1,3 +1,65 @@
+# デバッグ
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/debugging.html)を参照してください。
+
+デバッグの際には、式や変数の値を出力できると便利なことがよくあります。
+
+そこで、次のように書いてみたくなるかもしれません：
+
+```flix
+def sum(x: Int32, y: Int32): Int32 =
+    let result = x + y;
+    println("The sum of ${x} and ${y} is ${result}");
+    result
+```
+
+残念ながら、これは動作しません：
+
+```
+❌ -- Type Error -------------------------------------------------- Main.flix
+
+>> Unable to unify the effect formulas: 'IO' and 'Pure'.
+
+1 |> def sum(x: Int32, y: Int32): Int32 =
+2 |>     let result = x + y;
+3 |>     println("The sum of ${x} and ${y} is ${result}");
+4 |>     result
+```
+
+問題は、`println` が `IO` エフェクトを持つことです。そのため、純粋な関数の中でプリントデバッグ(Print debugging)のために `println` を使うことはできません。`sum` 関数に `IO` エフェクトを持たせることもできますが、それが望ましいことはめったにありません。その代わりに、Flix にはプリント行デバッグを可能にする組み込みのデバッグ機能が用意されています。
+
+## `Debug.dprintln` 関数
+
+代わりに、`Debug.dprintln` 関数を使って次のように書けます：
+
+```flix
+use Debug.dprintln;
+
+def sum(x: Int32, y: Int32): Int32 =
+    let result = x + y;
+    dprintln("The sum of ${x} and ${y} is ${result}");
+    result
+```
+
+`sum` 関数の内部では、`dprintln` は `Debug` エフェクトを持ちますが、その特殊な性質により、関数を抜けると `Debug` エフェクトは「消えます」。つまり、関数の型とエフェクトのシグネチャには含まれません。
+
+## ソース位置付きのデバッグ
+
+特殊な _デバッグ文字列補間子(Debug string interpolator)_ を使うと、print 文にソース位置(Source location)を付加できます：
+
+```flix
+use Debug.dprintln;
+
+def sum(x: Int32, y: Int32): Int32 =
+    let result = x + y;
+    dprintln(d"The sum of ${x} and ${y} is ${result}");
+    result
+```
+
+> `dprintln` のより詳しい紹介は、ブログ記事
+> [Effect Systems vs Print Debugging: A Pragmatic Solution](https://blog.flix.dev/blog/effect-systems-vs-print-debugging/) で読むことができます。
+
+<!--
 # Debugging
 
 When debugging, it is often helpful to output the value of an expression or
@@ -63,3 +125,4 @@ def sum(x: Int32, y: Int32): Int32 =
 
 > A longer introduction to `dprintln` is available in the
 > blog post [Effect Systems vs Print Debugging: A Pragmatic Solution](https://blog.flix.dev/blog/effect-systems-vs-print-debugging/)
+-->

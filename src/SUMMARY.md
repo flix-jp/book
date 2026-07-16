@@ -79,7 +79,7 @@
   - [匿名ホールと名前付きホール](./holes.md)
   - [型注釈](./type-ascriptions.md)
   - [冗長性](./redundancy.md)
-  - [Debugging](./debugging.md)
+  - [デバッグ](./debugging.md)
 - [Tools](./tools.md)
   - [Visual Studio Code](./vscode.md)
   - [Test Framework](./test-framework.md)

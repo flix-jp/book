@@ -119,3 +119,5 @@
 | 名前付きホール | Named hole |
 | 変数ホール | Variable hole |
 | シャドーイング | Shadowing |
+| プリントデバッグ | Print debugging |
+| ソース位置 | Source location |

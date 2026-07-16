@@ -98,3 +98,5 @@
 | 層化 | Stratification |
 | ローカル述語 | Local predicate |
 | 述語シンボル | Predicate symbol |
+| 関数述語 | Functional predicate |
+| 正に束縛される | Positively bound |

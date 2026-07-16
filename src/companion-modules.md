@@ -1,3 +1,122 @@
+# コンパニオンモジュール
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/companion-modules.html)を参照してください。
+
+モジュールの内部では、そのモジュールと同じ名前を持つ enum、struct、エフェクト、またはトレイトを宣言できます。このような宣言を、そのモジュールの companion(コンパニオン) と呼びます。
+
+例：
+
+```flix
+mod Color {
+    pub enum Color {
+        case Red,
+        case Green,
+        case Blue
+    }
+}
+```
+
+ここでは、`Color` enum が `Color` モジュールの companion です。
+
+companion の名前はモジュールからエクスポートされます。つまり、`Color` はモジュールと enum の両方を指すことができます。case は `Color.Red` としても `Color.Color.Red` としても参照できます。
+
+companion は、そのモジュール内の他のどの宣言よりも前に置かなければなりません。そうでない場合、コンパイラはエラーを報告します。
+
+## enum のコンパニオン
+
+enum がモジュールの companion として宣言されている場合、その型と case はモジュール全体で自動的に利用可能になります：
+
+```flix
+mod Color {
+    pub enum Color {
+        case Red,
+        case Green,
+        case Blue
+    }
+
+    pub def isWarm(c: Color): Bool = match c {
+        case Red    => true
+        case Green  => false
+        case Blue   => false
+    }
+}
+```
+
+ここでは、companion である `Color` モジュールの内部で、`Color` 型と `Red`、`Green`、`Blue` の各 case がスコープに入っています。
+
+## struct のコンパニオン
+
+struct もモジュールの companion として宣言できます。struct のフィールドはそのコンパニオンモジュールの内部からしか見えないため、フィールドを読み書きする関数はすべてそこに置く必要があります。
+
+例：
+
+```flix
+mod Point {
+    pub struct Point[r] {
+        x: Int32,
+        mut y: Int32
+    }
+
+    pub def area(p: Point[r]): Int32 \ r = p->x * p->y
+}
+```
+
+ここで `area` が `x` と `y` のフィールドにアクセスできるのは、それが `Point` のコンパニオンモジュールの内部にあるからです。フィールドの可視性の詳細については、[構造体](structs.md)を参照してください。
+
+## エフェクトのコンパニオン
+
+エフェクトもモジュールの companion として宣言できます。そのエフェクトにデフォルトハンドラがある場合、それは同じコンパニオンモジュールに置きます：
+
+```flix
+mod Fs.Glob {
+    pub eff Glob {
+        def glob(base: String, pattern: String): Result[IoError, List[String]]
+    }
+
+    // エフェクトのハンドラや補助関数はここに置きます。
+}
+```
+
+## トレイトのコンパニオン
+
+トレイトもモジュールの companion として宣言できます。通常、トレイトに関連する機能を格納する場所としてコンパニオンモジュールを使います：
+
+```flix
+mod Addable {
+    pub trait Addable[t] {
+        pub def add(x: t, y: t): t
+    }
+
+    pub def add3(x: t, y: t, z: t): t with Addable[t] = add(add(x, y), z)
+}
+```
+
+`Addable` のメンバーにアクセスする際、Flix はトレイト宣言とそのコンパニオンモジュールの両方を自動的に探索します。その結果、`Addable.add` はトレイトのメンバーである `add` を指し、`Addable.add3` は `Addable` モジュール内の関数を指します。
+
+注意すべき点として、トレイトのコンパニオンモジュールに定義された関数は、そのトレイトのインスタンスによって再定義することができません。したがって、後から再定義するつもりのないメンバーだけをコンパニオンモジュールに置くべきです。
+
+## コンパニオンモジュール内のインスタンス
+
+トレイトのインスタンスは、その型のコンパニオンモジュール内で宣言できます。例えば、`Size` enum に対する `Add`、`Sub`、`ToString` のインスタンスは、enum 自体と並べて配置します：
+
+```flix
+mod Fs.Size {
+    pub enum Size(Int64) with Eq, Order, Hash
+
+    instance Add[Size] {
+        pub def add(x: Size, y: Size): Size =
+            let Size(x1) = x;
+            let Size(y1) = y;
+            Size(x1 + y1)
+    }
+
+    pub def zero(): Size = Size(0i64)
+}
+```
+
+トレイトが別の場所で定義されている場合、インスタンスを置く場所としてはここが推奨されます。
+
+<!--
 # Companion Modules
 
 Inside a module we can declare an enum, struct, effect, or trait with the
@@ -135,3 +254,4 @@ mod Fs.Size {
 
 This is the recommended location for instances when the trait is defined
 elsewhere.
+-->

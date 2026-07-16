@@ -48,7 +48,7 @@
 - [モジュール](./modules.md)
   - [モジュールの宣言](./declaring-modules.md)
   - [モジュールの使用](./using-modules.md)
-  - [Companion Modules](./companion-modules.md)
+  - [コンパニオンモジュール](./companion-modules.md)
 - [Traits](./traits.md)
   - [Essential Traits](./essential-traits.md)
   - [Automatic Derivation](./automatic-derivation.md)

@@ -73,7 +73,7 @@
   - [束意味論](./lattice-semantics.md)
 - [日常のプログラミング](./everyday-programming.md)
   - [main 関数](./main.md)
-  - [Printing to Standard Out](./printing-to-stdout.md)
+  - [標準出力への出力](./printing-to-stdout.md)
   - [String Interpolation](./string-interpolation.md)
   - [Tail Recursion](./tail-recursion.md)
   - [Anonymous and Named Holes](./holes.md)

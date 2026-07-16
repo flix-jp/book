@@ -111,3 +111,4 @@
 | ホール | Hole |
 | エントリーポイント | Entry point |
 | 終了コード | Exit code |
+| プレリュード | Prelude |

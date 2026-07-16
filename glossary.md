@@ -33,3 +33,5 @@
 | 経験則 | Rule of thumb |
 | ビジネスロジック | Business logic |
 | エフェクト集合 | Effect set |
+| ライブラリエフェクト | Library effect |
+| デフォルトハンドラ | Default handler |

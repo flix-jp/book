@@ -55,7 +55,7 @@
   - [関連型](./associated-types.md)
   - [関連エフェクト](./associated-effects.md)
   - [高カインド型](./higher-kinded-types.md)
-- [Structured Concurrency](./concurrency.md)
+- [構造化並行性](./concurrency.md)
 - [Parallelism](./parallelism.md)
 - [Interoperability with Java](./interoperability.md)
   - [Creating Objects](./creating-objects.md)

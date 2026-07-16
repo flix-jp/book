@@ -68,3 +68,7 @@
 | デフォルト型 | Default type |
 | カインド注釈 | Kind annotation |
 | 高カインド型 | Higher-kinded types |
+| バッファ付きチャネル | Buffered channel |
+| バッファなしチャネル | Unbuffered channel |
+| ティッカー | Ticker |
+| ランデブー | Rendezvous |

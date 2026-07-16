@@ -97,7 +97,7 @@
   - [遅延評価](./laziness.md)
   - [純粋性リフレクション](./purity-reflection.md)
   - [型レベルプログラミング](./type-level-programming.md)
-  - [Termination Checking](./termination-checking.md)
+  - [停止性検査](./termination-checking.md)
 
 ---
 

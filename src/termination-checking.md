@@ -1,3 +1,224 @@
+# 停止性検査
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/termination-checking.html)を参照してください。
+
+Flix は `@Terminates` アノテーションをサポートしています。これは、関数が*構造的再帰(Structural recursion)*である――つまり、すべての入力に対して停止することが保証されている――ことをコンパイラに検証させるものです。`@Terminates` が付与された関数は、再帰呼び出しを仮引数の厳密な部分構造(Strict substructure)に対してのみ行わなければなりません。コンパイラはこれをコンパイル時に検査し、関数が構造的再帰の要件を満たさない場合はエラーを報告します。
+
+## 構造的再帰
+
+`@Terminates` の中心となる考え方は*構造的再帰*です。すべての再帰呼び出しは、仮引数に対するパターンマッチによってコンストラクタの内部から取り出された構成要素を引数として渡さなければなりません。この構成要素は元の値よりも厳密に小さいため、再帰は必ずいつか基底ケースに到達します。
+
+例えば、以下は独自のリスト型に対する構造的再帰の `length` 関数です：
+
+```flix
+enum MyList[a] {
+    case Nil
+    case Cons(a, MyList[a])
+}
+
+@Terminates
+def length(l: MyList[Int32]): Int32 = match l {
+    case MyList.Nil         => 0
+    case MyList.Cons(_, xs) => 1 + length(xs)
+}
+```
+
+再帰呼び出しは `xs` を渡していますが、これは `l` の `Cons` コンストラクタの内部で束縛されたものです。`xs` は `l` よりも厳密に小さいため、コンパイラはこの関数を受理します。
+
+## 木構造の再帰
+
+構造的再帰はリストに限らず、任意の代数的データ型に対して機能します。各呼び出しが仮引数の厳密な部分構造を受け取っている限り、関数は同じ分岐の中で複数の再帰呼び出しを行うことができます。
+
+例えば、以下は二分木に対する `size` 関数です：
+
+```flix
+enum MyTree[a] {
+    case Leaf(a)
+    case Node(MyTree[a], MyTree[a])
+}
+
+@Terminates
+def size(t: MyTree[Int32]): Int32 = match t {
+    case MyTree.Leaf(_)    => 1
+    case MyTree.Node(l, r) => size(l) + size(r)
+}
+```
+
+`l` と `r` はどちらも `t` の `Node` コンストラクタの内部で束縛されているため、両方の再帰呼び出しが有効です。
+
+## 複数のパラメータ
+
+関数が複数のパラメータを持つ場合、再帰呼び出しごとに減少する必要があるのは*ひとつ*のパラメータだけです。それ以外のパラメータは変更せずにそのまま渡して構いません。
+
+例えば、`append` は `l2` を変更せずに渡しながら、`l1` に対して再帰します：
+
+```flix
+enum MyList[a] {
+    case Nil
+    case Cons(a, MyList[a])
+}
+
+@Terminates
+def append(l1: MyList[Int32], l2: MyList[Int32]): MyList[Int32] = match l1 {
+    case MyList.Nil         => l2
+    case MyList.Cons(x, xs) => MyList.Cons(x, append(xs, l2))
+}
+```
+
+コンパイラは `xs` が `l1` の厳密な部分構造であることを認識し、それで十分だと判断します。`l2` が減少しないことは問題ありません。
+
+> **警告:** `@Terminates` は関数が停止することを保証しますが、末尾再帰であることは保証*しません*。例えば、上の `append` 関数は構造的再帰ですが、末尾再帰では*ありません*――再帰呼び出しが `MyList.Cons(x, ...)` に包まれているためです。そのため、非常に長いリストに対してはスタックオーバーフローを起こす可能性があります。スタックセーフな再帰関数の書き方については、[末尾再帰](./tail-recursion.md)のセクションを参照してください。
+
+## ローカル定義
+
+`@Terminates` 関数の内部にあるローカル定義は、それぞれ独立に検査されます。ローカル関数は自分自身のパラメータに対して再帰できます：
+
+```flix
+enum MyList[a] {
+    case Nil
+    case Cons(a, MyList[a])
+}
+
+@Terminates
+def length(l: MyList[Int32]): Int32 =
+    def loop(ll: MyList[Int32], acc: Int32): Int32 = match ll {
+        case MyList.Nil         => acc
+        case MyList.Cons(_, xs) => loop(xs, acc + 1)
+    };
+    loop(l, 0)
+```
+
+ここでは `loop` が自分自身のパラメータ `ll` に対して再帰しており、その厳密な部分構造である `xs` を渡しています。外側の関数 `length` は再帰していないため、自明に停止します。
+
+## 高階関数
+
+`@Terminates` 関数は、仮引数として受け取ったクロージャを適用することができます。これにより、`map` のような高階のパターンが可能になります：
+
+```flix
+enum MyList[a] {
+    case Nil
+    case Cons(a, MyList[a])
+}
+
+@Terminates
+def map(f: Int32 -> Int32, l: MyList[Int32]): MyList[Int32] = match l {
+    case MyList.Nil         => MyList.Nil
+    case MyList.Cons(x, xs) => MyList.Cons(f(x), map(f, xs))
+}
+```
+
+`f` は `map` の仮引数であるため、`f(x)` という適用は許可されます。コンパイラは `f` がパラメータに由来することを追跡し、この呼び出しを許可します。
+
+一方、*ローカルに構築された*クロージャを適用することは禁止されています：
+
+```flix
+@Terminates
+def bad(x: Int32): Int32 =
+    let c = y -> y + 1;
+    c(x)
+```
+
+これは拒否されます。`c` は仮引数ではなく、ローカルに定義されたクロージャであり、一般には任意の計算を隠し持つ可能性があるためです。
+
+> **警告:** `@Terminates` は、関数引数 `f` も停止するという*仮定のもとで* `map` が停止することを保証します。`f` が停止しない関数であれば、`map` も停止しないかもしれません。このアノテーションは `map` 自身の構造的再帰を検証するだけであり、`f` の振る舞いは検査しません。
+
+## 他の関数の呼び出し
+
+`@Terminates` 関数が呼び出せるのは、同じく `@Terminates` が付与された関数だけです。アノテーションのない関数を呼び出すとエラーになります。
+
+例えば、以下は拒否されます：
+
+```flix
+def g(x: Int32): Int32 = x * 2
+
+@Terminates
+def f(x: Int32): Int32 = g(x)
+```
+
+コンパイラは次のように報告します：
+
+```
+>> Call to non-@Terminates function 'g' in @Terminates function 'f'.
+
+   ... g(x)
+       ^^^^^^^^^
+       non-terminating call
+```
+
+修正方法は、呼び出される側の関数にもアノテーションを付けることです：
+
+```flix
+@Terminates
+def g(x: Int32): Int32 = x * 2
+
+@Terminates
+def f(x: Int32): Int32 = g(x)
+```
+
+## 厳密正値性
+
+構造的再帰に使われる enum 型は*厳密正(Strictly positive)*でなければなりません。ある型が厳密正であるとは、どのコンストラクタにおいても、矢印の左側に再帰的な出現を含まないことをいいます。
+
+例えば、以下の enum は厳密正では**ありません**。`MkBad` の引数において、`Bad` が `->` の左側に現れているためです：
+
+```flix
+enum Bad {
+    case MkBad(Bad -> Int32)
+}
+
+@Terminates
+def f(x: Bad): Int32 = match x {
+    case Bad.MkBad(_) => 0
+}
+```
+
+コンパイラはこれを次のエラーで拒否します：
+
+```
+>> Non-strictly positive type in 'f'.
+
+   ... case MkBad(Bad -> Int32)
+                  ^^^^^^^^^^^^
+                  negative occurrence
+```
+
+## よくあるエラー
+
+最もよくある間違いは、パターンマッチで取り出した部分構造ではなく、元のパラメータをそのまま渡してしまうことです：
+
+```flix
+enum MyList[a] {
+    case Nil
+    case Cons(a, MyList[a])
+}
+
+@Terminates
+def f(x: MyList[Int32]): Int32 = match x {
+    case MyList.Nil         => 0
+    case MyList.Cons(_, xs) => f(x)
+}
+```
+
+再帰呼び出しが、パターンから取り出した末尾の `xs` ではなく、元のパラメータである `x` を渡していることに注目してください。コンパイラは次のように報告します：
+
+```
+>> Non-structural recursion in 'f'.
+
+   ... f(x)
+       ^^^^
+       non-structural recursive call
+
+   Parameter   Argument   Status
+   x           x          alias of 'x' (not destructured)
+```
+
+診断テーブルは、どの引数に問題があるかを示しています。修正方法は、`x` の代わりに `xs` を渡すことです：
+
+```flix
+case MyList.Cons(_, xs) => f(xs)
+```
+
+<!--
 # Termination Checking
 
 Flix supports the `@Terminates` annotation, which asks the compiler to verify
@@ -253,4 +474,4 @@ The diagnostic table shows which arguments are problematic. The fix is to pass
 ```flix
 case MyList.Cons(_, xs) => f(xs)
 ```
-
+-->

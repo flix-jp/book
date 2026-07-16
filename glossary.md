@@ -112,3 +112,6 @@
 | エントリーポイント | Entry point |
 | 終了コード | Exit code |
 | プレリュード | Prelude |
+| 末尾再帰 | Tail recursion |
+| 末尾位置 | Tail position |
+| アキュムレータ | Accumulator |

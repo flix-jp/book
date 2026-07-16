@@ -75,7 +75,7 @@
   - [main 関数](./main.md)
   - [標準出力への出力](./printing-to-stdout.md)
   - [文字列補間](./string-interpolation.md)
-  - [Tail Recursion](./tail-recursion.md)
+  - [末尾再帰](./tail-recursion.md)
   - [Anonymous and Named Holes](./holes.md)
   - [Type Ascriptions](./type-ascriptions.md)
   - [Redundancy](./redundancy.md)

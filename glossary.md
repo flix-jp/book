@@ -37,3 +37,5 @@
 | デフォルトハンドラ | Default handler |
 | アサーション | Assertion |
 | 実時間 | Wall-clock time |
+| リーフエフェクト | Leaf effect |
+| エフェクト階層 | Effect hierarchy |

@@ -40,7 +40,7 @@
   - [Env](./env.md)
   - [Exit](./exit.md)
   - [FileSystem](./filesystem.md)
-  - [Http and Https](./http-and-https.md)
+  - [Http と Https](./http-and-https.md)
   - [Logger](./logger.md)
   - [Process](./process.md)
   - [Random](./random.md)

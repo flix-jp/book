@@ -39,3 +39,10 @@
 | 実時間 | Wall-clock time |
 | リーフエフェクト | Leaf effect |
 | エフェクト階層 | Effect hierarchy |
+| ミドルウェア | Middleware |
+| サーキットブレーカー | Circuit breaker |
+| レート制限 | Rate limiting |
+| リトライ戦略 | Retry strategy |
+| トークンバケット | Token bucket |
+| スライディングウィンドウ | Sliding window |
+| ジッター | Jitter |

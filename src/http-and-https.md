@@ -1,3 +1,373 @@
+# Http と Https
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/http-and-https.html)を参照してください。
+
+Flix は、HTTP リクエストを送信するためのライブラリエフェクトとして `Http` と `Https` を提供しています。どちらのエフェクトにもデフォルトハンドラがあるため、`main` で明示的に `runWithIO` を呼び出す必要はありません。主なモジュールは次のとおりです：
+
+- `Net.Http` — `Http` エフェクトと便利な関数群（`get`、`post`、`send` など）
+- `Net.Https` — `Https` エフェクト（`https://` の URL を強制します）
+- `Net.HttpRequest` — リクエストを構築するためのフルーエント API
+- `Net.HttpResponse` — レスポンスを調べるためのアクセサ群
+- `Net.Retry` — ミドルウェアと組み合わせて使うリトライ戦略
+
+## GET リクエストの送信
+
+HTTP リクエストを送る最も簡単な方法は `Http.get` です。これは `Result[IoError, HttpResponse]` を返すため、`Ok` と `Err` でパターンマッチします：
+
+```flix
+use Net.Http
+use Net.HttpResponse
+
+def main(): Unit \ { Http, IO } =
+    match Http.get("http://example.com/") {
+        case Ok(resp) => println(HttpResponse.body(resp))
+        case Err(err) => println(err)
+    }
+```
+
+`Http` エフェクトは `http://` と `https://` の両方の URL に対応しています。このエフェクトは、`main` の型シグネチャに `IO` と並んで現れます。
+
+## レスポンスの調査
+
+`HttpResponse` モジュールは、ステータスコード、ヘッダ、ボディの内容を取得するアクセサを提供します。`expect` 関数は 2xx 以外のステータスコードに対して `Err` を返すため、失敗したレスポンスをエラーとして扱いたい場合に便利です：
+
+```flix
+use Net.Http
+use Net.HttpResponse
+
+def main(): Unit \ { Http, IO } =
+    match Http.get("https://flix.dev/") {
+        case Ok(resp) =>
+            println("Status:         ${HttpResponse.status(resp)}");
+            println("Is success?     ${HttpResponse.isSuccess(resp)}");
+            println("Is client err?  ${HttpResponse.isClientError(resp)}");
+            println("Is server err?  ${HttpResponse.isServerError(resp)}");
+            println("Content-Type:   ${HttpResponse.contentType(resp)}");
+            println("Content-Length: ${HttpResponse.contentLength(resp)}");
+            println("Server header:  ${HttpResponse.headerValue("server", resp)}");
+            match HttpResponse.expect(resp) {
+                case Ok(r) =>
+                    println("Body length: ${String.length(HttpResponse.body(r))}")
+                case Err(e) =>
+                    println("Unexpected status: ${e}")
+            }
+        case Err(err) =>
+            println("Error: ${err}")
+    }
+```
+
+## POST リクエストと JSON
+
+ボディ付きの POST リクエストを作るには `HttpRequest.post` を使います。リクエストビルダーは、よく使われるヘッダを設定するための `withContentType` と `withAccept` に対応しています。構築したリクエストは `Http.send` で送信します：
+
+```flix
+use Net.Http
+use Net.HttpRequest
+use Net.HttpResponse
+
+def main(): Unit \ { Http, IO } =
+    let body = "{\"name\": \"Asterix\", \"age\": 35}";
+    let req = HttpRequest.post("https://flix.dev/api/users", body)
+                |> HttpRequest.withContentType("application/json")
+                |> HttpRequest.withAccept("application/json");
+    match Http.send(req) {
+        case Ok(resp) =>
+            println("Status: ${HttpResponse.status(resp)}");
+            println("Body: ${HttpResponse.body(resp)}")
+        case Err(err) =>
+            println("Error: ${err}")
+    }
+```
+
+## リクエストの構築
+
+`HttpRequest` モジュールは、リクエストを構築するためのフルーエント API を提供します。`|>` の呼び出しをパイプラインでつなぐことで、クエリパラメータ、認証トークン、カスタムヘッダ、タイムアウトを追加できます：
+
+```flix
+use Net.Http
+use Net.HttpRequest
+use Net.HttpResponse
+use Time.Duration.seconds
+
+def main(): Unit \ { Http, IO } =
+    let req =
+        HttpRequest.get("https://flix.dev/api/search")
+            |> HttpRequest.withQueryParam("q", "flix programming language")
+            |> HttpRequest.withQueryParams(Map#{
+                "page" => "1", "per_page" => "25", "sort" => "relevance"
+            })
+            |> HttpRequest.withBearerToken("ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ")
+            |> HttpRequest.withHeader("User-Agent", "MyApp/1.0")
+            |> HttpRequest.withTimeout(seconds(5));
+    match Http.send(req) {
+        case Ok(resp) =>
+            println("Status: ${HttpResponse.status(resp)}");
+            println("Body: ${String.takeLeft(80, HttpResponse.body(resp))}")
+        case Err(err) =>
+            println("Error: ${err}")
+    }
+```
+
+コンストラクタはすべての HTTP メソッドに対して用意されています：`HttpRequest.get`、`HttpRequest.post`、`HttpRequest.put`、`HttpRequest.patch`、`HttpRequest.delete` です。
+
+## Https エフェクト
+
+`Https` エフェクトは `Http` と同じように動作しますが、すべての URL が `https://` スキームを使うことを強制します。`http://` の URL を渡すと、リクエストは拒否されます。安全な接続のみが行われることを型システムに保証させたい場合は、`Https` を使ってください：
+
+```flix
+use Net.Https
+use Net.HttpResponse
+
+def main(): Unit \ { Https, IO } =
+    match Https.get("https://example.com/") {
+        case Ok(resp) => println(HttpResponse.body(resp))
+        case Err(err) => println(err)
+    }
+```
+
+なお、`Http` はすでに `https://` の URL に対応しています。`Https` は、*エフェクトシグネチャ*によってセキュリティの保証を明示したい場合のためのものです。
+
+## ミドルウェア
+
+ミドルウェア(Middleware)は、`Http`（または `Https`）のリクエストに割り込むエフェクトハンドラです。`run { ... } with Http.<ミドルウェア>` の形で適用し、複数の `with` 句を積み重ねることで合成できます。
+
+### ベース URL
+
+`withBaseUrl` は、相対パスの先頭にベース URL を付加します。絶対 URL（`://` を含むもの）はベースを迂回し、そのまま送信されます：
+
+```flix
+use Net.Http
+use Net.HttpResponse
+
+def main(): Unit \ { Http, IO } =
+    run {
+        match Http.get("/api/users") {
+            case Ok(resp) => println("/api/users -> ${HttpResponse.status(resp)}")
+            case Err(err) => println("/api/users -> ${err}")
+        };
+        match Http.get("/api/posts") {
+            case Ok(resp) => println("/api/posts -> ${HttpResponse.status(resp)}")
+            case Err(err) => println("/api/posts -> ${err}")
+        };
+        // 絶対 URL はベースを迂回します。
+        match Http.get("https://flix.dev/other") {
+            case Ok(resp) => println("absolute   -> ${HttpResponse.status(resp)}")
+            case Err(err) => println("absolute   -> ${err}")
+        }
+    } with Http.withBaseUrl("https://flix.dev")
+```
+
+### デフォルトヘッダ
+
+`withDefaultHeaders` は、すべてのリクエストにヘッダを注入します。リクエストにすでに存在するヘッダは上書きされません：
+
+```flix
+use Net.Http
+use Net.HttpResponse
+
+def main(): Unit \ { Http, IO } =
+    let defaults = Map#{
+        "Accept"        => List#{"application/json"},
+        "Authorization" => List#{"Bearer ghp_aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789"}
+    };
+    run {
+        match Http.get("https://flix.dev/api/users") {
+            case Ok(resp) => println("Status: ${HttpResponse.status(resp)}")
+            case Err(err) => println("Error: ${err}")
+        }
+    } with Http.withDefaultHeaders(defaults)
+```
+
+### ロギング
+
+`withLogging` は、`Logger` エフェクトを通じて各リクエストとレスポンスをログに記録します。`Logger` が `main` の型シグネチャに現れている点に注目してください：
+
+```flix
+use Net.Http
+use Net.HttpResponse
+
+def main(): Unit \ { Http, Logger, IO } =
+    run {
+        match Http.get("https://flix.dev/") {
+            case Ok(resp) => println("Status: ${HttpResponse.status(resp)}")
+            case Err(err) => println("Error: ${err}")
+        };
+        match Http.get("https://notfound.flix.dev/") {
+            case Ok(resp) => println("Status: ${HttpResponse.status(resp)}")
+            case Err(err) => println("Error: ${err}")
+        }
+    } with Http.withLogging
+```
+
+### リトライ
+
+`withRetry` は、`Net.Retry` モジュールの戦略を使った自動リトライを追加します。各戦略は、試行回数と結果（トランスポートエラーまたは HTTP エラー）に基づいてリトライするかどうかを決定する関数です：
+
+```flix
+use Net.Http
+use Net.Retry
+use Net.HttpResponse
+use Time.Duration.milliseconds
+
+def main(): Unit \ { Http, IO } =
+    // 線形: 100ms の遅延で最大 3 回までリトライします。
+    run {
+        println("--- Linear retry ---");
+        match Http.get("https://notfound.flix.dev/") {
+            case Ok(resp) => println("Status: ${HttpResponse.status(resp)}")
+            case Err(err) => println("Error: ${err}")
+        }
+    } with Http.withRetry(Retry.linear(maxRetries = 3, delay = milliseconds(100)));
+
+    // 指数: 100ms を基準遅延として最大 3 回までリトライします。
+    run {
+        println("--- Exponential retry ---");
+        match Http.get("https://notfound.flix.dev/") {
+            case Ok(resp) => println("Status: ${HttpResponse.status(resp)}")
+            case Err(err) => println("Error: ${err}")
+        }
+    } with Http.withRetry(Retry.exponential(maxRetries = 3, baseDelay = milliseconds(100)));
+
+    // トランスポートのみ: HTTP エラーではなく、接続失敗の場合のみリトライします。
+    run {
+        println("--- Transport-only retry ---");
+        match Http.get("https://notfound.flix.dev/") {
+            case Ok(resp) => println("Status: ${HttpResponse.status(resp)}")
+            case Err(err) => println("Error: ${err}")
+        }
+    } with Http.withRetry(Retry.retryTransportOnly(maxRetries = 2, delay = milliseconds(100)))
+```
+
+利用できる戦略は次のとおりです：
+
+- `Retry.linear` — リトライ間の遅延が一定
+- `Retry.exponential` — リトライごとに遅延が倍増
+- `Retry.retryAfter` — 429/503 レスポンスの `Retry-After` レスポンスヘッダに従う
+- `Retry.retryTransportOnly` — HTTP エラーではなく、接続失敗の場合のみリトライ
+
+戦略は `Retry.withJitter` でラップして遅延にランダムなジッターを加えたり、`Retry.withDeadline` でラップして全リトライを通した合計時間の上限を設けたりできます。
+
+### サーキットブレーカー
+
+`withCircuitBreaker` は、連鎖的な障害から保護します。`failureThreshold` 回連続で失敗（トランスポートエラーまたは 5xx レスポンス）すると、サーキット(Circuit)が開き、`cooldown` の期間中はリクエストを即座に拒否します。リクエストが成功すると失敗カウンタはリセットされます。`Clock` エフェクトが型シグネチャに現れている点に注目してください：
+
+```flix
+use Net.Http
+use Net.HttpResponse
+use Time.Clock
+use Time.Duration.seconds
+
+def main(): Unit \ { Clock, Http, IO } =
+    run {
+        let urls = List#{"/a", "/b", "/c", "/d", "/e", "/f", "/g", "/h"};
+        foreach (url <- urls) {
+            match Http.get(url) {
+                case Ok(resp) => println("${url} -> ${HttpResponse.status(resp)}")
+                case Err(err) => println("${url} -> ${err}")
+            }
+        }
+    } with Http.withCircuitBreaker(failureThreshold = 3, cooldown = seconds(5))
+      with Http.withBaseUrl("https://notfound.flix.dev")
+```
+
+### レート制限
+
+Flix は 3 種類のレート制限戦略を提供しています：
+
+- `withMinInterval` — 連続するリクエストの間に一定の最小遅延を強制します
+- `withTokenBucket` — 最初にバースト的なリクエストを許可し、その後は一定のレートに制限します
+- `withSlidingWindow` — 任意のローリングタイムウィンドウ内で最大 N 件のリクエストを許可します
+
+3 つとも `Clock` エフェクトを必要とします：
+
+```flix
+use Net.Http
+use Net.HttpResponse
+use Time.Clock
+use Time.Duration.{milliseconds, seconds}
+
+def main(): Unit \ { Clock, Http, IO } =
+    // 最小間隔: 連続するリクエストの間に少なくとも 100ms を空けます。
+    run {
+        println("--- Min interval ---");
+        let urls = List#{"/a", "/b", "/c", "/d"};
+        foreach (url <- urls) {
+            match Http.get(url) {
+                case Ok(resp) => println("${url} -> ${HttpResponse.status(resp)}")
+                case Err(err) => println("${url} -> ${err}")
+            }
+        }
+    } with Http.withMinInterval(interval = milliseconds(100))
+      with Http.withBaseUrl("https://flix.dev");
+
+    // トークンバケット: バーストで 2 件、その後は 100ms あたり 1 リクエストです。
+    run {
+        println("--- Token bucket ---");
+        let urls = List#{"/a", "/b", "/c", "/d"};
+        foreach (url <- urls) {
+            match Http.get(url) {
+                case Ok(resp) => println("${url} -> ${HttpResponse.status(resp)}")
+                case Err(err) => println("${url} -> ${err}")
+            }
+        }
+    } with Http.withTokenBucket(burstSize = 2, interval = milliseconds(100))
+      with Http.withBaseUrl("https://flix.dev");
+
+    // スライディングウィンドウ: 1000ms のウィンドウあたり最大 2 リクエストです。
+    run {
+        println("--- Sliding window ---");
+        let urls = List#{"/a", "/b", "/c", "/d"};
+        foreach (url <- urls) {
+            match Http.get(url) {
+                case Ok(resp) => println("${url} -> ${HttpResponse.status(resp)}")
+                case Err(err) => println("${url} -> ${err}")
+            }
+        }
+    } with Http.withSlidingWindow(maxRequests = 2, window = seconds(1))
+      with Http.withBaseUrl("https://flix.dev")
+```
+
+## ミドルウェアの合成
+
+ミドルウェアは `with` 句を積み重ねることで合成できます。各 `with` はその手前のブロックを包み込むため、最も外側のハンドラが最初に実行されます。以下は、ベース URL、デフォルトヘッダ、リトライ、サーキットブレーカー、レート制限、ロギングを積み重ねた例です：
+
+```flix
+use Net.Http
+use Net.Retry
+use Net.HttpResponse
+use Time.Clock
+use Time.Duration.{milliseconds, seconds}
+
+def main(): Unit \ { Clock, Http, Logger, IO } =
+    let defaultHeaders = Map#{
+        "Accept"        => List#{"application/json"},
+        "Authorization" => List#{"Bearer tok123"}
+    };
+    run {
+        let urls = List#{"/api/users", "/api/posts"};
+        foreach (url <- urls) {
+            match Http.get(url) {
+                case Ok(resp) => println("${url} -> ${HttpResponse.status(resp)}")
+                case Err(err) => println("${url} -> ${err}")
+            }
+        };
+        match Http.get("https://notfound.flix.dev/") {
+            case Ok(resp) => println("notfound -> ${HttpResponse.status(resp)}")
+            case Err(err) => println("notfound -> ${err}")
+        }
+    } with Http.withBaseUrl("https://flix.dev")
+      with Http.withDefaultHeaders(defaultHeaders)
+      with Http.withRetry(Retry.linear(maxRetries = 2, delay = milliseconds(100)))
+      with Http.withCircuitBreaker(failureThreshold = 3, cooldown = seconds(5))
+      with Http.withSlidingWindow(maxRequests = 2, window = seconds(1))
+      with Http.withLogging
+```
+
+`Http`、`Logger`、`Clock` の各エフェクトにはいずれもデフォルトハンドラがあるため、`main` の型シグネチャに現れると自動的に処理されます。
+
+> **注意:** `with` 句の順序は重要です。最も外側のハンドラ（最後に書かれたもの）が、内側のすべてのハンドラを包み込みます。上の例では `withLogging` が最も外側にあるため、リトライやサーキットブレーカーによる試行も含めて、*すべての* HTTP リクエストを観測します。もし `withLogging` を `withRetry` より前に移動すると、リトライは観測されず、元のリクエストだけが観測されます。ミドルウェアを合成するときは、どの層がどのリクエストを観測すべきかを考えてください。
+
+<!--
 # Http and Https
 
 Flix provides `Http` and `Https` as library effects for sending HTTP requests.
@@ -401,3 +771,4 @@ handled automatically when they appear in the type signature of `main`.
 > circuit-breaker probes. If we moved `withLogging` before `withRetry`, it would
 > only see the original requests, not the retries. When composing middleware,
 > think about which layer should observe which requests.
+-->

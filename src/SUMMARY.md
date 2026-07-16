@@ -80,7 +80,7 @@
   - [型注釈](./type-ascriptions.md)
   - [冗長性](./redundancy.md)
   - [デバッグ](./debugging.md)
-- [Tools](./tools.md)
+- [ツール](./tools.md)
   - [Visual Studio Code](./vscode.md)
   - [Test Framework](./test-framework.md)
 - [Build and Packages](./build-and-packages.md)

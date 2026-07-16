@@ -68,7 +68,7 @@
   - [Java のコレクション](./java-collections.md)
 - [不動点](./fixpoints.md)
   - [層化否定](./stratified-negation.md)
-  - [Local Predicates](./local-predicates.md)
+  - [ローカル述語](./local-predicates.md)
   - [Functional Predicates](./functional-predicates.md)
   - [Lattice Semantics](./lattice-semantics.md)
 - [Everyday Programming](./everyday-programming.md)

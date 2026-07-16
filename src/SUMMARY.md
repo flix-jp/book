@@ -70,7 +70,7 @@
   - [層化否定](./stratified-negation.md)
   - [ローカル述語](./local-predicates.md)
   - [関数述語](./functional-predicates.md)
-  - [Lattice Semantics](./lattice-semantics.md)
+  - [束意味論](./lattice-semantics.md)
 - [Everyday Programming](./everyday-programming.md)
   - [The Main Function](./main.md)
   - [Printing to Standard Out](./printing-to-stdout.md)

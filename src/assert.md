@@ -1,5 +1,102 @@
 # Assert
 
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/assert.html)を参照してください。
+
+Flix は、実行時のアサーション(Assertion)のためのライブラリエフェクトとして `Assert` を提供しています。`Assert` エフェクトにはデフォルトハンドラがあるため、`main` で明示的に `runWithIO` を呼び出す必要はありません。
+
+## 基本的なアサーション
+
+`Assert` モジュールは、いくつかのアサーション関数を提供しています。
+
+```flix
+mod Assert {
+    /// `cond` が `true` であることをアサートします。
+    def assertTrue(cond: Bool): Unit \ Assert
+
+    /// `cond` が `false` であることをアサートします。
+    def assertFalse(cond: Bool): Unit \ Assert
+
+    /// `expected` が `actual` と等しいことをアサートします。
+    def assertEq(expected: a, actual: a): Unit \ Assert with Eq[a], ToString[a]
+
+    /// `unexpected` が `actual` と等しくないことをアサートします。
+    def assertNeq(unexpected: a, actual: a): Unit \ Assert with Eq[a], ToString[a]
+
+    /// `o` が `Some` であることをアサートします。
+    def assertSome(o: Option[a]): Unit \ Assert
+
+    /// `o` が `None` であることをアサートします。
+    def assertNone(o: Option[a]): Unit \ Assert with ToString[a]
+
+    /// `r` が `Ok` であることをアサートします。
+    def assertOk(r: Result[e, a]): Unit \ Assert with ToString[e]
+
+    /// `r` が `Err` であることをアサートします。
+    def assertErr(r: Result[e, a]): Unit \ Assert with ToString[a]
+
+    /// `ma` が空であることをアサートします。
+    def assertEmpty(ma: m[a]): Unit \ Assert with Foldable[m]
+
+    /// `ma` が空でないことをアサートします。
+    def assertNonEmpty(ma: m[a]): Unit \ Assert with Foldable[m]
+
+    /// 指定されたメッセージ `msg` とともに無条件に成功します。
+    def success(msg: String): Unit \ Assert
+
+    /// 指定されたメッセージ `msg` とともに無条件に失敗します。
+    def fail(msg: String): Unit \ Assert
+}
+```
+
+## デフォルトハンドラで `Assert` を使う
+
+デフォルトハンドラは失敗時に `AssertionError` をスローするため、明示的なハンドラは必要ありません。
+
+```flix
+use Assert.{assertTrue, assertFalse, assertEq, assertNeq}
+
+def main(): Unit \ { Assert, IO } =
+    assertTrue(1 + 1 == 2);
+    assertFalse(1 > 2);
+    assertEq(expected = 4, 2 + 2);
+    assertNeq(unexpected = 0, 1 + 1);
+    println("All assertions passed!")
+```
+
+## 失敗を標準出力に表示する
+
+`runWithStdOut` ハンドラは、アサーションの失敗を標準出力に表示しつつ、実行を継続させます。
+
+```flix
+use Assert.assertEq
+
+def main(): Unit \ IO =
+    run {
+        assertEq(expected = 4, 2 + 2);
+        assertEq(expected = 10, 3 + 3);
+        println("Execution continued after failing assertion.")
+    } with Assert.runWithStdOut
+```
+
+## Logger で失敗をログに記録する
+
+`runWithLogger` ハンドラは、アサーションの失敗を `Logger` エフェクトに送ります。
+
+```flix
+use Assert.assertEq
+
+def main(): Unit \ IO =
+    run {
+        assertEq(expected = 42, 21 + 21);
+        assertEq(expected = 10, 3 + 3);
+        println("Execution continued after failing assertion.")
+    } with Assert.runWithLogger
+      with Logger.runWithIO
+```
+
+<!--
+# Assert
+
 Flix provides `Assert` as a library effect for runtime assertions. The `Assert`
 effect has a default handler, so no explicit `runWithIO` call is needed in
 `main`.
@@ -95,3 +192,4 @@ def main(): Unit \ IO =
     } with Assert.runWithLogger
       with Logger.runWithIO
 ```
+-->

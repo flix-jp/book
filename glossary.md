@@ -53,3 +53,4 @@
 | 再送出 | Re-raise |
 | 完全修飾名 | Fully-qualified name |
 | 名前衝突 | Name clash |
+| サブモジュール | Sub-module |

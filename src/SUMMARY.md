@@ -46,7 +46,7 @@
   - [Random](./random.md)
   - [Sleep](./sleep.md)
 - [モジュール](./modules.md)
-  - [Declaring Modules](./declaring-modules.md)
+  - [モジュールの宣言](./declaring-modules.md)
   - [Using Modules](./using-modules.md)
   - [Companion Modules](./companion-modules.md)
 - [Traits](./traits.md)

@@ -64,7 +64,7 @@
   - [クラスとインターフェース](./extending-classes-and-interfaces.md)
   - [ネストクラスと内部クラス](./nested-and-inner-classes.md)
   - [例外](./exceptions.md)
-  - [Boxing and Unboxing](./boxing-and-unboxing.md)
+  - [ボックス化とアンボックス化](./boxing-and-unboxing.md)
   - [Java Collections](./java-collections.md)
 - [Fixpoints](./fixpoints.md)
   - [Stratified Negation](./stratified-negation.md)

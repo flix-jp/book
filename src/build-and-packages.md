@@ -1,3 +1,31 @@
+# ビルドとパッケージ管理
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/build-and-packages.html)を参照してください。
+
+Flix にはビルドシステム(Build system)とパッケージマネージャ(Package manager)が付属しています。ビルドシステムを使うと、Flix プログラムを Java クラスの集まりにコンパイルしたり、fat JAR(ファットジャー)をビルドしたりすることが簡単にできます。パッケージマネージャを使うと、Flix パッケージを作成して GitHub に公開し、マニフェストファイル(Manifest file)を介してそれらに依存することができます。また、パッケージマネージャによって、Maven で公開されている Java の JAR アーティファクトに依存することも可能です。
+
+Flix のビルドシステムは、以下のコマンドをサポートしています：
+
+- `init`: カレントディレクトリに新しい Flix プロジェクトを作成します。
+- `check`: 現在のプロジェクトにコンパイルエラーがないか検査します。
+- `build`: 現在のプロジェクトをビルドします（つまり、Java バイトコードを出力します）。
+- `build-jar`: 現在のプロジェクトから jar ファイルをビルドします。
+- `build-fatjar`: すべての依存関係をバンドルした jar ファイルをビルドします。
+- `build-pkg`: 現在のプロジェクトから fpkg ファイルをビルドします。
+- `run`: 現在のプロジェクトの main を実行します。
+- `test`: 現在のプロジェクトのすべてのテストを実行します。
+
+すべてのコマンドは、コマンドライン、REPL、そして VSCode から実行できます。
+
+`build-pkg` を除くすべてのコマンドは、マニフェストファイルがなくても動作します。Flix プロジェクトをビルド、パッケージ化、公開するには、`flix.toml` マニフェストが必要です。`init` コマンドは、`flix.toml` マニフェストがまだ存在しない場合、空のスケルトンを作成します。
+
+## プロジェクト構造
+
+Flix は、`*.flix`、`src/**/*.flix,`、`test/**/*.flix` のパスからソースファイルを探索します。
+
+Flix は、`lib/**/*.fpkg` と `lib/**/*.jar` のパスから Flix パッケージと JAR を探索します。
+
+<!--
 # Build and Package Management
 
 Flix comes with a build system and package manager. The build system makes it
@@ -32,3 +60,4 @@ Flix scans for source files in the paths `*.flix`, `src/**/*.flix,`, and
 
 Flix scans for Flix packages and JARs in the paths `lib/**/*.fpkg` and
 `lib/**/*.jar`.
+-->

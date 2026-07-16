@@ -121,3 +121,6 @@
 | シャドーイング | Shadowing |
 | プリントデバッグ | Print debugging |
 | ソース位置 | Source location |
+| ビルドシステム | Build system |
+| パッケージマネージャ | Package manager |
+| マニフェスト | Manifest |

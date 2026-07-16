@@ -4,7 +4,7 @@
 
 この章では、Flix の高度な機能について解説します。内容は次のとおりです：
 
-- [チェック付きキャスト](./checked-casts.md)と[チェックなしキャスト](./unchecked-casts.md)
+- [検査付きキャスト](./checked-casts.md)と[未検査キャスト](./unchecked-casts.md)
 - [`bug!` 関数と `unreachable!` 関数](./bug-and-unreachable.md)
 - [純粋性リフレクション](./purity-reflection.md)
 - [停止性検査](./termination-checking.md)

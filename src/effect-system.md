@@ -4,9 +4,9 @@
 
 Flix は、言語に完全に統合された最先端の型およびエフェクトシステム
 （type and effect system）を備えています。Flix のエフェクトシステムは
-強力かつ広範であり、effect polymorphism（エフェクト多相）、
-sub-effecting（サブエフェクティング）、effect exclusion（エフェクト排他）、
-purity reflection（純粋性リフレクション）、associated effects（関連エフェクト）を
+強力かつ広範であり、エフェクト多相（effect polymorphism）、
+サブエフェクティング（sub-effecting）、エフェクト除外（effect exclusion）、
+純粋性リフレクション（purity reflection）、関連エフェクト（associated effects）を
 サポートしています。
 
 これらの新しく刺激的な機能については、以降のページで探っていきます。
@@ -16,7 +16,7 @@ purity reflection（純粋性リフレクション）、associated effects（関
 - **（純粋性 / Purity）** 型およびエフェクトシステムは、純粋（pure）な関数と
   純粋でない（impure）関数を分離します。Flix では、純粋な関数は一切の副作用を
   持つことができず、同じ引数を与えられたときには同じ値を返さなければなりません。
-  とはいえ、純粋な関数であっても、mutable なデータ構造を使って命令型スタイルで
+  とはいえ、純粋な関数であっても、ミュータブルなデータ構造を使って命令型スタイルで
   実装することは可能です。ただし、それらのデータ構造が関数の終了時にスコープから
   外れる場合に限ります。
 
@@ -30,7 +30,7 @@ purity reflection（純粋性リフレクション）、associated effects（関
   よって検査されるドキュメントとしての役割を果たします。
 
 - **（エフェクトとハンドラ / Effects and Handlers）** 型およびエフェクトシステムは、
-  代数的エフェクト（algebraic effects）とハンドラ（handler）の基盤となります。
+  代数エフェクト（algebraic effects）とハンドラ（handler）の基盤となります。
   これらによって、プログラマは例外（exception）、async/await、協調的マルチタスク
   （cooperative multitasking）といった独自の制御構造を実装できるようになります。
 
@@ -58,12 +58,11 @@ Flix の型およびエフェクトシステムはかなり洗練されており
 
 先に進む前に、Flix には 3 種類のエフェクトがあることを理解しておくことが重要です。
 
-- [primitive effects](./primitive-effects.md)
-- [algebraic effects](./effects-and-handlers.md)
-- [heap effects](./mutable-data.md)
+- [プリミティブエフェクト](./primitive-effects.md)
+- [代数エフェクト](./effects-and-handlers.md)
+- [ヒープエフェクト](./mutable-data.md)
 
-トレイト（trait）とエフェクトがどのように相互作用するかについては、[Associated
-Effects](./associated-effects.md) の節で説明します。
+トレイト（trait）とエフェクトがどのように相互作用するかについては、[関連エフェクト](./associated-effects.md) の節で説明します。
 
 ## ダイレクトスタイル
 

@@ -10,7 +10,7 @@ Flix は、一般的な I/O 操作のための組み込みライブラリエフ�
 | [`Logger`](./logger.md)                              | 5 段階の重大度レベルによる構造化ログ。フィルタリングと収集に対応しています。                     |
 | [`Math.Random`](./random.md)                         | 擬似乱数の生成。シードによる決定的な動作も選択できます。                                         |
 | [`Fs.FileSystem`](./filesystem.md) <br> [`Fs.FileRead`](./filesystem.md) <br> [`Fs.FileWrite`](./filesystem.md) <br> [`Fs.FileStat`](./filesystem.md) | ファイル I/O、メタデータ、ディレクトリ、およびミドルウェア（chroot、アトミックな書き込み、インメモリファイルシステムなど）。 |
-| [`Net.Http`](./http-and-https.md) <br> [`Net.Https`](./http-and-https.md) | 流暢な API による HTTP リクエストの送信と、ミドルウェア（リトライ、レート制限、サーキットブレーカー）。 |
+| [`Net.Http`](./http-and-https.md) <br> [`Net.Https`](./http-and-https.md) | フルーエント API による HTTP リクエストの送信と、ミドルウェア（リトライ、レート制限、サーキットブレーカー）。 |
 | [`Sys.Console`](./console.md)                        | ターミナル I/O：入力の読み取り、stdout/stderr への出力、プロンプト、メニュー。                   |
 | [`Sys.Env`](./env.md)                                | 環境変数、システムプロパティ、プラットフォーム情報へのアクセス。                                 |
 | [`Sys.Exit`](./exit.md)                              | 指定した終了コードによるプログラムの終了。                                                       |

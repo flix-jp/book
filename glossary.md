@@ -51,3 +51,5 @@
 | 擬似乱数 | Pseudorandom number |
 | シード | Seed |
 | 再送出 | Re-raise |
+| 完全修飾名 | Fully-qualified name |
+| 名前衝突 | Name clash |

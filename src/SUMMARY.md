@@ -45,7 +45,7 @@
   - [Process](./process.md)
   - [Random](./random.md)
   - [Sleep](./sleep.md)
-- [Modules](./modules.md)
+- [モジュール](./modules.md)
   - [Declaring Modules](./declaring-modules.md)
   - [Using Modules](./using-modules.md)
   - [Companion Modules](./companion-modules.md)

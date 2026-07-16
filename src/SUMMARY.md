@@ -85,7 +85,7 @@
   - [テストフレームワーク](./test-framework.md)
 - [ビルドとパッケージ管理](./build-and-packages.md)
   - [ビルド管理](./build.md)
-  - [Packages](./packages.md)
+  - [パッケージ管理](./packages.md)
   - [Publish](./publish.md)
   - [Outdated](./outdated.md)
 ---

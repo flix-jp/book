@@ -66,7 +66,7 @@
   - [例外](./exceptions.md)
   - [ボックス化とアンボックス化](./boxing-and-unboxing.md)
   - [Java のコレクション](./java-collections.md)
-- [Fixpoints](./fixpoints.md)
+- [不動点](./fixpoints.md)
   - [Stratified Negation](./stratified-negation.md)
   - [Local Predicates](./local-predicates.md)
   - [Functional Predicates](./functional-predicates.md)

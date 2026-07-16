@@ -107,7 +107,7 @@
 
 ---
 
-- [Additional Information](./additional-information.md)
+- [追加情報](./additional-information.md)
   - [Research Literature](./research-literature.md)
   - [Blog Posts](./blog-posts.md)
   - [Videos](./videos.md)

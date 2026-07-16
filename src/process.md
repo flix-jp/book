@@ -4,7 +4,7 @@
 
 Flix は、OS プロセスの起動と管理のためのライブラリエフェクト(library effect)として `Process` を提供しています。`Process` エフェクトにはデフォルトハンドラがあるため、`main` の中で明示的に `runWithIO` を呼び出す必要はありません。中心となるモジュールは `Sys.Process` です。
 
-## The Process Effect
+## Process エフェクト
 
 `Process` エフェクトは、プロセスの起動、その入出力ストリームへのアクセス、そして終了の待機をサポートしています。
 
@@ -46,7 +46,7 @@ pub eff Process {
 }
 ```
 
-## The Process Module
+## Process モジュール
 
 `Process` モジュールは、`Process` エフェクトの上に構築された便利な関数を提供しています。
 

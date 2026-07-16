@@ -109,7 +109,7 @@ def f(): String \ IO =
 
 `o` の型が不明であるため、`String.valueOf(boolean)`、`String.valueOf(char)`、`String.valueOf(double)`、あるいはその他のオーバーロードされたバージョンのどれを呼び出したいのか、Flix には分かりません。
 
-解決策は、該当する引数に型指定(type ascription)を付けることです：
+解決策は、該当する引数に型注釈(type ascription)を付けることです：
 
 ```flix
 import java.lang.{String => JString}
@@ -119,7 +119,7 @@ def f(): String \ IO =
     JString.valueOf((o: Bool))
 ```
 
-この型指定は `o` が `Bool` 型であることを指定しており、これによってメソッド解決を正常に完了できるようになります。なお、追加の括弧のペアが必要であることに注意してください。
+この型注釈は `o` が `Bool` 型であることを指定しており、これによってメソッド解決を正常に完了できるようになります。なお、追加の括弧のペアが必要であることに注意してください。
 
 ## 純粋であると分かっている Java メソッドの呼び出し
 

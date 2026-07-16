@@ -2,7 +2,7 @@
 
 > 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/stratified-negation.html)を参照してください。
 
-Flix は、ルール本体における否定の制限付きの使用を可能にする、_stratified negation(層化否定)_ をサポートしています。例えば：
+Flix は、ルール本体で否定を制限付きで使用できるようにする _層化否定(stratified negation)_ をサポートしています。例えば：
 
 ```flix
 def main(): Unit \ IO =

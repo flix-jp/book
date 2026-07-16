@@ -39,7 +39,7 @@ use A.B.isWarm
 
 Flix は、以下を含む複数の種類の use をサポートしています：
 
-- 名前の修飾付き use(ユーズ)：`use A.B.Color`
+- 名前の修飾付き use：`use A.B.Color`
 - 複数の名前の修飾付き use：`use A.B.Color.{Red, Green, Blue}`
 - リネームを伴う修飾付き use：`use A.B.Color => AColor`
 - 複数のリネームを伴う修飾付き use：`use A.B.Color.{Red => R, Green => G, Blue => B}`

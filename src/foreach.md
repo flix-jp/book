@@ -53,7 +53,7 @@ def isExcotic(fruit: String): Bool = match fruit {
 }
 ```
 
-## 見やすさのための任意の波括弧の追加
+## 見やすさのための波括弧の追加（省略可能）
 
 `foreach` 式は、波括弧を追加することで見やすさを向上できる場合があります：
 

@@ -2,7 +2,7 @@
 
 > 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effects-and-handlers.html)を参照してください。
 
-Flix は、[Eff](https://www.eff-lang.org/) や [Koka](https://koka-lang.github.io/) のスタイルで、代数的エフェクト(algebraic effects)とハンドラ(handlers)をサポートしています。
+Flix は、[Eff](https://www.eff-lang.org/) や [Koka](https://koka-lang.github.io/) のスタイルで、代数エフェクト(algebraic effects)とハンドラ(handlers)をサポートしています。
 
 Flix のエフェクトハンドラは、動的スコープ(dynamic scope)、ディープハンドラ(deep handlers)を用い、複数回の再開(multiple resumptions)をサポートしています。
 
@@ -131,7 +131,7 @@ def main(): Unit \ IO =
 
 ## 複数回の再開
 
-Flix は、複数回の再開を伴う代数的エフェクトをサポートしています。このようなエフェクトを使うと、async/await、バックトラッキング探索、協調的マルチタスクなどを実装できます。
+Flix は、複数回の再開を伴う代数エフェクトをサポートしています。このようなエフェクトを使うと、async/await、バックトラッキング探索、協調的マルチタスクなどを実装できます。
 
 次は簡単な例です。
 
@@ -183,9 +183,9 @@ def main(): Unit \ IO = {
 
 `main` ではこの2つのエフェクトハンドラを使います。特筆すべきは、*ハンドラのネストの順序が重要である* という点です！ `Exc` エフェクトを先に処理すると、リスト `Some(heads) :: Some(tails) :: None :: Nil` が得られます。一方、`Exc` を最後に処理すると、計算全体が `None` で失敗します。
 
-## 代数的エフェクトとモナド
+## 代数エフェクトとモナド
 
-Flix は、代数的エフェクトハンドラと[モナド(monads)](./monadic-for-yield.md)の両方をサポートしています。これは、両方のプログラミングスタイルをサポートしたいからです。
+Flix は、代数エフェクトハンドラと[モナド(monads)](./monadic-for-yield.md)の両方をサポートしています。これは、両方のプログラミングスタイルをサポートしたいからです。
 
 - エフェクトハンドラを使ってプログラミングしたければ、そうできます。
 
@@ -193,7 +193,7 @@ Flix は、代数的エフェクトハンドラと[モナド(monads)](./monadic-
 
 Flix は（まだ）`IO` モナドを定義していませんが、自分で作ることはできます。
 
-Flix の標準ライブラリは、ハイブリッドな方法に偏っています。外界とのやり取りをモデル化するには代数的エフェクトを使いますが、単純なエラー処理には `Option` や `Result` データ型を好みます。`Option` や `Result` を扱うのは、[モナド構文(monadic syntax)](./monadic-for-yield.md)を使うとより快適になります。
+Flix の標準ライブラリは、ハイブリッドなアプローチに寄っています。外界とのやり取りをモデル化するには代数エフェクトを使いますが、単純なエラー処理には `Option` や `Result` データ型を好みます。`Option` や `Result` を扱うのは、[モナド構文(monadic syntax)](./monadic-for-yield.md)を使うとより快適になります。
 
 ## 制限: 多相エフェクト
 

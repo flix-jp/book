@@ -51,7 +51,7 @@ def main(): Unit \ IO =
 
 ## Middleware
 
-`Time.Sleep` モジュールは、いくつかの Middleware(ミドルウェア)ハンドラを提供しています。これらは、スリープの期間を横取り（インターセプト）して変換したうえで、背後にある `Sleep` エフェクトへ転送します。Middleware は `Sleep` を再送出（re-raise）するため、複数の層を合成できます。
+`Time.Sleep` モジュールは、いくつかの Middleware(ミドルウェア)ハンドラを提供しています。これらは、スリープの期間をインターセプトして変換したうえで、背後にある `Sleep` エフェクトへ転送します。Middleware は `Sleep` を再送出（re-raise）するため、複数の層を合成できます。
 
 | Middleware          | 説明                                                      |
 |---------------------|-----------------------------------------------------------|
@@ -101,7 +101,7 @@ def main(): Unit \ { Logger, Random, Sleep, IO } =
       with Sleep.withLogging
 ```
 
-順序が重要です。`withJitter` は元の期間を横取りしてジッターを適用し、`Sleep` を再送出します。その後、`withLogging` ハンドラはジッターが適用された期間を見ることになります。
+順序が重要です。`withJitter` は元の期間をインターセプトしてジッターを適用し、`Sleep` を再送出します。その後、`withLogging` ハンドラはジッターが適用された期間を見ることになります。
 
 <!--
 # Sleep

@@ -150,6 +150,14 @@
 | 基底ケース | Base case |
 | スタックセーフ | Stack-safe |
 | 継続渡しスタイル | Continuation-passing style (CPS) |
+| イミュータブル | Immutable |
+| ミュータブル | Mutable |
+| 第一級 | First-class |
+| 脱糖 | Desugaring |
+| フルーエント API | Fluent API |
+| 空でないリスト | Non-empty list |
+| ラベル付き引数 | Labelled argument |
+| エフェクト除外 | Effect exclusion |
 | エフェクトメンバ | Effect member |
 | 型メンバ | Type member |
 | 限定継続 | Delimited continuation |

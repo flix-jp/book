@@ -10,7 +10,7 @@ Flix は OCaml と Haskell に触発されており、Rust と Scala からの�
 - リージョンベースのローカルミュータブルメモリ
 - ユーザー定義のエフェクトとハンドラ
 - 関連型と関連エフェクトを持つ高カインドトレイト
-- 組み込みのファーストクラス Datalog プログラミング
+- 組み込みの第一級 Datalog プログラミング
 
 Flix は効率的な JVM バイトコードにコンパイルされ、Java 仮想マシン上で動作し、完全な末尾呼び出し除去(tail call elimination)をサポートしています。Flix は Java との相互運用性を持ち、JVM のクラスやメソッドを使用できます。そのため、Java エコシステム全体が Flix から利用可能です。
 
@@ -153,7 +153,7 @@ def main(): Unit \ IO =
     }
 ```
 
-以下は**ファーストクラス Datalog 制約**を使用した例です：
+以下は**第一級 Datalog 制約**を使用した例です：
 
 ```flix
 def reachable(edges: List[(Int32, Int32)], src: Int32, dst: Int32): Bool =

@@ -63,7 +63,7 @@
   - [フィールドの読み書き](./reading-and-writing-fields.md)
   - [クラスとインターフェース](./extending-classes-and-interfaces.md)
   - [ネストクラスと内部クラス](./nested-and-inner-classes.md)
-  - [Exceptions](./exceptions.md)
+  - [例外](./exceptions.md)
   - [Boxing and Unboxing](./boxing-and-unboxing.md)
   - [Java Collections](./java-collections.md)
 - [Fixpoints](./fixpoints.md)

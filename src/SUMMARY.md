@@ -84,7 +84,7 @@
   - [Visual Studio Code](./vscode.md)
   - [テストフレームワーク](./test-framework.md)
 - [ビルドとパッケージ管理](./build-and-packages.md)
-  - [Build](./build.md)
+  - [ビルド管理](./build.md)
   - [Packages](./packages.md)
   - [Publish](./publish.md)
   - [Outdated](./outdated.md)

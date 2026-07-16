@@ -84,3 +84,5 @@
 | スーパーメソッド呼び出し | Super method call |
 | ネストクラス | Nested class |
 | 内部クラス | Inner class |
+| ボックス化 | Boxing |
+| アンボックス化 | Unboxing |

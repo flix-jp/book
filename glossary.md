@@ -100,3 +100,10 @@
 | 述語シンボル | Predicate symbol |
 | 関数述語 | Functional predicate |
 | 正に束縛される | Positively bound |
+| 束 | Lattice |
+| 束意味論 | Lattice semantics |
+| 半順序 | Partial order |
+| 最小上界 | Least upper bound |
+| 最大下界 | Greatest lower bound |
+| ボトム要素 | Bottom element |
+| 単調関数 | Monotone function |

@@ -107,3 +107,5 @@
 | 最大下界 | Greatest lower bound |
 | ボトム要素 | Bottom element |
 | 単調関数 | Monotone function |
+| 型注釈 | Type ascription |
+| ホール | Hole |

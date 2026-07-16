@@ -71,7 +71,7 @@
   - [ローカル述語](./local-predicates.md)
   - [関数述語](./functional-predicates.md)
   - [束意味論](./lattice-semantics.md)
-- [Everyday Programming](./everyday-programming.md)
+- [日常のプログラミング](./everyday-programming.md)
   - [The Main Function](./main.md)
   - [Printing to Standard Out](./printing-to-stdout.md)
   - [String Interpolation](./string-interpolation.md)

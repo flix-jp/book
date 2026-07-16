@@ -1,3 +1,35 @@
+# 関数述語
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/functional-predicates.html)を参照してください。
+
+論理述語を使いたいものの、そのタプルをすべて網羅的に列挙することは避けたい、という状況に遭遇することがあります。
+
+例えば、`prime` が範囲 `[from; to]` 内の素数であるときに成り立つ述語 `PrimeInRange(from, to, prime)` が欲しい状況を考えてみましょう。このような述語を思い描くことはできますが、実際に計算するのは現実的ではありません。その代わりに多くの場合で望まれるのは、`PrimeInRange` を **関数述語**(Functional)、すなわち `from` と `to` を _入力_ として受け取り、素数の集合を _出力_ として生成する関数として扱うことです。具体的には、次のようなルールを書きたいとします。
+
+```flix
+R(p) :- P(x), Q(y), PrimeInRange(x, y, p).
+```
+
+ただし、すべての `x`、`y`、`p` に対して `PrimeInRange` を評価することは避けたいのです。
+
+これは次のようにして実現できます。まず、関数を書きます。
+
+```flix
+def primesInRange(b: Int32, e: Int32): Vector[Int32] = 
+    Vector.range(b, e) |> Vector.filter(isPrime)
+```
+
+重要なのは、`primesInRange` が、開始インデックス `b` と終了インデックス `e` を受け取ってタプル（この場合は単一要素）の Vector を返す _関数_ であるという点です。これにより、`primesInRange` は私たちが関心を持つタプルを効率的に計算できます。これをルールの中で使うには、次のように書きます。
+
+```flix
+R(p) :- P(b), Q(e), let p = primesInRange(b, e).
+```
+
+ここでは、`b` と `e` が `primesInRange` の入力として、`p` がその出力として明確に識別されています。具体的には、Flix は `b` と `e` が正に束縛されている（Positively bound）こと（すなわち、非否定のボディアトム——この場合は `P` と `Q` ——によって束縛されていること）を要求します。この例では `primesInRange` は `Int32` の Vector を返しますが、一般に関数述語はタプルの Vector を返すことができます。
+
+> **注意:** 現在の実装における重要な制限として、関数述語の左辺（LHS）にある変数は再束縛して**はいけません**。つまり、関数述語が `let (a, b) = f(x, y)` という形式である場合、`a` と `b` はそのルールの中で再束縛されてはいけません。
+
+<!--
 # Functional Predicates
 
 We sometimes run into a situation where we would like to use a logic predicate,
@@ -43,3 +75,4 @@ may return a vector of tuples.
 > variables in the LHS of a functional predicate _must not_ be rebound. That is,
 > if the functional predicate is of the form `let (a, b) = f(x, y)` then `a` and
 > `b` must not be rebound in the rule. 
+-->

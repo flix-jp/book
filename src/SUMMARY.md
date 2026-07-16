@@ -82,7 +82,7 @@
   - [デバッグ](./debugging.md)
 - [ツール](./tools.md)
   - [Visual Studio Code](./vscode.md)
-  - [Test Framework](./test-framework.md)
+  - [テストフレームワーク](./test-framework.md)
 - [Build and Packages](./build-and-packages.md)
   - [Build](./build.md)
   - [Packages](./packages.md)

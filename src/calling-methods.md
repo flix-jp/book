@@ -1,3 +1,169 @@
+# オブジェクトメソッドの呼び出し
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/calling-methods.html)を参照してください。
+
+Flix では、Java に似た構文を使って、Java オブジェクトのメソッドを呼び出すことができます。
+
+例えば：
+
+```flix
+import java.io.File
+
+def main(): Unit \ IO = 
+    let f = new File("foo.txt");
+    println(f.getName())
+```
+
+ここでは `java.io.File` クラスをインポートし、`File` オブジェクトをインスタンス化して、そのオブジェクトの `getName` メソッドを呼び出しています。
+
+コンストラクタの場合と同様に、Flix は引数の数と型に基づいてメソッドを解決します。
+
+別の例を示します：
+
+```flix
+import java.io.File
+
+def main(): Unit \ IO = 
+    let f = new File("foo.txt");
+    if (f.exists())
+        println("The file ${f.getName()} exists!")
+    else
+        println("The file ${f.getName()} does not exist!")
+```
+
+さらに大きな例を示します：
+
+```flix
+import java.io.File
+import java.io.FileWriter
+
+def main(): Unit \ IO = 
+    let f = new File("foo.txt");
+    let w = new FileWriter(f);
+    w.append("Hello World\n");
+    w.close()
+```
+
+上記の例では、発生しうる `IOException` をキャッチしたい場合があるでしょう：
+
+```flix
+import java.io.File
+import java.io.FileWriter
+import java.io.IOException
+
+def main(): Unit \ IO = 
+    let f = new File("foo.txt");
+    try {
+        let w = new FileWriter(f);
+        w.append("Hello World\n");
+        w.close()
+    } catch {
+        case ex: IOException => 
+            println("Unable to write to file: ${f.getName()}");
+            println("The error message was: ${ex.getMessage()}")
+    }
+```
+
+## 静的メソッドの呼び出し
+
+Flix では、Java に似た構文を使って、静的メソッド（すなわちクラスメソッド）を呼び出すことができます。
+
+例えば：
+
+```flix
+import java.lang.Math
+
+def main(): Unit \ IO = 
+    let n = Math.sin(3.14);
+    println(n)
+
+```
+
+コンストラクタやメソッドの場合と同様に、Flix は引数の数と型に基づいて静的メソッドを解決します。
+
+別の例を示します：
+
+```flix
+import java.lang.Math
+
+def main(): Unit \ IO = 
+    println(Math.abs(-123i32));
+    println(Math.abs(-123i64));
+    println(Math.abs(-123.456f32));
+    println(Math.abs(-123.456f64))
+```
+
+## コンストラクタやメソッドの解決に失敗する場合
+
+場合によっては、どの Java コンストラクタやメソッドが呼び出されるのかを Flix コンパイラが決定できないことがあります。
+
+例えば、次のプログラムでは：
+
+```flix
+import java.lang.{String => JString}
+
+def f(): String \ IO = 
+    let o = ???;
+    JString.valueOf(o)
+```
+
+`o` の型が不明であるため、`String.valueOf(boolean)`、`String.valueOf(char)`、`String.valueOf(double)`、あるいはその他のオーバーロードされたバージョンのどれを呼び出したいのか、Flix には分かりません。
+
+解決策は、該当する引数に型指定(type ascription)を付けることです：
+
+```flix
+import java.lang.{String => JString}
+
+def f(): String \ IO = 
+    let o = ???;
+    JString.valueOf((o: Bool))
+```
+
+この型指定は `o` が `Bool` 型であることを指定しており、これによってメソッド解決を正常に完了できるようになります。なお、追加の括弧のペアが必要であることに注意してください。
+
+## 純粋であると分かっている Java メソッドの呼び出し
+
+Java オブジェクトの生成、Java メソッドの呼び出し、Java 静的メソッドの呼び出しを行う Flix の式は、いずれも `IO` エフェクトを持ちます。これは当然のことです。Java のコンストラクタやメソッドは、任意の副作用を持ちうるからです。
+
+Java のコンストラクタやメソッドの呼び出しが副作用を持たないと確実に分かっている場合は、`unsafe` ブロックを使って、その式を純粋なものとして扱うよう Flix に伝えることができます。
+
+例えば：
+
+```flix
+import java.lang.Math
+
+def pythagoras(x: Float64, y: Float64): Float64 = // 純粋、IO エフェクトなし
+    unsafe Math.sqrt((Math.pow(x, 2.0) + Math.pow(y, 2.0)))
+
+def main(): Unit \ IO = 
+    println(pythagoras(3.0, 4.0))
+```
+
+ここでは `Math.pow` と `Math.sqrt` が*純粋な*関数であると確実に分かっているため、それらを `unsafe` ブロックの中に置くことができます。これにより、Flix の `pythagoras` 関数を純粋なもの、すなわち `IO` エフェクトを持たないものとして型検査できます。
+
+> **警告:** どのような状況であっても、副作用を持つ式に `unsafe` を使わないでください。そうしてしまうと型・エフェクトシステムが破綻し、誤ったコンパイラ最適化が行われ、プログラムの意味が微妙に、あるいは破滅的に変わってしまう可能性があります！
+
+## Java コンストラクタとメソッドの部分適用
+
+Flix は Flix 関数の部分適用(partial application)をサポートしています。しかし、Java のコンストラクタやメソッドを部分適用することはできません。この制限は、明示的なラムダを導入することで克服できます。
+
+例えば：
+
+```flix
+import java.lang.{String => JString}
+
+def main(): Unit \ IO = 
+    def replaceAll(s, src, dst) = s.replaceAll(src, dst);
+    let f = replaceAll("Hello World");
+    let s1 = f("World")("Galaxy");
+    let s2 = f("World")("Universe");
+    println(s1);
+    println(s2)
+```
+
+ここでは `String.replaceAll` を呼び出す Flix 関数 `replaceAll` を導入しています。`replaceAll` は Flix 関数なので、例に示すように部分適用することができます。
+
+<!--
 # Calling Object Methods
 
 In Flix, we can call methods on Java objects using syntax similar to Java.
@@ -181,3 +347,4 @@ def main(): Unit \ IO =
 Here we introduce a Flix function `replaceAll` which calls `String.replaceAll`.
 Since `replaceAll` is a Flix function, we can partially apply it as shown in the
 example. 
+-->

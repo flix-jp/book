@@ -79,3 +79,4 @@
 | リネームインポート | Renaming import |
 | スーパーコンストラクタ | Super constructor |
 | 匿名サブクラス | Anonymous subclass |
+| 部分適用 | Partial application |

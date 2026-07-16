@@ -93,7 +93,7 @@
 - [高度な機能](./advanced-features.md)
   - [検査付きキャスト](./checked-casts.md)
   - [未検査キャスト](./unchecked-casts.md)
-  - [Bugs and Unreachable Code](./bug-and-unreachable.md)
+  - [バグと到達不能コード](./bug-and-unreachable.md)
   - [Laziness](./laziness.md)
   - [Purity Reflection](./purity-reflection.md)
   - [Type-Level Programming](./type-level-programming.md)

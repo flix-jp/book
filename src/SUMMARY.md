@@ -87,7 +87,7 @@
   - [ビルド管理](./build.md)
   - [パッケージ管理](./packages.md)
   - [パッケージの公開](./publish.md)
-  - [Outdated](./outdated.md)
+  - [古くなったパッケージの確認](./outdated.md)
 ---
 
 - [Advanced Features](./advanced-features.md)

@@ -60,7 +60,7 @@
 - [Java との相互運用](./interoperability.md)
   - [オブジェクトの生成](./creating-objects.md)
   - [メソッドの呼び出し](./calling-methods.md)
-  - [Reading and Writing Fields](./reading-and-writing-fields.md)
+  - [フィールドの読み書き](./reading-and-writing-fields.md)
   - [Classes and Interfaces](./extending-classes-and-interfaces.md)
   - [Nested and Inner Classes](./nested-and-inner-classes.md)
   - [Exceptions](./exceptions.md)

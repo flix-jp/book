@@ -54,3 +54,4 @@
 | 完全修飾名 | Fully-qualified name |
 | 名前衝突 | Name clash |
 | サブモジュール | Sub-module |
+| 修飾付き use | Qualified use |

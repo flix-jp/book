@@ -47,7 +47,7 @@
   - [Sleep](./sleep.md)
 - [モジュール](./modules.md)
   - [モジュールの宣言](./declaring-modules.md)
-  - [Using Modules](./using-modules.md)
+  - [モジュールの使用](./using-modules.md)
   - [Companion Modules](./companion-modules.md)
 - [Traits](./traits.md)
   - [Essential Traits](./essential-traits.md)

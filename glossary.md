@@ -115,3 +115,6 @@
 | 末尾再帰 | Tail recursion |
 | 末尾位置 | Tail position |
 | アキュムレータ | Accumulator |
+| 匿名ホール | Anonymous hole |
+| 名前付きホール | Named hole |
+| 変数ホール | Variable hole |

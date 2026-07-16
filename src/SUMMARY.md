@@ -101,7 +101,7 @@
 
 ---
 
-- [Common Problems](./common-problems.md)
+- [よくある問題](./common-problems.md)
 - [Frequently Asked Questions](./frequently-asked-questions.md)
 - [Glossary](./glossary.md)
 

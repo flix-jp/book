@@ -86,7 +86,7 @@
 - [ビルドとパッケージ管理](./build-and-packages.md)
   - [ビルド管理](./build.md)
   - [パッケージ管理](./packages.md)
-  - [Publish](./publish.md)
+  - [パッケージの公開](./publish.md)
   - [Outdated](./outdated.md)
 ---
 

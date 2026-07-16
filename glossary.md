@@ -138,3 +138,5 @@
 | サブエフェクティング | Sub-effecting |
 | エフェクトキャスト | Effect cast |
 | 不変条件 | Invariant |
+| 遅延評価 | Lazy evaluation |
+| 先行評価 | Eager evaluation |

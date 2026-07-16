@@ -1,5 +1,150 @@
 # Process
 
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/process.html)を参照してください。
+
+Flix は、OS プロセスの起動と管理のためのライブラリエフェクト(library effect)として `Process` を提供しています。`Process` エフェクトにはデフォルトハンドラがあるため、`main` の中で明示的に `runWithIO` を呼び出す必要はありません。中心となるモジュールは `Sys.Process` です。
+
+## The Process Effect
+
+`Process` エフェクトは、プロセスの起動、その入出力ストリームへのアクセス、そして終了の待機をサポートしています。
+
+```flix
+pub eff Process {
+    /// コマンド `cmd` を、引数 `args`、作業ディレクトリ `cwd`、環境変数 `env` で実行します。
+    def execWithCwdAndEnv(cmd: String, args: List[String],
+        cwd: Option[String], env: Map[String, String]):
+        Result[IoError, ProcessHandle]
+
+    /// プロセス `ph` の終了値を返します。
+    def exitValue(ph: ProcessHandle): Result[IoError, Int32]
+
+    /// プロセス `ph` が生存しているかどうかを返します。
+    def isAlive(ph: ProcessHandle): Result[IoError, Bool]
+
+    /// プロセス `ph` の PID を返します。
+    def pid(ph: ProcessHandle): Result[IoError, Int64]
+
+    /// プロセス `ph` の標準入力ストリームを返します。
+    def stdin(ph: ProcessHandle): Result[IoError, StdIn]
+
+    /// プロセス `ph` の標準出力ストリームを返します。
+    def stdout(ph: ProcessHandle): Result[IoError, StdOut]
+
+    /// プロセス `ph` の標準エラーストリームを返します。
+    def stderr(ph: ProcessHandle): Result[IoError, StdErr]
+
+    /// プロセス `ph` を停止します。
+    def stop(ph: ProcessHandle): Result[IoError, Unit]
+
+    /// プロセス `ph` の終了を待機し、その終了値を返します。
+    def waitFor(ph: ProcessHandle): Result[IoError, Int32]
+
+    /// プロセス `ph` の終了を最大 `time`（単位は `tUnit`）だけ待機します。
+    /// プロセスが終了した場合は `true` を、タイムアウトした場合は `false` を返します。
+    def waitForTimeout(ph: ProcessHandle, time: Int64, tUnit: TimeUnit):
+        Result[IoError, Bool]
+}
+```
+
+## The Process Module
+
+`Process` モジュールは、`Process` エフェクトの上に構築された便利な関数を提供しています。
+
+```flix
+mod Process {
+    /// コマンド `cmd` を引数 `args` で実行します。
+    def exec(cmd: String, args: List[String]):
+        Result[IoError, ProcessHandle] \ Process
+
+    /// `cmd` を、引数 `args` と作業ディレクトリ `cwd` で実行します。
+    def execWithCwd(cmd: String, args: List[String], cwd: Option[String]):
+        Result[IoError, ProcessHandle] \ Process
+
+    /// `cmd` を、引数 `args` と環境変数 `env` で実行します。
+    def execWithEnv(cmd: String, args: List[String], env: Map[String, String]):
+        Result[IoError, ProcessHandle] \ Process
+}
+```
+
+## コマンドの実行
+
+OS プロセスを起動する最も簡単な方法は `Process.exec` を使うことです。この関数はコマンドと引数のリストを受け取り、`Result[IoError, ProcessHandle]` を返します。
+
+```flix
+use Sys.Process
+
+def main(): Unit \ { Process, IO } =
+    match Process.exec("java", "-version" :: Nil) {
+        case Result.Ok(_)    => println("Process started successfully.")
+        case Result.Err(err) => println("Unable to execute process: ${err}")
+    }
+```
+
+## プロセス出力の読み取り
+
+プロセスを起動した後、`Process.stdout` と `Process.stderr` でその出力ストリームにアクセスできます。返される `StdOut` 型と `StdErr` 型は `Readable` を実装しているため、そこからバイト列を読み取ることができます。
+
+```flix
+use Sys.Process
+
+def main(): Unit \ { Process, IO } = region rc {
+    match Process.exec("java", "-version" :: Nil) {
+        case Result.Err(err) => println("exec failed: ${err}")
+        case Result.Ok(ph)   =>
+            match Process.stderr(ph) {
+                case Result.Err(err) => println("stderr failed: ${err}")
+                case Result.Ok(err)  =>
+                    let buf = Array.repeat(rc, 1024, (0i8: Int8));
+                    match Readable.read(buf, err) {
+                        case Result.Err(e) => println("read failed: ${e}")
+                        case Result.Ok(n)  => println("Read ${n} bytes from stderr.")
+                    }
+            }
+    }
+}
+```
+
+> **注意:** `java -version` は標準出力ではなく標準エラーに書き込みます。
+
+## 終了の待機
+
+プロセスが終了するまでブロックするには `Process.waitFor` を使います。この関数は終了コードを `Int32` として返します。
+
+```flix
+use Sys.Process
+
+def main(): Unit \ { Process, IO } =
+    match Process.exec("java", "-version" :: Nil) {
+        case Result.Err(err) => println("exec failed: ${err}")
+        case Result.Ok(ph)   =>
+            match Process.waitFor(ph) {
+                case Result.Err(err) => println("waitFor failed: ${err}")
+                case Result.Ok(code) => println("Process exited with code: ${code}")
+            }
+    }
+```
+
+## 作業ディレクトリと環境変数
+
+`Process.execWithCwd` は、特定の作業ディレクトリを指定してプロセスを起動します。`Process.execWithEnv` は、追加の環境変数を渡します。
+
+```flix
+use Sys.Process
+
+def main(): Unit \ { Process, IO } =
+    match Process.execWithCwd("java", "-version" :: Nil, Some("/tmp")) {
+        case Result.Ok(_)    => println("execWithCwd succeeded.")
+        case Result.Err(err) => println("execWithCwd failed: ${err}")
+    };
+    match Process.execWithEnv("java", "-version" :: Nil, Map#{"MY_VAR" => "hello"}) {
+        case Result.Ok(_)    => println("execWithEnv succeeded.")
+        case Result.Err(err) => println("execWithEnv failed: ${err}")
+    }
+```
+
+<!--
+# Process
+
 Flix provides `Process` as a library effect for spawning and managing OS
 processes. The `Process` effect has a default handler, so no explicit
 `runWithIO` call is needed in `main`. The key module is `Sys.Process`.
@@ -149,4 +294,4 @@ def main(): Unit \ { Process, IO } =
         case Result.Err(err) => println("execWithEnv failed: ${err}")
     }
 ```
-
+-->

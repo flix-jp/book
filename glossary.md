@@ -48,3 +48,5 @@
 | ジッター | Jitter |
 | 構造化ログ | Structured logging |
 | 重大度 | Severity |
+| 擬似乱数 | Pseudorandom number |
+| シード | Seed |

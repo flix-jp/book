@@ -49,7 +49,7 @@
   - [モジュールの宣言](./declaring-modules.md)
   - [モジュールの使用](./using-modules.md)
   - [コンパニオンモジュール](./companion-modules.md)
-- [Traits](./traits.md)
+- [トレイト](./traits.md)
   - [Essential Traits](./essential-traits.md)
   - [Automatic Derivation](./automatic-derivation.md)
   - [Associated Types](./associated-types.md)

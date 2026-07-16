@@ -56,3 +56,6 @@
 | サブモジュール | Sub-module |
 | 修飾付き use | Qualified use |
 | コンパニオンモジュール | Companion module |
+| トレイトシグネチャ | Trait signature |
+| 重複するインスタンス | Overlapping instances |
+| 型コンストラクタ | Type constructor |

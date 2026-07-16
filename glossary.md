@@ -118,3 +118,4 @@
 | 匿名ホール | Anonymous hole |
 | 名前付きホール | Named hole |
 | 変数ホール | Variable hole |
+| シャドーイング | Shadowing |

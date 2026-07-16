@@ -78,7 +78,7 @@
   - [末尾再帰](./tail-recursion.md)
   - [匿名ホールと名前付きホール](./holes.md)
   - [型注釈](./type-ascriptions.md)
-  - [Redundancy](./redundancy.md)
+  - [冗長性](./redundancy.md)
   - [Debugging](./debugging.md)
 - [Tools](./tools.md)
   - [Visual Studio Code](./vscode.md)

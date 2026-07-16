@@ -60,3 +60,6 @@
 | 重複するインスタンス | Overlapping instances |
 | 型コンストラクタ | Type constructor |
 | 文字列補間 | String interpolation |
+| 自動導出 | Automatic derivation |
+| 構造的等価性 | Structural equality |
+| 全順序 | Total ordering |

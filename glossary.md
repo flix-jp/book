@@ -96,3 +96,5 @@
 | 過大近似 | Over-approximation |
 | 層化否定 | Stratified negation |
 | 層化 | Stratification |
+| ローカル述語 | Local predicate |
+| 述語シンボル | Predicate symbol |

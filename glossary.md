@@ -109,3 +109,5 @@
 | 単調関数 | Monotone function |
 | 型注釈 | Type ascription |
 | ホール | Hole |
+| エントリーポイント | Entry point |
+| 終了コード | Exit code |

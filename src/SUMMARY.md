@@ -72,7 +72,7 @@
   - [関数述語](./functional-predicates.md)
   - [束意味論](./lattice-semantics.md)
 - [日常のプログラミング](./everyday-programming.md)
-  - [The Main Function](./main.md)
+  - [main 関数](./main.md)
   - [Printing to Standard Out](./printing-to-stdout.md)
   - [String Interpolation](./string-interpolation.md)
   - [Tail Recursion](./tail-recursion.md)

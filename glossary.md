@@ -36,3 +36,4 @@
 | ライブラリエフェクト | Library effect |
 | デフォルトハンドラ | Default handler |
 | アサーション | Assertion |
+| 実時間 | Wall-clock time |

@@ -57,7 +57,7 @@
   - [高カインド型](./higher-kinded-types.md)
 - [構造化並行性](./concurrency.md)
 - [並列性](./parallelism.md)
-- [Interoperability with Java](./interoperability.md)
+- [Java との相互運用](./interoperability.md)
   - [Creating Objects](./creating-objects.md)
   - [Calling Methods](./calling-methods.md)
   - [Reading and Writing Fields](./reading-and-writing-fields.md)

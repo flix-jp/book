@@ -74,3 +74,5 @@
 | ランデブー | Rendezvous |
 | 並列性 | Parallelism |
 | 並行性 | Concurrency |
+| 相互運用 | Interoperability |
+| 匿名拡張 | Anonymous extension |

@@ -150,3 +150,9 @@
 | 基底ケース | Base case |
 | スタックセーフ | Stack-safe |
 | 継続渡しスタイル | Continuation-passing style (CPS) |
+| エフェクトメンバ | Effect member |
+| 型メンバ | Type member |
+| 限定継続 | Delimited continuation |
+| 組み込みエフェクト | Built-in effect |
+| ユーザー定義エフェクト | User-defined effect |
+| 解釈不能エフェクト | Uninterpretable effect |

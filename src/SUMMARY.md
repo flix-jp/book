@@ -103,7 +103,7 @@
 
 - [よくある問題](./common-problems.md)
 - [よくある質問](./frequently-asked-questions.md)
-- [Glossary](./glossary.md)
+- [用語集](./glossary.md)
 
 ---
 

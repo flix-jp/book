@@ -133,3 +133,6 @@
 | 未検査キャスト | Unchecked cast |
 | 純粋性リフレクション | Purity reflection |
 | 停止性検査 | Termination checking |
+| アップキャスト | Upcast |
+| サブタイピング | Sub-typing |
+| サブエフェクティング | Sub-effecting |

@@ -102,7 +102,7 @@
 ---
 
 - [よくある問題](./common-problems.md)
-- [Frequently Asked Questions](./frequently-asked-questions.md)
+- [よくある質問](./frequently-asked-questions.md)
 - [Glossary](./glossary.md)
 
 ---

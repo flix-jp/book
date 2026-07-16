@@ -58,7 +58,7 @@
 - [構造化並行性](./concurrency.md)
 - [並列性](./parallelism.md)
 - [Java との相互運用](./interoperability.md)
-  - [Creating Objects](./creating-objects.md)
+  - [オブジェクトの生成](./creating-objects.md)
   - [Calling Methods](./calling-methods.md)
   - [Reading and Writing Fields](./reading-and-writing-fields.md)
   - [Classes and Interfaces](./extending-classes-and-interfaces.md)

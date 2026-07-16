@@ -1,3 +1,84 @@
+# オブジェクトの生成
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/creating-objects.html)を参照してください。
+
+Flix では、Java に似た構文でオブジェクトを生成できます。
+
+例えば：
+
+```flix
+import java.io.File
+
+def main(): Unit \ IO = 
+    let f = new File("foo.txt");
+    println("Hello World!")
+```
+
+ここでは `java.io.File` クラスをインポートし、`new` キーワードを使ってコンストラクタの1つを呼び出すことで、`File` オブジェクトをインスタンス化しています。
+
+`File` クラスには複数のコンストラクタがあるため、次のように書くこともできます：
+
+```flix
+import java.io.File
+
+def main(): Unit \ IO = 
+    let f1 = new File("foo.txt");
+    let f2 = new File("bar", "foo.txt");
+    println("Hello World!")
+```
+
+Flix は、引数の個数とその型に基づいてコンストラクタを解決します。
+
+別の例として、次のように書けます：
+
+```flix
+import java.io.File
+import java.net.URI
+
+def main(): Unit \ IO = 
+    let f1 = new File("foo.txt");
+    let f2 = new File("bar", "foo.txt");
+    let f3 = new File(new URI("file://foo.txt"));
+    println("Hello World!")
+```
+
+Java の名前と Flix のモジュールが衝突する場合は、_リネームインポート(renaming import)_ を使って解決できます：
+
+```flix
+import java.lang.{String => JString}
+
+def main(): Unit \ IO = 
+    let s = new JString("Hello World");
+    println("Hello World!")
+```
+
+ここで `JString` は Java クラスの `java.lang.String` を指し、`String` は Flix のモジュールを指します。なお、内部的には Flix の文字列と Java の文字列は同じものです。
+
+## スーパーコンストラクタの呼び出し
+
+Java クラスの匿名サブクラス(anonymous subclass)を生成する際には、`super` を使って親のコンストラクタを呼び出すコンストラクタを定義できます：
+
+```flix
+import java.lang.Thread
+
+def main(): Unit \ IO =
+    let t = new Thread {
+        def new(): Thread \ IO = super("my-thread")
+        def run(_this: Thread): Unit \ IO =
+            println("Hello from ${Thread.currentThread().getName()}")
+    };
+    t.start()
+```
+
+ここでは `Thread` を継承し、スレッド名として `"my-thread"` を親のコンストラクタに渡しています。コンストラクタは `def new()` で定義し、その本体は厳密に `super(...)` の呼び出しでなければなりません。1つの `new` 式につき、定義できるコンストラクタは最大1つです。
+
+コンストラクタが定義されていない場合、Flix は自動的に親の引数なしコンストラクタを呼び出します。
+
+> **注意:** Java コードとのやり取りは、常に `IO` エフェクトを伴います。
+
+> **注意:** Flix では、Java クラスは使用する前に `import` されている必要があります。特に、`new java.io.File(...)` のように書くことは _できません_。
+
+<!--
 # Creating Objects
 
 In Flix, we can create objects using syntax similar to Java.
@@ -85,3 +166,4 @@ constructor.
 
 > **Note:** In Flix, Java classes must be `import`ed before they can be used. In
 > particular, we _cannot_ write `new java.io.File(...)`.
+-->

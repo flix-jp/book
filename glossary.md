@@ -76,3 +76,6 @@
 | 並行性 | Concurrency |
 | 相互運用 | Interoperability |
 | 匿名拡張 | Anonymous extension |
+| リネームインポート | Renaming import |
+| スーパーコンストラクタ | Super constructor |
+| 匿名サブクラス | Anonymous subclass |

@@ -76,7 +76,7 @@
   - [標準出力への出力](./printing-to-stdout.md)
   - [文字列補間](./string-interpolation.md)
   - [末尾再帰](./tail-recursion.md)
-  - [Anonymous and Named Holes](./holes.md)
+  - [匿名ホールと名前付きホール](./holes.md)
   - [Type Ascriptions](./type-ascriptions.md)
   - [Redundancy](./redundancy.md)
   - [Debugging](./debugging.md)

@@ -35,3 +35,4 @@
 | エフェクト集合 | Effect set |
 | ライブラリエフェクト | Library effect |
 | デフォルトハンドラ | Default handler |
+| アサーション | Assertion |

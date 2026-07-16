@@ -128,3 +128,4 @@
 | サプライチェーン攻撃 | Supply-chain attack |
 | 依存関係解決 | Dependency resolution |
 | 推移的依存関係 | Transitive dependency |
+| アーティファクト | Artifact |

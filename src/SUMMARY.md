@@ -56,7 +56,7 @@
   - [関連エフェクト](./associated-effects.md)
   - [高カインド型](./higher-kinded-types.md)
 - [構造化並行性](./concurrency.md)
-- [Parallelism](./parallelism.md)
+- [並列性](./parallelism.md)
 - [Interoperability with Java](./interoperability.md)
   - [Creating Objects](./creating-objects.md)
   - [Calling Methods](./calling-methods.md)

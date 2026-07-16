@@ -72,3 +72,5 @@
 | バッファなしチャネル | Unbuffered channel |
 | ティッカー | Ticker |
 | ランデブー | Rendezvous |
+| 並列性 | Parallelism |
+| 並行性 | Concurrency |

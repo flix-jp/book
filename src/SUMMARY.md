@@ -94,7 +94,7 @@
   - [検査付きキャスト](./checked-casts.md)
   - [未検査キャスト](./unchecked-casts.md)
   - [バグと到達不能コード](./bug-and-unreachable.md)
-  - [Laziness](./laziness.md)
+  - [遅延評価](./laziness.md)
   - [Purity Reflection](./purity-reflection.md)
   - [Type-Level Programming](./type-level-programming.md)
   - [Termination Checking](./termination-checking.md)

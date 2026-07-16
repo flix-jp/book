@@ -146,3 +146,6 @@
 | 篩型 | Refinement type |
 | 依存型 | Dependent type |
 | パラメトリック多相 | Parametric polymorphism |
+| 構造的再帰 | Structural recursion |
+| 基底ケース | Base case |
+| スタックセーフ | Stack-safe |

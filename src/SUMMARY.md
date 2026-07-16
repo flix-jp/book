@@ -77,7 +77,7 @@
   - [文字列補間](./string-interpolation.md)
   - [末尾再帰](./tail-recursion.md)
   - [匿名ホールと名前付きホール](./holes.md)
-  - [Type Ascriptions](./type-ascriptions.md)
+  - [型注釈](./type-ascriptions.md)
   - [Redundancy](./redundancy.md)
   - [Debugging](./debugging.md)
 - [Tools](./tools.md)

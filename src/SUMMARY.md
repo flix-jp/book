@@ -67,7 +67,7 @@
   - [ボックス化とアンボックス化](./boxing-and-unboxing.md)
   - [Java のコレクション](./java-collections.md)
 - [不動点](./fixpoints.md)
-  - [Stratified Negation](./stratified-negation.md)
+  - [層化否定](./stratified-negation.md)
   - [Local Predicates](./local-predicates.md)
   - [Functional Predicates](./functional-predicates.md)
   - [Lattice Semantics](./lattice-semantics.md)

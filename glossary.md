@@ -94,3 +94,5 @@
 | 制約システム | Constraint system |
 | アリティ | Arity |
 | 過大近似 | Over-approximation |
+| 層化否定 | Stratified negation |
+| 層化 | Stratification |

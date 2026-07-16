@@ -149,3 +149,4 @@
 | 構造的再帰 | Structural recursion |
 | 基底ケース | Base case |
 | スタックセーフ | Stack-safe |
+| 継続渡しスタイル | Continuation-passing style (CPS) |

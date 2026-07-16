@@ -33,7 +33,7 @@
   - [エフェクトとハンドラ](./effects-and-handlers.md)
   - [デフォルトハンドラ](./default-handlers.md)
   - [エフェクト指向プログラミング](./effect-oriented-programming.md)
-- [Library Effects](./library-effects.md)
+- [ライブラリエフェクト](./library-effects.md)
   - [Assert](./assert.md)
   - [Clock](./clock.md)
   - [Console](./console.md)

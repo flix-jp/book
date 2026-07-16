@@ -32,3 +32,4 @@
 | ハンドラ | Handler |
 | 経験則 | Rule of thumb |
 | ビジネスロジック | Business logic |
+| エフェクト集合 | Effect set |

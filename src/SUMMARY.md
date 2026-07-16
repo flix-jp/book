@@ -3,7 +3,7 @@
 - [Flix へようこそ](./introduction.md)
 - [はじめに](./getting-started.md)
   - [Hello World!](./hello-world.md)
-  - [Next Steps](./next-steps.md)
+  - [次のステップ](./next-steps.md)
 - [データ型](./data-types.md)
   - [プリミティブ型](./primitive-types.md)
   - [タプル](./tuples.md)

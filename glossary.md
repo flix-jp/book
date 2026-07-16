@@ -63,3 +63,6 @@
 | 自動導出 | Automatic derivation |
 | 構造的等価性 | Structural equality |
 | 全順序 | Total ordering |
+| 等値制約 | Equality constraint |
+| 多引数型クラス | Multi-parameter type classes |
+| デフォルト型 | Default type |

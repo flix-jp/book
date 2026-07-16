@@ -61,7 +61,7 @@
   - [オブジェクトの生成](./creating-objects.md)
   - [メソッドの呼び出し](./calling-methods.md)
   - [フィールドの読み書き](./reading-and-writing-fields.md)
-  - [Classes and Interfaces](./extending-classes-and-interfaces.md)
+  - [クラスとインターフェース](./extending-classes-and-interfaces.md)
   - [Nested and Inner Classes](./nested-and-inner-classes.md)
   - [Exceptions](./exceptions.md)
   - [Boxing and Unboxing](./boxing-and-unboxing.md)

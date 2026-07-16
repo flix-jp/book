@@ -80,3 +80,5 @@
 | スーパーコンストラクタ | Super constructor |
 | 匿名サブクラス | Anonymous subclass |
 | 部分適用 | Partial application |
+| 匿名クラス | Anonymous class |
+| スーパーメソッド呼び出し | Super method call |

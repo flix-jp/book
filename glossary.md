@@ -86,3 +86,11 @@
 | 内部クラス | Inner class |
 | ボックス化 | Boxing |
 | アンボックス化 | Unboxing |
+| 不動点計算 | Fixpoint computation |
+| 第一級制約 | First-class constraints |
+| 行多相 | Row-polymorphic |
+| 推移閉包 | Transitive closure |
+| ファクト | Fact |
+| 制約システム | Constraint system |
+| アリティ | Arity |
+| 過大近似 | Over-approximation |

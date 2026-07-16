@@ -1,3 +1,124 @@
+# 検査付き型キャストとエフェクトキャスト
+
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/checked-casts.html)を参照してください。
+
+Flix の型・エフェクトシステムは――設計上――サブタイピング(sub-typing)もサブエフェクティング(sub-effecting)もサポートしていません。この制限は実際にはめったに問題になりませんが、回避するために Flix には 2 つの _安全な_ アップキャスト(upcast)構文が用意されています：
+
+- 検査付き*型*キャスト: `checked_cast(exp)`
+- 検査付き*エフェクト*キャスト: `checked_ecast(exp)`
+
+> **注意:** `checked_cast` と `checked_ecast` の式は _安全_ であることが保証されています。Flix コンパイラは、すべての検査付きキャストが決して失敗しないことをコンパイル時に検査します。
+
+## 検査付き型キャスト
+
+次のプログラム：
+
+```flix
+import java.lang.Object
+
+def main(): Unit =
+    let s = "Hello World";
+    let _: Object = s;
+    ()
+```
+
+はコンパイルできません：
+
+```
+❌ -- Type Error --------------------------------------------------
+
+>> Unexpected type: expected 'java.lang.Object', found 'String'.
+
+5 |     let _: Object = s;
+                        ^
+                        expression has unexpected type.
+```
+
+なぜなら、Flix では `String` 型は `Object` のサブタイプ _ではない_ からです。
+
+検査付き型キャストを使えば、`String` から `Object` へ安全にアップキャストできます：
+
+```flix
+import java.lang.Object;
+
+def main(): Unit =
+    let s = "Hello World";
+    let _: Object = checked_cast(s);
+    ()
+```
+
+`checked_cast` 構文を使うと、任意の Java 型をそのスーパータイプのいずれかへ安全にアップキャストできます：
+
+```flix
+let _: Object       = checked_cast("Hello World");
+let _: CharSequence = checked_cast("Hello World");
+let _: Serializable = checked_cast("Hello World");
+let _: Object       = checked_cast(null);
+let _: String       = checked_cast(null);
+```
+
+## 検査付きエフェクトキャスト
+
+次のプログラム：
+
+```flix
+def hof(f: Int32 -> Int32 \ IO): Int32 \ IO = f(42)
+
+def main(): Int32 \ IO =
+    hof(x -> x + 1)
+```
+
+はコンパイルできません：
+
+```
+❌ -- Type Error --------------------------------------------------
+
+>> Expected argument of type 'Int32 -> Int32 \ IO', but got 'Int32 -> Int32'.
+
+4 |     hof(x -> x + 1)
+            ^^^^^^^^^^
+            expected: 'Int32 -> Int32 & Impure \ IO'
+
+The function 'hof' expects its 1st argument to be of type 'Int32 -> Int32 \ IO'.
+
+Expected: Int32 -> Int32 & Impure \ IO
+  Actual: Int32 -> Int32
+```
+
+なぜなら、Flix では _純粋な_ 関数は不純な関数のサブタイプ _ではない_ からです。具体的には、`hof` は `IO` エフェクトを持つ関数を要求していますが、渡しているのは純粋な関数です。
+
+検査付きエフェクトキャストを使えば、純粋な式を不純な式へ安全にアップキャストできます：
+
+```flix
+def main(): Int32 \ IO =
+    hof(x -> checked_ecast(x + 1))
+```
+
+`checked_ecast` 構文によって、`x + 1` が `IO` エフェクトを持っているかのように扱うことができます。
+
+> **注意:** Flix では――一般的な経験則として――高階関数はその関数引数に特定のエフェクトを要求する _べきではありません_。代わりに、エフェクト多相にするべきです。
+
+## 関数型
+
+`checked_cast` と `checked_ecast` のいずれの構文も、関数型に対しては機能しません。
+
+例えば、次のコードは動作しません：
+
+```flix
+let f: Unit -> ##java.lang.Object = checked_cast(() -> "Hello World")
+```
+
+これは関数型 `Unit -> String` を `Unit -> Object` へキャストしようとしているためです。
+
+代わりに、次のように書くべきです：
+
+```flix
+let f: Unit -> ##java.lang.Object = (() -> checked_cast("Hello World"))
+```
+
+こちらは `String` を `Object` へ直接キャストしているからです。
+
+<!--
 # Checked Type and Effect Casts
 
 The Flix type and effect system – by design – does not support sub-typing nor
@@ -126,3 +247,4 @@ let f: Unit -> ##java.lang.Object = (() -> checked_cast("Hello World"))
 ```
 
 because it directly casts `String` to `Object`.
+-->

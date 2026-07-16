@@ -91,7 +91,7 @@
 ---
 
 - [高度な機能](./advanced-features.md)
-  - [Checked Casts](./checked-casts.md)
+  - [検査付きキャスト](./checked-casts.md)
   - [Unchecked Casts](./unchecked-casts.md)
   - [Bugs and Unreachable Code](./bug-and-unreachable.md)
   - [Laziness](./laziness.md)

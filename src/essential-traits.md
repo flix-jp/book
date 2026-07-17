@@ -1,6 +1,6 @@
 # 必須のトレイト
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/essential-traits.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/essential-traits.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/essential-traits.md)ください。
 
 Flix で実践的なプログラミングを行うには、少なくとも 3 つのトレイト(Trait)、すなわち `Eq`、`Order`、`ToString` についての知識が必要です。
 

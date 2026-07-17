@@ -1,6 +1,6 @@
 # Java との相互運用
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/interoperability.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/interoperability.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/interoperability.md)ください。
 
 Flix は [Java Virtual Machine](https://en.wikipedia.org/wiki/Java_virtual_machine)（JVM）ベースのプログラミング言語です。したがって：
 

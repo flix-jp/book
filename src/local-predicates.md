@@ -1,6 +1,6 @@
 # ローカル述語
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/local-predicates.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/local-predicates.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/local-predicates.md)ください。
 
 Flix は、_local predicates(ローカル述語)_ と呼ばれる抽象化の仕組みをサポートしています。ローカル述語は、ローカル変数と同じように、外部からは見えません。
 

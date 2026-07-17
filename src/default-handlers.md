@@ -1,6 +1,6 @@
 # デフォルトハンドラ
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/default-handlers.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/default-handlers.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/default-handlers.md)ください。
 
 Flix は **デフォルトハンドラ（default handler）** をサポートしています。これは、
 エフェクトが、そのエフェクトを `IO` エフェクトへと変換するハンドラを宣言できる

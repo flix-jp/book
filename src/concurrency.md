@@ -1,6 +1,6 @@
 # 構造化並行性
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/concurrency.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/concurrency.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/concurrency.md)ください。
 
 Flix は、Go と Rust に着想を得た、チャネルとプロセスによる CSP スタイルの並行処理をサポートしています。
 

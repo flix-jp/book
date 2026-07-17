@@ -1,6 +1,6 @@
 # Applicative For-Yield
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/applicative-for-yield.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/applicative-for-yield.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/applicative-for-yield.md)ください。
 
 Flix は、モナド的(monadic)な `forM` 式に加えて、`Applicative` トレイト(Trait)を基盤とするアプリカティブ(applicative)な `forA` 式をサポートしています。`forA` 構文を使うと、`Validation[e, t]` データ型を用いたエラー処理コードを簡単に書けます。
 

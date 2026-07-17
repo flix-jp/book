@@ -1,6 +1,6 @@
 # トレイト
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/traits.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/traits.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/traits.md)ください。
 
 トレイト(Trait)は[型クラス](https://en.wikipedia.org/wiki/Type_class)としても知られており、抽象化とモジュール性を支える仕組みです。Flix のトレイトシステムは Haskell や Rust のものと似ていますが、同一ではありません。Flix のトレイトは、関連型、関連エフェクト、高カインド型をサポートしています。
 

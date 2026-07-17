@@ -1,6 +1,6 @@
 # 用語集
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/glossary.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/glossary.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/glossary.md)ください。
 
 ***Algebraic Data Type（代数的データ型）.*** 直和型と直積型、すなわち列挙型とタプル型を用いて定義されるデータ型です。
 

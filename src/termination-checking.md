@@ -1,6 +1,6 @@
 # 停止性検査
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/termination-checking.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/termination-checking.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/termination-checking.md)ください。
 
 Flix は `@Terminates` アノテーションをサポートしています。これは、関数が*構造的再帰(Structural recursion)*である――つまり、すべての入力に対して停止することが保証されている――ことをコンパイラに検証させるものです。`@Terminates` が付与された関数は、再帰呼び出しを仮引数の厳密な部分構造(Strict substructure)に対してのみ行わなければなりません。コンパイラはこれをコンパイル時に検査し、関数が構造的再帰の要件を満たさない場合はエラーを報告します。
 

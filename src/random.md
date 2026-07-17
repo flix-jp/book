@@ -1,6 +1,6 @@
 # Random
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/random.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/random.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/random.md)ください。
 
 Flix は、擬似乱数(Pseudorandom number)を生成するためのライブラリエフェクトとして `Random` を提供しています。`Random` エフェクトはデフォルトハンドラを持っているため、`main` の中で明示的に `runWithIO` を呼び出す必要はありません。主要なモジュールは `Math.Random` です。
 

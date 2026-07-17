@@ -1,6 +1,6 @@
 # Hello World
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/hello-world.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/hello-world.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/hello-world.md)ください。
 
 それでは、`src/Main.flix` ファイルにある、かの有名な _Hello World_ プログラムを見てみましょう：
 

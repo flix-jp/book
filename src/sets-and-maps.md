@@ -1,6 +1,6 @@
 # Set と Map
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/sets-and-maps.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/sets-and-maps.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/sets-and-maps.md)ください。
 
 Flix は平衡木に基づく（イミュータブルな）`Set`(セット)と `Map`(マップ)を強力にサポートしています。そのため、`Set` の要素と `Map` のキーは `Order` トレイトを実装している必要があります。
 

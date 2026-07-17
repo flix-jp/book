@@ -1,6 +1,6 @@
 # Flix を使って束上の制約を解く
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/lattice-semantics.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/lattice-semantics.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/lattice-semantics.md)ください。
 
 Flix は、_関係に対する制約_ だけでなく、_束(Lattice)に対する制約_ もサポートしています。このような制約を作るには、まず束の演算（半順序(Partial order)、最小上界(Least upper bound)など）を関数として定義し、それらをある型に関連付け、そして束意味論(Lattice semantics)を持つ述語シンボルを宣言する必要があります。
 

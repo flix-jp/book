@@ -1,6 +1,6 @@
 # テストフレームワーク
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/test-framework.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/test-framework.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/test-framework.md)ください。
 
 Flix には組み込みのテストフレームワークが付属しています。テストは、`@Test` アノテーション(Annotation)が付けられた Flix の関数です。テスト関数は引数を取らず、`Unit` を返す必要があります。
 

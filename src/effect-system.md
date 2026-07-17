@@ -1,6 +1,6 @@
 # エフェクトシステム
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effect-system.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effect-system.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/effect-system.md)ください。
 
 Flix は、言語に完全に統合された最先端の型およびエフェクトシステム
 （type and effect system）を備えています。Flix のエフェクトシステムは

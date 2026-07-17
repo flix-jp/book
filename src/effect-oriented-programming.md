@@ -1,6 +1,6 @@
 # エフェクト指向プログラミング
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effect-oriented-programming.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effect-oriented-programming.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/effect-oriented-programming.md)ください。
 
 エフェクトを使ったプログラミングには、新しい考え方、すなわち _エフェクト指向の考え方（effect-oriented mindset）_ が必要です。
 

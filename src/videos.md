@@ -1,6 +1,6 @@
 # 動画
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/videos.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/videos.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/videos.md)ください。
 
 Flix に関する動画集です。
 

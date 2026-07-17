@@ -1,6 +1,6 @@
 # 古くなったパッケージの確認
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/outdated.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/outdated.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/outdated.md)ください。
 
 `outdated` コマンドを使うと、Flix パッケージに利用可能な更新があるかどうかを確認できます。
 

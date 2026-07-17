@@ -1,6 +1,6 @@
 # イミュータブルなデータ
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/immutable-data.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/immutable-data.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/immutable-data.md)ください。
 
 関数型プログラミングの_要_となるのが、イミュータブル(不変)なデータ型です。
 

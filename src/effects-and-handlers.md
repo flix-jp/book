@@ -1,6 +1,6 @@
 # エフェクトとハンドラ
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effects-and-handlers.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effects-and-handlers.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/effects-and-handlers.md)ください。
 
 Flix は、[Eff](https://www.eff-lang.org/) や [Koka](https://koka-lang.github.io/) のスタイルで、代数エフェクト(algebraic effects)とハンドラ(handlers)をサポートしています。
 

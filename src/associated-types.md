@@ -1,6 +1,6 @@
 # 関連型
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/associated-types.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/associated-types.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/associated-types.md)ください。
 
 関連型(Associated type)とは、トレイトの型メンバであり、各トレイトインスタンスごとに指定されるものです。関連型は、[多引数型クラス](https://en.wikipedia.org/wiki/Type_class#Multi-parameter_type_classes)に代わる、より自然な選択肢と見なされることがよくあります。
 

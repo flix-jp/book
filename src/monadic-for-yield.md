@@ -1,6 +1,6 @@
 # Monadic For-Yield
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/monadic-for-yield.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/monadic-for-yield.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/monadic-for-yield.md)ください。
 
 Flix は、Scala の `for` 内包表記や Haskell の do 記法に似た、モナドの _forM-yield_ 構文をサポートしています。_forM_ 構文は、`point` と `flatMap`（これらは `Monad` トレイトによって提供されます）を使用するための糖衣構文です。_forM_ 構文は、`empty`（これは `MonadZero` トレイトによって提供されます）を使用する _guard_ 式もサポートしています。
 

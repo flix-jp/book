@@ -1,6 +1,6 @@
 # 並列性
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/parallelism.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/parallelism.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/parallelism.md)ください。
 
 これまでに、`spawn` 式を使うことで式を新しいスレッドで評価できることを見てきました：
 

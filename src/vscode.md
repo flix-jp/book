@@ -1,6 +1,6 @@
 # Visual Studio Code 拡張機能
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/vscode.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/vscode.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/vscode.md)ください。
 
 Flix には[フル機能の Visual Studio Code 拡張機能](https://marketplace.visualstudio.com/items?itemName=flix.flix)が用意されています：
 

@@ -1,6 +1,6 @@
 # ミュータブルなデータ
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/mutable-data.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/mutable-data.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/mutable-data.md)ください。
 
 Flix は _関数型ファースト（functional-first）_ なプログラミング言語であり、
 immutable(イミュータブル)なデータ構造の使用を推奨しますが、必須とはしません。

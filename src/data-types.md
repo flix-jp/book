@@ -1,6 +1,6 @@
 # データ型
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/data-types.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/data-types.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/data-types.md)ください。
 
 Flix には、ブール値、浮動小数点数、整数などの組み込みデータ型と、タプルやレコードなどの複合型が用意されています。
 さらに、標準ライブラリでは `Option[a]`、`Result[e, t]`、`List[a]`、`Set[a]`、`Map[k, v]` などの型が定義されています。

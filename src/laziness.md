@@ -1,6 +1,6 @@
 # 遅延評価
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/laziness.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/laziness.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/laziness.md)ください。
 
 Flix はほとんどの場面で先行評価(Eager evaluation)を用いますが、`lazy` キーワードを使うことで、適切な場面でプログラマが遅延評価(Lazy evaluation)を選択できるようになっています：
 

@@ -1,6 +1,6 @@
 # Flix へようこそ
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/introduction.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/introduction.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/introduction.md)ください。
 
 Flix は、[オーフス大学](https://cs.au.dk/)、[オープンソースコントリビューター](https://github.com/flix/flix)、[ウォータールー大学](https://uwaterloo.ca/)、[テュービンゲン大学](https://uni-tuebingen.de/)、[コペンハーゲン大学](https://di.ku.dk/)の研究者と協力して開発されている、原則に基づいた関数型・論理型・命令型プログラミング言語です。
 

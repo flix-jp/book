@@ -1,6 +1,6 @@
 # `bug!` と `unreachable!`
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/bug-and-unreachable.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/bug-and-unreachable.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/bug-and-unreachable.md)ください。
 
 Flix は、`bug!` と `unreachable!` という 2 つの特別な「関数」をサポートしています。これらは、プログラム内部の不変条件(Invariant)が破られており、実行を中断すべきであることを示すために使えます。例えば：
 

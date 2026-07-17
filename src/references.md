@@ -1,6 +1,6 @@
 # References
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/references.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/references.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/references.md)ください。
 
 Flix はミュータブル（mutable）でスコープ付きの参照（reference）をサポートしています。参照とは、その値が時間とともに変化しうるボックスです。参照に対する 3 つの主要な操作は次のとおりです。
 

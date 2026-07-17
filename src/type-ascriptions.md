@@ -1,6 +1,6 @@
 # 型注釈
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/type-ascriptions.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/type-ascriptions.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/type-ascriptions.md)ください。
 
 Flix はローカル型推論をサポートしていますが、式や let 束縛にその型を注釈しておくと便利な場合があります。このような注釈を型注釈(Type ascription)と呼びます。型注釈によって式の型を変えることはできず、型安全性を破るために使うこともできません。
 

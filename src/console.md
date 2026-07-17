@@ -1,6 +1,6 @@
 # Console
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/console.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/console.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/console.md)ください。
 
 Flix は、ターミナル I/O のためのライブラリエフェクトとして `Console` を提供しています。`Console` エフェクトにはデフォルトハンドラがあるため、`main` の中で明示的に `runWithIO` を呼び出す必要はありません。主要なモジュールは `Sys.Console` です。
 

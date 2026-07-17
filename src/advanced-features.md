@@ -1,6 +1,6 @@
 # 高度な機能
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/advanced-features.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/advanced-features.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/advanced-features.md)ください。
 
 この章では、Flix の高度な機能について解説します。内容は次のとおりです：
 

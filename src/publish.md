@@ -1,6 +1,6 @@
 # GitHub でパッケージを公開する
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/publish.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/publish.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/publish.md)ください。
 
 Flix のパッケージは GitHub 上で公開されます。
 

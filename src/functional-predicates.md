@@ -1,6 +1,6 @@
 # 関数述語
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/functional-predicates.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/functional-predicates.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/functional-predicates.md)ください。
 
 論理述語を使いたいものの、そのタプルをすべて網羅的に列挙することは避けたい、という状況に遭遇することがあります。
 

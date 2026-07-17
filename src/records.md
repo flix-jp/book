@@ -1,6 +1,6 @@
 # レコード
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/records.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/records.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/records.md)ください。
 
 Flix は、行多相(Row Polymorphism)で拡張可能なレコードをサポートしています。
 

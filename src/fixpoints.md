@@ -1,6 +1,6 @@
 # 不動点
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/fixpoints.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/fixpoints.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/fixpoints.md)ください。
 
 Flix のユニークな機能のひとつに、*関係に対する制約（constraint on relations）*および*束に対する制約（constraint on lattices）*の不動点計算（Fixpoint computation）を言語組み込みでサポートしていることが挙げられます。
 

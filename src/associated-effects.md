@@ -1,6 +1,6 @@
 # 関連エフェクト
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/associated-effects.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/associated-effects.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/associated-effects.md)ください。
 
 これまで、関連型(Associated types)によって、各インスタンスが関連型に対する具体的な型を指定できるようになり、トレイトの柔軟性が高まることを見てきました。関連*エフェクト*(Associated effects)も同じ仕組みで動作しますが、対象となるのはエフェクトです。
 

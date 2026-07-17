@@ -1,6 +1,6 @@
 # Sleep
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/sleep.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/sleep.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/sleep.md)ください。
 
 Flix は、現在のスレッドを一時停止するためのライブラリエフェクトとして `Sleep` を提供しています。`Sleep` エフェクトにはデフォルトハンドラがあるため、`main` の中で明示的に `runWithIO` を呼び出す必要はありません。中心となるモジュールは `Time.Sleep` です。
 

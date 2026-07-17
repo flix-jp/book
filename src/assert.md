@@ -1,6 +1,6 @@
 # Assert
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/assert.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/assert.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/assert.md)ください。
 
 Flix は、実行時のアサーション(Assertion)のためのライブラリエフェクトとして `Assert` を提供しています。`Assert` エフェクトにはデフォルトハンドラがあるため、`main` で明示的に `runWithIO` を呼び出す必要はありません。
 

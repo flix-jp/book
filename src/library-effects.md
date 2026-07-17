@@ -1,6 +1,6 @@
 # ライブラリエフェクト
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/library-effects.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/library-effects.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/library-effects.md)ください。
 
 Flix は、一般的な I/O 操作のための組み込みライブラリエフェクト(Library effect)をいくつか提供しています。これらのエフェクトはすべてデフォルトハンドラを持っているため、`main` で明示的に `runWithIO` を呼び出す必要はありません。
 

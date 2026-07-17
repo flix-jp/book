@@ -1,6 +1,6 @@
 # よくある問題
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/common-problems.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/common-problems.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/common-problems.md)ください。
 
 - [ToString is not defined on 'a'](#tostring-is-not-defined-on-a)
 - [レコードと複雑なインスタンス](#レコードと複雑なインスタンス)

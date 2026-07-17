@@ -1,6 +1,6 @@
 # 研究文献
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/research-literature.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/research-literature.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/research-literature.md)ください。
 
 以下の研究論文は、Flix の特定の側面を扱っています：
 

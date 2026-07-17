@@ -1,6 +1,6 @@
 # Http と Https
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/http-and-https.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/http-and-https.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/http-and-https.md)ください。
 
 Flix は、HTTP リクエストを送信するためのライブラリエフェクトとして `Http` と `Https` を提供しています。どちらのエフェクトにもデフォルトハンドラがあるため、`main` で明示的に `runWithIO` を呼び出す必要はありません。主なモジュールは次のとおりです：
 

@@ -1,6 +1,6 @@
 # 標準出力への出力
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/printing-to-stdout.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/printing-to-stdout.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/printing-to-stdout.md)ください。
 
 Flix の Prelude(プレリュード)には、標準出力へ出力する `println` 関数が定義されています。例えば：
 

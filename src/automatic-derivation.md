@@ -1,6 +1,6 @@
 # 自動導出
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/automatic-derivation.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/automatic-derivation.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/automatic-derivation.md)ください。
 
 Flix は、いくつかのトレイトに対する自動導出(Automatic derivation)をサポートしています。これには以下が含まれます：
 

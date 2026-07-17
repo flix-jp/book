@@ -1,6 +1,6 @@
 # 末尾再帰
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/tail-recursion.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/tail-recursion.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/tail-recursion.md)ください。
 
 Flix では、そして一般に関数型プログラミングでは、反復処理は[再帰](https://en.wikipedia.org/wiki/Recursion_(computer_science))によって表現されます。
 

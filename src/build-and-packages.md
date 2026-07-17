@@ -1,6 +1,6 @@
 # ビルドとパッケージ管理
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/build-and-packages.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/build-and-packages.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/build-and-packages.md)ください。
 
 Flix にはビルドシステム(Build system)とパッケージマネージャ(Package manager)が付属しています。ビルドシステムを使うと、Flix プログラムを Java クラスの集まりにコンパイルしたり、fat JAR(ファット JAR)をビルドしたりすることが簡単にできます。パッケージマネージャを使うと、Flix パッケージを作成して GitHub に公開し、マニフェストファイル(Manifest file)を介してそれらに依存することができます。また、パッケージマネージャによって、Maven で公開されている Java の JAR アーティファクトに依存することも可能です。
 

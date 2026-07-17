@@ -1,6 +1,6 @@
 # 例外
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/exceptions.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/exceptions.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/exceptions.md)ください。
 
 Flix では、`try-catch` 構文を使って Java の例外(Exception)を捕捉できます。この構文は Java のものと似ていますが、文法が少し異なります。
 

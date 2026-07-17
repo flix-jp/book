@@ -1,6 +1,6 @@
 # Clock
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/clock.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/clock.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/clock.md)ください。
 
 Flix は、現在の実時間(wall-clock time)を問い合わせるためのライブラリエフェクトとして `Clock` を提供しています。`Clock` エフェクトはデフォルトハンドラを持つため、`main` の中で明示的に `runWithIO` を呼び出す必要はありません。中心となるモジュールは `Time.Clock` です。
 

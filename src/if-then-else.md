@@ -1,6 +1,6 @@
 # If-then-else
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/if-then-else.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/if-then-else.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/if-then-else.md)ください。
 
 Flix は、おなじみの *if-then-else* 式をサポートしています。
 

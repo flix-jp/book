@@ -1,6 +1,6 @@
 # クラスとインターフェースの拡張
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/extending-classes-and-interfaces.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/extending-classes-and-interfaces.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/extending-classes-and-interfaces.md)ください。
 
 Flix では、Java のクラスを継承したり、Java のインターフェースを実装したりするオブジェクトを作成できます。
 

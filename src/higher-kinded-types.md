@@ -1,6 +1,6 @@
 # 高カインド型
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/higher-kinded-types.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/higher-kinded-types.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/higher-kinded-types.md)ください。
 
 Flix は[高カインド型(Higher-kinded types)](https://en.wikipedia.org/wiki/Kind_(type_theory))をサポートしています。そのため、トレイトは*型コンストラクタ(Type constructor)*を抽象化できます。
 

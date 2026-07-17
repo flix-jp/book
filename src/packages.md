@@ -1,6 +1,6 @@
 # パッケージ管理
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/packages.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/packages.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/packages.md)ください。
 
 自明でない Flix プロジェクトには、必ず `flix.toml` という manifest(マニフェスト)を用意すべきです。マニフェストには、プロジェクトとその依存関係に関する情報が記述されます。
 

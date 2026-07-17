@@ -1,6 +1,6 @@
 # 追加情報
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/additional-information.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/additional-information.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/additional-information.md)ください。
 
 プログラミング言語 Flix に関するさらなる情報は、以下で見つけることができます：
 

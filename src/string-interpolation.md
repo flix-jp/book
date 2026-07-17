@@ -1,6 +1,6 @@
 # 文字列補間
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/string-interpolation.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/string-interpolation.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/string-interpolation.md)ください。
 
 Flix の文字列は補間をサポートしています。文字列の中で `"${e}"` という形式を書くと、`e` を評価して値にし、`ToString` トレイトを使って文字列に変換します。例えば：
 

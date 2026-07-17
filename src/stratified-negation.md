@@ -1,6 +1,6 @@
 # 層化否定
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/stratified-negation.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/stratified-negation.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/stratified-negation.md)ください。
 
 Flix は、ルール本体で否定を制限付きで使用できるようにする _層化否定(stratified negation)_ をサポートしています。例えば：
 

@@ -1,6 +1,6 @@
 # ネストクラスと内部クラス
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/nested-and-inner-classes.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/nested-and-inner-classes.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/nested-and-inner-classes.md)ください。
 
 Java は、ネストされた static クラスと、非 static な内部クラス(Inner class)をサポートしています。
 

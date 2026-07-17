@@ -1,6 +1,6 @@
 # はじめに
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/getting-started.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/getting-started.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/getting-started.md)ください。
 
 Flix を始めるのは簡単です。必要なのは [Java バージョン 21 以上](https://adoptium.net/temurin/releases/)だけです。
 

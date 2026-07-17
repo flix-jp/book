@@ -1,6 +1,6 @@
 # 検査付き型キャストとエフェクトキャスト
 
-> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/checked-casts.html)を参照してください。
+> 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/checked-casts.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/checked-casts.md)ください。
 
 Flix の型・エフェクトシステムは――設計上――サブタイピング(sub-typing)もサブエフェクティング(sub-effecting)もサポートしていません。この制限は実際にはめったに問題になりませんが、回避するために Flix には 2 つの _安全な_ アップキャスト(upcast)構文が用意されています：
 

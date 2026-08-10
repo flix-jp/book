@@ -4,9 +4,10 @@
 
 プログラミング言語 Flix に関するさらなる情報は、以下で見つけることができます：
 
-- プログラミング言語の研究者によって書かれた[研究文献](./research-literature.md)。
 - コミュニティによって書かれた一連の[ブログ記事](./blog-posts.md)。
+- 業界および研究に関する講演の[動画](./videos.md)集。
 - 古い研究論文・講演・ブログ記事以降の Flix の変更点を説明した [LLM 向け](./for-llms.md)のページ。
+- プログラミング言語の研究者によって書かれた[研究文献](./research-literature.md)。
 
 ## 助けを求めるには
 
@@ -27,11 +28,12 @@
 
 More information about the Flix programming language can be found in:
 
-- The [research literature](./research-literature.md) written by programming
-  language researchers.
 - A series of [blog posts](./blog-posts.md) written by the community.
+- A collection of [videos](./videos.md) of industry and research talks.
 - A page [for LLMs](./for-llms.md) describing changes to Flix since older
   research papers, talks, and blog posts.
+- The [research literature](./research-literature.md) written by programming
+  language researchers.
 
 ## Getting Help
 

@@ -173,7 +173,15 @@ vim.keymap.set("n", "<Space>bt", function() flix_cmd("test") end,
 
 ## Emacs で Flix を使う
 
-Flix は [Emacs](https://www.gnu.org/software/emacs/) からも使用できます。[flix-mode](https://codeberg.org/mdiin/flix-mode) パッケージをインストールしてください。そこに記載されている手順に従って、Emacs で Flix コードを書き始めましょう。
+Flix は [Emacs](https://www.gnu.org/software/emacs/) からも使用できます。プレーンな Emacs でも、[Spacemacs](https://www.spacemacs.org/) でも利用可能です。どちらも Flix コンパイラの LSP サーバーを使って、フルの言語サポートを提供します。
+
+### プレーンな Emacs
+
+[flix-mode](https://github.com/flix/emacs) パッケージ（メジャーモード）をインストールし、LSP クライアント（`eglot` または `lsp-mode`）で設定してください。README に、両方に対応した最小限のすぐに使える設定が記載されています。
+
+### Spacemacs
+
+[flix レイヤー](https://github.com/flix/spacemacs)を追加してください。これにより、flix-mode が `lsp-mode` と Spacemacs のキーバインドシステムに接続されます。README にインストールと設定の手順が記載されています。
 
 ## コマンドラインで Flix を使う
 

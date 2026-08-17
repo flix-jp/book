@@ -8,16 +8,18 @@ Flix のビルドシステムは、以下のコマンドをサポートしてい
 
 - `init`: カレントディレクトリに新しい Flix プロジェクトを作成します。
 - `check`: 現在のプロジェクトにコンパイルエラーがないか検査します。
-- `build`: 現在のプロジェクトをビルドします（つまり、Java バイトコードを出力します）。
+- `build`: 現在のプロジェクトをビルド（つまり、コンパイル）します。
+- `build-classes`: 現在のプロジェクトをビルドし、クラスファイルを `build` ディレクトリに書き出します。
 - `build-jar`: 現在のプロジェクトから jar ファイルをビルドします。
 - `build-fatjar`: すべての依存関係をバンドルした jar ファイルをビルドします。
 - `build-pkg`: 現在のプロジェクトから fpkg ファイルをビルドします。
+- `clean`: `build` ディレクトリを削除します。
 - `run`: 現在のプロジェクトの main を実行します。
 - `test`: 現在のプロジェクトのすべてのテストを実行します。
 
 すべてのコマンドは、コマンドライン、REPL、そして VSCode から実行できます。
 
-`build-pkg` を除くすべてのコマンドは、マニフェストファイルがなくても動作します。Flix プロジェクトをビルド、パッケージ化、公開するには、`flix.toml` マニフェストが必要です。`init` コマンドは、`flix.toml` マニフェストがまだ存在しない場合、空のスケルトンを作成します。
+`build-pkg` と `clean` を除くすべてのコマンドは、マニフェストファイルがなくても動作します。Flix プロジェクトをビルド、パッケージ化、公開するには、`flix.toml` マニフェストが必要です。`init` コマンドは、`flix.toml` マニフェストがまだ存在しない場合、空のスケルトンを作成します。
 
 ## プロジェクト構造
 
@@ -38,17 +40,19 @@ The Flix build system supports the following commands:
 
 - `init`: creates a new Flix project in the current directory.
 - `check`: checks the current project for compiler errors.
-- `build`: builds the current project (i.e. emits Java bytecode).
+- `build`: builds (i.e. compiles) the current project.
+- `build-classes`: builds the current project and writes the class files to the `build` directory.
 - `build-jar`: builds a jar-file from the current project. 
 - `build-fatjar`: builds a jar-file with all dependencies bundled.
 - `build-pkg`: builds a fpkg-file from the current project. 
+- `clean`: removes the `build` directory.
 - `run`: runs main in current project.  
 - `test`: runs all tests in the current project.
 
 All commands can be executed from the command line, from the REPL, and from
 VSCode.
 
-All commands, except `build-pkg` work without a manifest file. To build,
+All commands, except `build-pkg` and `clean`, work without a manifest file. To build,
 package, and publish a Flix project, a `flix.toml` manifest is required. The
 `init` command will create an empty skeleton `flix.toml` manifest, if not
 already present. 

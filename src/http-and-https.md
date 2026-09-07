@@ -58,7 +58,7 @@ def main(): Unit \ { Http, IO } =
 
 ## POST リクエストと JSON
 
-ボディ付きの POST リクエストを作るには `HttpRequest.post` を使います。リクエストビルダーは、よく使われるヘッダを設定するための `withContentType` と `withAccept` に対応しています。構築したリクエストは `Http.send` で送信します：
+ボディ付きの POST リクエストを作るには `HttpRequest.postWith` を使います。リクエストビルダーは、よく使われるヘッダを設定するための `withContentType` と `withAccept` に対応しています。構築したリクエストは `Http.send` で送信します：
 
 ```flix
 use Net.Http
@@ -67,7 +67,7 @@ use Net.HttpResponse
 
 def main(): Unit \ { Http, IO } =
     let body = "{\"name\": \"Asterix\", \"age\": 35}";
-    let req = HttpRequest.post("https://flix.dev/api/users", body)
+    let req = HttpRequest.postWith("https://flix.dev/api/users", body)
                 |> HttpRequest.withContentType("application/json")
                 |> HttpRequest.withAccept("application/json");
     match Http.send(req) {
@@ -108,7 +108,7 @@ def main(): Unit \ { Http, IO } =
     }
 ```
 
-コンストラクタはすべての HTTP メソッドに対して用意されています：`HttpRequest.get`、`HttpRequest.post`、`HttpRequest.put`、`HttpRequest.patch`、`HttpRequest.delete` です。
+コンストラクタはすべての HTTP メソッドに対して用意されています：`HttpRequest.get`、`HttpRequest.post`、`HttpRequest.put`、`HttpRequest.patch`、`HttpRequest.delete` です。これらはいずれも URL のみを受け取り、ボディを持たないリクエストを作成します。`post`、`put`、`patch` については、`HttpRequest.postWith`、`HttpRequest.putWith`、`HttpRequest.patchWith` という、ボディを第 2 引数として受け取るバリアントが用意されています。また、任意のリクエストに後からボディを追加するには `HttpRequest.withBody` や `HttpRequest.withBodyBytes` を使うこともできます。
 
 ## Https エフェクト
 

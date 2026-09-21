@@ -38,6 +38,33 @@ Flix には `Util.Json` モジュールとして JSON サポートが組み込�
 
 注意: `Util.Json` モジュールは標準ライブラリの一部なので、外部依存を追加する必要はありません。利用可能なデータ型・関数・トレイトについては [Util.Json](https://api.flix.dev/Util.Json.html) を参照してください。
 
+## 依存関係にはその mount を通じてアクセスする
+
+Flix パッケージには、`flix.toml` で与えられた *mount* を通じてアクセスします。`use` の中で `::` の前に書きます。それ以外の方法ではそのモジュールはスコープに入りません。
+
+&#x274C; **してはいけないこと:**
+
+```flix
+use Museum                          // スコープにない
+def main(): Unit \ IO = Museum.visitMuseum()
+```
+
+&#x2705; **すべきこと:**
+
+```flix
+use museum::Museum
+def main(): Unit \ IO = Museum.visitMuseum()
+```
+
+このとき `flix.toml` は次のように宣言します：
+
+```toml
+[dependencies]
+"github:flix/museum" = { version = "2.1.0", mount = "museum" }
+```
+
+注意: `::` は `use` の中でしか使えず、1 回だけしか使えません。モジュールは `.` で区切ります。`use museum::Museum.Exhibit` と書き、`use museum::Museum::Exhibit` とは書きません。また、式や型の中で `museum::Museum.visitMuseum()` と書くこともできません。標準ライブラリや自分のプロジェクト自身のモジュールに対する `use` は影響を受けません。`use Math.Shuffle` に `::` はありません。詳しくは [依存関係の使用](./using-dependencies.md) を参照してください。
+
 ## エフェクト指向プログラミングを使用する
 
 Flix はエフェクト指向の言語です。(a) 標準ライブラリで定義されたエフェクト、または (b) 自分で定義したエフェクトに対してプログラミングし、`main` の近くでそれらをハンドルしてください。
@@ -462,6 +489,38 @@ Note: The `Util.Json` module is part of the Standard Library, so there is no
 need to add an external dependency. See
 [Util.Json](https://api.flix.dev/Util.Json.html) for the available data types,
 functions, and traits.
+
+## Reach a Dependency Through Its Mount
+
+A Flix package is reached through the *mount* it is given in `flix.toml`, written
+before `::` in a `use`. Its modules are not in scope otherwise.
+
+&#x274C; **Don't:**
+
+```flix
+use Museum                          // not in scope
+def main(): Unit \ IO = Museum.visitMuseum()
+```
+
+&#x2705; **Do:**
+
+```flix
+use museum::Museum
+def main(): Unit \ IO = Museum.visitMuseum()
+```
+
+where `flix.toml` declares:
+
+```toml
+[dependencies]
+"github:flix/museum" = { version = "2.1.0", mount = "museum" }
+```
+
+Note: The `::` can occur in a `use` only, and at most once. Modules are separated
+by `.`: write `use museum::Museum.Exhibit`, never `use museum::Museum::Exhibit`,
+and never `museum::Museum.visitMuseum()` in an expression or a type. A `use` of
+the Standard Library or of the project's own modules is unaffected:
+`use Math.Shuffle` has no `::`. See [Using Dependencies](./using-dependencies.md).
 
 ## Use Effect-Oriented Programming
 

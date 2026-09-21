@@ -46,6 +46,26 @@ Flix は、以下を含む複数の種類の use をサポートしています�
 
 > **注意:** Flix はワイルドカードをサポートしていません。
 
+## パッケージの use
+
+`use` は、プロジェクトが依存している Flix パッケージのモジュールに到達するためにも使えます。`flix.toml` の中でそのパッケージに付けられた名前である mount を書き、続けて `::` を書きます：
+
+```flix
+use game::Board                          // パッケージのトップレベルモジュール
+use game::Game.Rules                     // ネストされたモジュール
+use game::Game.Rules.players             // 関数
+use game::{Board, Game}                  // 複数のモジュール
+use game::Game.Rules.{players => count}  // リネームを伴う場合
+```
+
+`::` はパッケージとその中のモジュールパスを区切るもので、モジュールパス自体はこれまでどおり `.` で区切ります。つまり `use game::Game.Rules` と書き、`use game::Game::Rules` とは書きません。`::` の前後に空白を入れてはならず、1 つの use の中で使えるのは 1 回だけです。
+
+パッケージを指定しない `use` はこれまでどおりの動作をします。`use Chain.Empty` は標準ライブラリに到達し、`use A.B.Color` は自分自身のモジュールに到達します。
+
+> **注意:** `::` を書けるのは `use` の中だけです。式の中で `game::Board.place()` と書いたり、型の中で `game::Board` と書いたりすることはできません。
+
+パッケージがどのようにマウントされるかについては、[依存関係の使用](./using-dependencies.md) を参照してください。
+
 ## use はどこに書けるのか？
 
 Flix では、次の 2 つの場所で use を使えます：
@@ -144,6 +164,33 @@ Flix supports several kinds of uses, including:
 - A qualified use with multiple renames: `use A.B.Color.{Red => R, Green => G, Blue => B}`.
 
 > **Note:** Flix does not support wildcard.
+
+## Uses of a Package
+
+A `use` can also reach a module of a Flix package that the project depends on. We
+write the *mount* of the package, the name it is declared under in `flix.toml`,
+followed by `::`:
+
+```flix
+use game::Board                          // a top-level module of the package
+use game::Game.Rules                     // a nested module
+use game::Game.Rules.players             // a function
+use game::{Board, Game}                  // several modules
+use game::Game.Rules.{players => count}  // with a rename
+```
+
+The `::` separates the package from the module path inside it, and the module
+path is separated by `.` as always: we write `use game::Game.Rules`, never
+`use game::Game::Rules`. There must be no whitespace around the `::`, and it can
+occur at most once in a use.
+
+A `use` that names no package is unaffected: `use Chain.Empty` reaches the
+standard library, and `use A.B.Color` reaches our own module, exactly as before.
+
+> **Note:** The `::` can be written in a `use` only. We cannot write
+> `game::Board.place()` in an expression, nor `game::Board` in a type.
+
+See [Using Dependencies](./using-dependencies.md) for how a package is mounted.
 
 ## Where can Uses Occur?
 

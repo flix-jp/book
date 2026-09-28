@@ -27,13 +27,16 @@ Flix プロジェクトは、`flix.toml` マニフェスト、`src` 内の Flix 
 | `build-jar`       | プロジェクトから JAR ファイルをビルドします。               |
 | `build-fatjar`    | すべての依存関係をバンドルした JAR ファイルをビルドします。 |
 | `build-pkg`       | プロジェクトから Flix パッケージ（fpkg ファイル）をビルドします。 |
-| `clean`           | `build` ディレクトリを削除します。                         |
+| `clean`           | `build` と `artifact` ディレクトリを削除します。            |
+| `install`         | Flix パッケージを依存関係に追加します。                     |
+| `upgrade`         | Flix パッケージの依存関係のバージョンを変更します。          |
+| `remove`          | Flix パッケージを依存関係から削除します。                   |
 | `outdated`        | より新しいバージョンが利用可能な依存関係を表示します。       |
 | `release`         | プロジェクトの新しいバージョンを GitHub にリリースします。   |
 
-プロジェクトの依存関係は、[依存関係の使用](./using-dependencies.md) で説明するように、マニフェストの中で宣言します。すべての依存関係は、[依存関係の信頼](./trusting-dependencies.md) で説明するように、その依存関係が実行できることを制限する **security context（セキュリティコンテキスト）** の中でビルドされます。
+プロジェクトの依存関係は、自分で編集することも、`install`・`upgrade`・`remove` コマンドで編集することもでき、[依存関係の使用](./using-dependencies.md) で説明するように、マニフェストの中で宣言します。すべての依存関係は、[依存関係の信頼](./trusting-dependencies.md) で説明するように、その依存関係が実行できることを制限する **security context（セキュリティコンテキスト）** の中でビルドされます。
 
-> **注意:** ほとんどのコマンドは、マニフェストが存在しないディレクトリでも動作します。その場合 Flix は `*.flix`、`src/**`、`test/**` からソースファイルを読み込み、依存関係の解決は行いません。`build-pkg`・`clean`・`release` の各コマンドにはマニフェストが必要です。
+> **注意:** ほとんどのコマンドは、マニフェストが存在しないディレクトリでも動作します。その場合 Flix は `*.flix`、`src/**`、`test/**` からソースファイルを読み込み、依存関係の解決は行いません。`build-pkg`・`clean`・`install`・`upgrade`・`remove`・`release` の各コマンドにはマニフェストが必要です。
 
 <!--
 # Projects and Packages
@@ -77,17 +80,21 @@ every test.
 | `build-jar`     | builds a JAR-file from the project.                     |
 | `build-fatjar`  | builds a JAR-file with all dependencies bundled.        |
 | `build-pkg`     | builds a Flix package (an fpkg-file) from the project.  |
-| `clean`         | removes the `build` directory.                          |
+| `clean`         | removes the `build` and `artifact` directories.         |
+| `install`       | adds Flix packages to the dependencies.                 |
+| `upgrade`       | changes the versions of Flix package dependencies.      |
+| `remove`        | removes Flix packages from the dependencies.            |
 | `outdated`      | shows dependencies which have newer versions available. |
 | `release`       | releases a new version of the project to GitHub.        |
 
-We declare the dependencies of a project in its manifest, as described in
+We declare the dependencies of a project in its manifest, which we can edit
+ourselves or with the `install`, `upgrade`, and `remove` commands, as described in
 [Using Dependencies](./using-dependencies.md). Every dependency is built in a
 *security context* that limits what it is allowed to do, as described in
 [Trusting Dependencies](./trusting-dependencies.md).
 
 > **Note:** Most commands also work in a directory that has no manifest. Flix
 > then loads source files from `*.flix`, `src/**`, and `test/**`, and has no
-> dependencies to resolve. The `build-pkg`, `clean`, and `release` commands
-> require a manifest.
+> dependencies to resolve. The `build-pkg`, `clean`, `install`, `upgrade`,
+> `remove`, and `release` commands require a manifest.
 -->

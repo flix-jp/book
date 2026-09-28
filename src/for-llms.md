@@ -45,25 +45,25 @@ Flix パッケージには、`flix.toml` で与えられた *mount* を通じて
 &#x274C; **してはいけないこと:**
 
 ```flix
-use Museum                          // スコープにない
-def main(): Unit \ IO = Museum.visitMuseum()
+use Giftshop                        // スコープにない
+def main(): Unit \ IO = Giftshop.buyGift()
 ```
 
 &#x2705; **すべきこと:**
 
 ```flix
-use museum::Museum
-def main(): Unit \ IO = Museum.visitMuseum()
+use giftshop::Giftshop
+def main(): Unit \ IO = Giftshop.buyGift()
 ```
 
 このとき `flix.toml` は次のように宣言します：
 
 ```toml
 [dependencies]
-"github:flix/museum" = { version = "2.1.0", mount = "museum" }
+"github:flix/museum-giftshop" = { version = "2.0.2", mount = "giftshop" }
 ```
 
-注意: `::` は `use` の中でしか使えず、1 回だけしか使えません。モジュールは `.` で区切ります。`use museum::Museum.Exhibit` と書き、`use museum::Museum::Exhibit` とは書きません。また、式や型の中で `museum::Museum.visitMuseum()` と書くこともできません。標準ライブラリや自分のプロジェクト自身のモジュールに対する `use` は影響を受けません。`use Math.Shuffle` に `::` はありません。詳しくは [依存関係の使用](./using-dependencies.md) を参照してください。
+注意: `::` は `use` の中でしか使えず、1 回だけしか使えません。モジュールは `.` で区切ります。`use giftshop::Giftshop.Gift` と書き、`use giftshop::Giftshop::Gift` とは書きません。また、式や型の中で `giftshop::Giftshop.buyGift()` と書くこともできません。標準ライブラリや自分のプロジェクト自身のモジュールに対する `use` は影響を受けません。`use Math.Shuffle` に `::` はありません。詳しくは [依存関係の使用](./using-dependencies.md) を参照してください。
 
 ## エフェクト指向プログラミングを使用する
 
@@ -498,27 +498,27 @@ before `::` in a `use`. Its modules are not in scope otherwise.
 &#x274C; **Don't:**
 
 ```flix
-use Museum                          // not in scope
-def main(): Unit \ IO = Museum.visitMuseum()
+use Giftshop                        // not in scope
+def main(): Unit \ IO = Giftshop.buyGift()
 ```
 
 &#x2705; **Do:**
 
 ```flix
-use museum::Museum
-def main(): Unit \ IO = Museum.visitMuseum()
+use giftshop::Giftshop
+def main(): Unit \ IO = Giftshop.buyGift()
 ```
 
 where `flix.toml` declares:
 
 ```toml
 [dependencies]
-"github:flix/museum" = { version = "2.1.0", mount = "museum" }
+"github:flix/museum-giftshop" = { version = "2.0.2", mount = "giftshop" }
 ```
 
 Note: The `::` can occur in a `use` only, and at most once. Modules are separated
-by `.`: write `use museum::Museum.Exhibit`, never `use museum::Museum::Exhibit`,
-and never `museum::Museum.visitMuseum()` in an expression or a type. A `use` of
+by `.`: write `use giftshop::Giftshop.Gift`, never `use giftshop::Giftshop::Gift`,
+and never `giftshop::Giftshop.buyGift()` in an expression or a type. A `use` of
 the Standard Library or of the project's own modules is unaffected:
 `use Math.Shuffle` has no `::`. See [Using Dependencies](./using-dependencies.md).
 

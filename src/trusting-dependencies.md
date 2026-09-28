@@ -22,11 +22,13 @@ security context は次のとおりです：
 
 ```toml
 [dependencies]
-"github:flix/museum"              = { version = "2.1.0", mount = "museum", security = "plain" }
-"github:magnus-madsen/helloworld" = { version = "1.3.0", mount = "helloworld", security = "unrestricted" }
+"github:flix/museum-giftshop" = { version = "2.0.2", mount = "giftshop", security = "plain" }
+"github:flix/museum"          = { version = "4.0.0", mount = "museum", security = "unrestricted" }
 ```
 
-security context を宣言していない依存関係は、`plain` context でビルドされます。
+`flix/museum` パッケージは、それ自身の依存関係の 1 つが Java ライブラリを使用しているため、`unrestricted` でなければなりません。
+
+security context を宣言していない依存関係は、`plain` context でビルドされます。`install` コマンドは security context を宣言しないため、それ以外の context を設定する場合はマニフェストを編集します。
 
 > **注意:** security context は依存関係に適用されます。私たち自身のコードは、依存しているパッケージに対して何を宣言していようと、常に unrestricted です。
 
@@ -92,11 +94,16 @@ We can set the security context of each dependency in the manifest:
 
 ```toml
 [dependencies]
-"github:flix/museum"              = { version = "2.1.0", mount = "museum", security = "plain" }
-"github:magnus-madsen/helloworld" = { version = "1.3.0", mount = "helloworld", security = "unrestricted" }
+"github:flix/museum-giftshop" = { version = "2.0.2", mount = "giftshop", security = "plain" }
+"github:flix/museum"          = { version = "4.0.0", mount = "museum", security = "unrestricted" }
 ```
 
-A dependency that declares no security context is built in the `plain` context.
+The `flix/museum` package must be `unrestricted`, because one of its own
+dependencies uses a Java library.
+
+A dependency that declares no security context is built in the `plain` context. The
+`install` command declares none, so we set any other context by editing the
+manifest.
 
 > **Note:** Security contexts apply to dependencies. Our own code is always
 > unrestricted, whatever we declare for the packages we depend on.

@@ -54,7 +54,7 @@ $ java -jar artifact/inventory.jar
 !dlroW olleH
 ```
 
-fat JAR ファイルには、プロジェクトのクラスファイル、`resources` ディレクトリ内のファイル、そして `lib` ディレクトリにあるすべての JAR ファイルの内容、つまり Flix と Maven の*すべての*依存関係が含まれます。
+fat JAR ファイルには、プロジェクトのクラスファイル、`resources` ディレクトリ内のファイル、そしてプロジェクトが依存するすべての JAR ファイルの内容、つまり Flix と Maven の*すべての*依存関係が含まれます。
 
 > **注意:** `build-jar` コマンドと `build-fatjar` コマンドは、同じ JAR ファイルに書き込みます。最後に実行したどちらかのコマンドの結果が残ります。
 
@@ -82,9 +82,7 @@ Flix パッケージは、本質的にはプロジェクトのソースコード
 
 ## クリーンアップ
 
-`clean` コマンドを使うと、`build` ディレクトリを削除できます。これにより、`build-classes` が書き出したクラスファイルと、`doc` が書き出したドキュメントが削除されます。
-
-> **注意:** `clean` コマンドは `artifact` ディレクトリには手をつけません。自分でビルドした JAR ファイルやパッケージファイルを削除するのは自分自身の役目です。
+`clean` コマンドを使うと、`build` ディレクトリと `artifact` ディレクトリを削除できます。これにより、`build-classes` が書き出したクラスファイル、`doc` が書き出したドキュメント、そして `build-jar`・`build-fatjar`・`build-pkg` が書き出した JAR ファイルやパッケージファイルが削除されます。
 
 <!--
 # Building Artifacts
@@ -163,7 +161,7 @@ $ java -jar artifact/inventory.jar
 ```
 
 The fat JAR-file holds the class files of the project, the files in the `resources`
-directory, and the contents of every JAR-file in the `lib` directory, i.e. _all_
+directory, and the contents of every JAR-file the project depends on, i.e. _all_
 dependencies — both Flix and Maven.
 
 > **Note:** The `build-jar` and `build-fatjar` commands write to the same
@@ -208,9 +206,8 @@ as described in [Publishing a Package](./publishing-a-package.md).
 
 ## Cleaning Up
 
-We can remove the `build` directory with the `clean` command. This deletes the
-class files written by `build-classes` and the documentation written by `doc`.
-
-> **Note:** The `clean` command leaves the `artifact` directory alone. We remove
-> the JAR- and package-files we have built ourselves.
+We can remove the `build` and `artifact` directories with the `clean` command.
+This deletes the class files written by `build-classes`, the documentation written
+by `doc`, and the JAR- and package-files written by `build-jar`, `build-fatjar`,
+and `build-pkg`.
 -->

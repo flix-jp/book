@@ -2,6 +2,8 @@
 
 > 💡 **お知らせ**: このドキュメントはAIによって翻訳されています。表現に違和感がある場合は、[原文（英語）](https://doc.flix.dev/effect-polymorphism.html)を参照するか、[翻訳にご協力](https://github.com/flix-jp/book/edit/master/src/effect-polymorphism.md)ください。
 
+> **注意:** エフェクト多相（effect polymorphism）は、[多相エフェクト](./polymorphic-effects.md)と混同しないようにしてください。エフェクト多相な関数とは、エフェクトによってパラメータ化される _関数_ であるのに対し、多相エフェクトとは、型によってパラメータ化される _エフェクト_ のことです。
+
 Flix では、関数が純粋である（つまり副作用がない）ことを表現できます。
 
 ```flix
@@ -201,6 +203,11 @@ Flix コンパイラは次のエラーメッセージを出力します。
 
 <!--
 # Effect Polymorphism
+
+> **Note:** Effect polymorphism should not be confused with [polymorphic
+> effects](./polymorphic-effects.md). An effect polymorphic function is a
+> _function_ that is parameterized by an effect, whereas a polymorphic effect is
+> an _effect_ that is parameterized by a type.
 
 In Flix, we can express that a function is pure (i.e. has no side-effects): 
 

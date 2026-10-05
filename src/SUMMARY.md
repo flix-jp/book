@@ -31,6 +31,7 @@
   - [プリミティブエフェクト](./primitive-effects.md)
   - [エフェクト多相](./effect-polymorphism.md)
   - [エフェクトとハンドラ](./effects-and-handlers.md)
+  - [多相エフェクト](./polymorphic-effects.md)
   - [デフォルトハンドラ](./default-handlers.md)
   - [エフェクト指向プログラミング](./effect-oriented-programming.md)
 - [ライブラリエフェクト](./library-effects.md)
@@ -106,6 +107,7 @@
 
 - [よくある問題](./common-problems.md)
 - [よくある質問](./frequently-asked-questions.md)
+- [クイックリファレンス](./quick-reference.md)
 - [用語集](./glossary.md)
 
 ---

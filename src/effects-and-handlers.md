@@ -195,43 +195,17 @@ Flix は（まだ）`IO` モナドを定義していませんが、自分で作�
 
 Flix の標準ライブラリは、ハイブリッドなアプローチに寄っています。外界とのやり取りをモデル化するには代数エフェクトを使いますが、単純なエラー処理には `Option` や `Result` データ型を好みます。`Option` や `Result` を扱うのは、[モナド構文(monadic syntax)](./monadic-for-yield.md)を使うとより快適になります。
 
-## 制限: 多相エフェクト
+## 多相エフェクト
 
-Flix の型およびエフェクトシステムは、多相エフェクト(polymorphic effects)をまだサポートしていません。[^1]
-
-たとえば、多相的な `Throw[a]` エフェクトを宣言することは *できません*。
+エフェクトは型によってパラメータ化できます。例えば、型 `t` の値を emit するエフェクトを次のように宣言できます。
 
 ```flix
-eff Throw[a] {
-    def throw(x: a): Void
+eff Emit[t] {
+    def emit(x: t): Unit
 }
 ```
 
-Flix コンパイラは次のエラーメッセージを出力します。
-
-```
-❌ -- Syntax Error --
-
->> Unexpected effect type parameters.
-
-1 | eff Throw[a] {
-              ^
-              unexpected effect type parameters
-```
-
-残念ながら、異なる型の値を投げる必要がある場合は、別々のエフェクトを宣言しなければなりません。
-
-たとえば次のようになります。
-
-```flix
-eff ThrowBool {
-    def throw(x: Bool): Void
-}
-
-eff ThrowInt32 {
-    def throw(x: Int32): Void
-}
-```
+このようなエフェクトについては、[多相エフェクト](./polymorphic-effects.md)の節で説明します。
 
 ## new object 式と spawn 式における未処理のエフェクト
 
@@ -263,8 +237,6 @@ Flix コンパイラは次のエラーメッセージを出力します。
                   ^^^^^^^^^^^^
                   illegal effect.
 ```
-
-[^1]: この制限を取り除く方法を、現在調査中です。
 
 <!--
 # Effects and Handlers
@@ -512,44 +484,19 @@ to model interaction with the outside world but prefer the `Option` and `Result`
 data types for simple error handling. Working with `Option`s and `Result`s is
 more pleasant with [monadic syntax](./monadic-for-yield.md).
 
-## Limitation: Polymorphic Effects
+## Polymorphic Effects
 
-The Flix type and effect system does not yet support polymorphic effects.[^1] 
-
-For example, we *cannot* declare a polymorphic `Throw[a]` effect:
-
-```flix
-eff Throw[a] {
-    def throw(x: a): Void
-}
-```
-
-The Flix compiler emits the error message:
-
-```
-❌ -- Syntax Error --
-
->> Unexpected effect type parameters.
-
-1 | eff Throw[a] {
-              ^
-              unexpected effect type parameters
-```
-
-Unfortunately, if we need to throw values of different types, we have to declare
-different effects. 
-
-For example:
+An effect can be parameterized by a type. For example, we can declare an effect
+that emits values of type `t`:
 
 ```flix
-eff ThrowBool {
-    def throw(x: Bool): Void
-}
-
-eff ThrowInt32 {
-    def throw(x: Int32): Void
+eff Emit[t] {
+    def emit(x: t): Unit
 }
 ```
+
+We describe such effects in the section on [Polymorphic
+Effects](./polymorphic-effects.md).
 
 ## Unhandled Effects in New Object and Spawn Expressions
 
@@ -582,6 +529,4 @@ The Flix compiler emits the error message:
                   ^^^^^^^^^^^^
                   illegal effect.
 ```
-
-[^1]: We are currently investigating how to lift this restriction.
 -->

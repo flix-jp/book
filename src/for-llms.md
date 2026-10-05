@@ -265,6 +265,35 @@ def main(): Unit \ { Logger, Random, Sleep, IO } =
 
 注意: エフェクトとハンドラを使えば、フラットで逐次的なコードが書けます。ハンドラを合成するには `run { ... } with Handler.middleware` を使用してください——エフェクトシステムがすでに提供している機能を模倣するためにコールバックを渡してはいけません。
 
+## エフェクトは型パラメータを持てる
+
+古いバージョンの Flix は多相エフェクトをサポートしていなかったため、型ごとに別々のエフェクトを宣言する必要がありました。これは**もはや必要ありません**。エフェクトは型パラメータを宣言できます。
+
+&#x274C; **古い書き方（もはや不要）：**
+
+```
+eff EmitInt32 {                 // 誤り -- 古い書き方
+    def emit(x: Int32): Unit
+}
+
+eff EmitString {                // 誤り -- 古い書き方
+    def emit(x: String): Unit
+}
+```
+
+&#x2705; **現在の書き方（正しい。Flix 0.77.0 以降）：**
+
+```flix
+eff Emit[t] {
+    def emit(x: t): Unit
+}
+
+def range(b: Int32, e: Int32): Unit \ Emit[Int32] = ...
+def greetings(): Unit \ Emit[String] = ...
+```
+
+注意: 1つの関数の中では、多相エフェクトはその関数の内部でハンドルされるエフェクトも含め、どこでも同じ型引数で使われなければなりません。1つの関数の中で `Emit[Int32]` と `Emit[String]` の両方を使うことはできません。型パラメータはエフェクトに付けるものであり、操作に付けることはありません。操作の呼び出しは `Emit.emit(x)` のように、ハンドラの記述は `with handler Emit` のように、いずれも型引数なしで書きます。詳細は [多相エフェクト](./polymorphic-effects.md) を参照してください。
+
 ## Java の型はインポートが必要
 
 Flix では、Java クラスは使用する前に必ずインポートしなければなりません。完全修飾された Java クラス名をインラインで使用することはできません。ファイルまたはモジュールの先頭で `import` 宣言を使用してください。
@@ -740,6 +769,42 @@ def main(): Unit \ { Logger, Random, Sleep, IO } =
 Note: Effects and handlers let you write flat, sequential code. Use
 `run { ... } with Handler.middleware` to compose handlers — never pass
 callbacks to simulate what the effect system already provides.
+
+## Effects Can Have Type Parameters
+
+Older versions of Flix did not support polymorphic effects, so we had to declare
+a separate effect for each type. This is **no longer the case**. An effect can
+declare type parameters.
+
+&#x274C; **Old (no longer necessary):**
+
+```
+eff EmitInt32 {                 // Wrong -- Outdated
+    def emit(x: Int32): Unit
+}
+
+eff EmitString {                // Wrong -- Outdated
+    def emit(x: String): Unit
+}
+```
+
+&#x2705; **Current (correct, as of Flix 0.77.0):**
+
+```flix
+eff Emit[t] {
+    def emit(x: t): Unit
+}
+
+def range(b: Int32, e: Int32): Unit \ Emit[Int32] = ...
+def greetings(): Unit \ Emit[String] = ...
+```
+
+Note: Within one function, a polymorphic effect must be used with the same type
+arguments everywhere, including in the effects handled inside the function. A
+function cannot use both `Emit[Int32]` and `Emit[String]`. Type parameters go on
+the effect, never on an operation. Call operations as `Emit.emit(x)` and write
+handlers as `with handler Emit`, both without type arguments. See [Polymorphic
+Effects](./polymorphic-effects.md) for details.
 
 ## Java Types Must Be Imported
 

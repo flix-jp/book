@@ -72,6 +72,40 @@ def myTest01(): Unit \ {Assert, Logger} =
     Assert.assertEq(expected = 42, 42)
 ```
 
+## 多相エフェクト
+
+[多相エフェクト](./polymorphic-effects.md) もデフォルトハンドラを持つことができます。たとえば：
+
+```flix
+mod Emit {
+    pub eff Emit[t] {
+        def emit(x: t): Unit
+    }
+
+    @DefaultHandler
+    pub def runWithIO(f: Unit -> a \ ef): a \ (ef - Emit[t]) + IO =
+        run {
+            f()
+        } with handler Emit {
+            def emit(_, resume) = resume()
+        }
+}
+
+def main(): Unit \ {Emit[Int32], IO} =
+    Emit.emit(42);
+    println("Done")
+```
+
+ここで `Emit` のデフォルトハンドラは、emit された値を単に捨てます。
+
+多相エフェクト `E[t]` のデフォルトハンドラは、次の形式のシグネチャを持たなければなりません。
+
+```flix
+def runWithIO(f: Unit -> a \ ef): a \ (ef - E[t]) + IO
+```
+
+ここで `t` は型変数です。このシグネチャにはトレイト制約を持たせることができません。例えば `with ToString[t]` を追加することはできません。これは、デフォルトハンドラがすべての型 `t` に対して機能しなければならないためです。これが、上記のデフォルトハンドラが emit された値を表示できない理由です。
+
 <!--
 # Default Handlers
 
@@ -143,4 +177,42 @@ def myTest01(): Unit \ {Assert, Logger} =
     Logger.info("Running test!");
     Assert.assertEq(expected = 42, 42)
 ```
+
+## Polymorphic Effects
+
+A [polymorphic effect](./polymorphic-effects.md) can also have a default
+handler. For example:
+
+```flix
+mod Emit {
+    pub eff Emit[t] {
+        def emit(x: t): Unit
+    }
+
+    @DefaultHandler
+    pub def runWithIO(f: Unit -> a \ ef): a \ (ef - Emit[t]) + IO =
+        run {
+            f()
+        } with handler Emit {
+            def emit(_, resume) = resume()
+        }
+}
+
+def main(): Unit \ {Emit[Int32], IO} =
+    Emit.emit(42);
+    println("Done")
+```
+
+Here the default handler of `Emit` discards the emitted values.
+
+The default handler of a polymorphic effect `E[t]` must have a signature of the
+form:
+
+```flix
+def runWithIO(f: Unit -> a \ ef): a \ (ef - E[t]) + IO
+```
+
+where `t` is a type variable. The signature cannot have trait constraints, e.g.
+we cannot add `with ToString[t]`, because a default handler must work for every
+type `t`. This is why the default handler above cannot print the emitted values.
 -->

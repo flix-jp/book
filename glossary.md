@@ -164,3 +164,4 @@
 | 組み込みエフェクト | Built-in effect |
 | ユーザー定義エフェクト | User-defined effect |
 | 解釈不能エフェクト | Uninterpretable effect |
+| 多相エフェクト | Polymorphic effect |

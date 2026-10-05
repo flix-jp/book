@@ -4,10 +4,11 @@
 
 Flix は、言語に完全に統合された最先端の型およびエフェクトシステム
 （type and effect system）を備えています。Flix のエフェクトシステムは
-強力かつ広範であり、エフェクト多相（effect polymorphism）、
-サブエフェクティング（sub-effecting）、エフェクト除外（effect exclusion）、
-純粋性リフレクション（purity reflection）、関連エフェクト（associated effects）を
-サポートしています。
+強力かつ広範であり、エフェクト多相（effect polymorphism、エフェクトによって
+パラメータ化される関数）、多相エフェクト（polymorphic effects、型によって
+パラメータ化されるエフェクト）、サブエフェクティング（sub-effecting）、
+エフェクト除外（effect exclusion）、純粋性リフレクション（purity reflection）、
+関連エフェクト（associated effects）をサポートしています。
 
 これらの新しく刺激的な機能については、以降のページで探っていきます。
 
@@ -83,8 +84,9 @@ _ダイレクトスタイル（direct-style）_ のプログラミング言語�
 
 Flix features a state-of-the-art type and effect system fully integrated into
 the language. The Flix effect system is powerful and extensive, supporting
-effect polymorphism, sub-effecting, effect exclusion, purity reflection, and
-associated effects.
+effect polymorphism (functions that are parameterized by effects), polymorphic
+effects (effects that are parameterized by types), sub-effecting, effect
+exclusion, purity reflection, and associated effects.
 
 We will explore these new and exciting features over the coming pages.
 

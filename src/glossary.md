@@ -18,7 +18,7 @@
 
 ***Effect Member（エフェクトメンバ）.*** [関連エフェクト](#associated-effect)を参照してください。
 
-***Effect Polymorphic（エフェクト多相）.*** 関数引数のエフェクトに応じて、自身のエフェクトが決まる関数のことです。[高階関数](#higher-order-function)も参照してください。
+***Effect Polymorphic（エフェクト多相）.*** <a name="effect-polymorphic"></a> 関数引数のエフェクトに応じて、自身のエフェクトが決まる関数のことです。[多相エフェクト](#polymorphic-effect)と混同しないようにしてください。[高階関数](#higher-order-function)も参照してください。
 
 ***Effect Handler（エフェクトハンドラ）.*** ユーザー定義エフェクトをハンドリングする式です。
 
@@ -27,6 +27,8 @@
 ***IO Effect（IOエフェクト）.*** 外部世界とのあらゆるやり取りを表す、組み込みの汎用エフェクトです。
 
 ***Mount（マウント）.*** マニフェスト内で依存関係ごとに設定される名前で、`use` の中で `::` の前に書くことでその Flix パッケージのモジュールにアクセスするために使います。
+
+***Polymorphic Effect（多相エフェクト）.*** <a name="polymorphic-effect"></a> `Emit[t]` のように、1つ以上の型によってパラメータ化されるエフェクトのことです。[エフェクト多相](#effect-polymorphic)な関数と混同しないようにしてください。
 
 ***Pure（純粋）.*** エフェクトを一切持たない関数（または式）のことです。
 
@@ -79,8 +81,10 @@ fail at runtime.
 
 ***Effect Member.*** See [associated effect](#associated-effect).
 
-***Effect Polymorphic.*** A function whose effect(s) depend on the effect(s) of
-its function argument. See also [higher-order function](#higher-order-function).
+***Effect Polymorphic.*** <a name="effect-polymorphic"></a> A function whose
+effect(s) depend on the effect(s) of its function argument. Not to be confused
+with a [polymorphic effect](#polymorphic-effect). See also [higher-order
+function](#higher-order-function).
 
 ***Effect Handler.*** An expression which handles a user-defined effect.
 
@@ -89,6 +93,10 @@ that takes a function argument or returns a function.
 
 ***IO Effect.*** A built-in generic effect which represents any interaction with
 the outside world. 
+
+***Polymorphic Effect.*** <a name="polymorphic-effect"></a> An effect that is
+parameterized by one or more types, e.g. `Emit[t]`. Not to be confused with an
+[effect polymorphic](#effect-polymorphic) function.
 
 ***Pure.*** A function (or expression) which has no effects.
 

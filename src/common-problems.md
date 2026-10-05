@@ -5,6 +5,7 @@
 - [ToString is not defined on 'a'](#tostring-is-not-defined-on-a)
 - [レコードと複雑なインスタンス](#レコードと複雑なインスタンス)
 - [Expected kind 'Bool or Effect' here, but kind 'Type' is used](#expected-kind-bool-or-effect-here-but-kind-type-is-used)
+- [エフェクトの型引数の不一致](#エフェクトの型引数の不一致)
 
 ## ToString is not defined on 'a'
 
@@ -110,12 +111,46 @@ enum A[a: Type, b: Type, ef: Bool] {
 }
 ```
 
+## エフェクトの型引数の不一致
+
+次のプログラムを考えます：
+
+```flix
+eff Emit[t] {
+    def emit(x: t): Unit
+}
+
+def f(): Unit \ Emit[Int32] + Emit[String] =
+    Emit.emit(42);
+    Emit.emit("Hello")
+```
+
+Flix コンパイラは次のように報告します：
+
+```
+-- Type Error [E6795] -------------------------------------------- src/Main.flix
+
+>> Mismatched type arguments for effect 'Emit': 'Int32' and 'String'.
+
+5 | def f(): Unit \ Emit[Int32] + Emit[String] =
+                                  ^^^^^^^^^^^^
+                                  mismatched effect type argument.
+
+The effect 'Emit' is used with different types for its 1st type parameter 't'.
+
+Effect One: Emit[Int32]
+Effect Two: Emit[String]
+```
+
+問題は、[多相エフェクト](./polymorphic-effects.md) が関数全体を通じて同じ型引数で使われなければならないことです。これはその関数の内部でハンドルされるエフェクトも含みます。
+
 <!--
 # Common Problems
 
 - [ToString is not defined on 'a'](#tostring-is-not-defined-on-a)
 - [Records and Complex Instances](#records-and-complex-instances)
 - [Expected kind 'Bool or Effect' here, but kind 'Type' is used](#expected-kind-bool-or-effect-here-but-kind-type-is-used)
+- [Mismatched type arguments for effect](#mismatched-type-arguments-for-effect)
 
 ## ToString is not defined on 'a'
 
@@ -228,4 +263,39 @@ enum A[a: Type, b: Type, ef: Bool] {
     case A(a -> b \ ef)
 }
 ```
+
+## Mismatched type arguments for effect
+
+Given the program:
+
+```flix
+eff Emit[t] {
+    def emit(x: t): Unit
+}
+
+def f(): Unit \ Emit[Int32] + Emit[String] =
+    Emit.emit(42);
+    Emit.emit("Hello")
+```
+
+The Flix compiler reports:
+
+```
+-- Type Error [E6795] -------------------------------------------- src/Main.flix
+
+>> Mismatched type arguments for effect 'Emit': 'Int32' and 'String'.
+
+5 | def f(): Unit \ Emit[Int32] + Emit[String] =
+                                  ^^^^^^^^^^^^
+                                  mismatched effect type argument.
+
+The effect 'Emit' is used with different types for its 1st type parameter 't'.
+
+Effect One: Emit[Int32]
+Effect Two: Emit[String]
+```
+
+The issue is that a [polymorphic effect](./polymorphic-effects.md) must be used
+with the same type arguments throughout a function. This includes effects that
+are handled inside the function.
 -->

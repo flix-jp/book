@@ -93,7 +93,7 @@ def memberOf(x: t, l: List[t]): Bool with Equatable[t] =
 
 ```flix
 mod Zoo {
-    sealed trait Animal[a] {
+    pub sealed trait Animal[a] {
         pub def isMammal(x: a): Bool
     }
 
@@ -110,7 +110,7 @@ mod Zoo {
 }
 ```
 
-ここでは `Animal` と `Giraffe` のインスタンスを実装できます。それらが `Animal` トレイトと同じモジュール内に存在するからです。しかし、`Zoo` モジュールの外側から `Animal` を実装することはできません。試しに次のように書くと：
+ここでは `Giraffe` と `Penguin` のインスタンスを実装できます。それらが `Animal` トレイトと同じモジュール内に存在するからです。しかし、`Zoo` モジュールの外側から `Animal` を実装することはできません。試しに次のように書くと：
 
 ```flix
 mod Lake {
@@ -125,14 +125,28 @@ mod Lake {
 Flix は次のように報告します：
 
 ```
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E1467] -------------------------------------- src/Main.flix
 
 >> Trait 'Zoo.Animal' is sealed from the module 'Lake'.
 
 21 |     instance Zoo.Animal[Swan] {
                   ^^^^^^^^^^
-                  sealed trait.
+                  sealed trait
+
+Explanation: A sealed trait can only be implemented within its declaring module.
+
+  mod M {
+      pub sealed trait T[a]
+      instance T[Int32]       // OK: same module
+  }
+  mod N {
+      use M.T
+      instance T[String]      // not OK: different module
+  }
 ```
+
+> **注意：** sealed トレイトはモジュールの内部で宣言しなければなりません。ファイルのトップレベルにあるトレイトを sealed にすることはできません。
+
 
 
 ## 不正な形のトレイト
@@ -350,7 +364,7 @@ For example:
 
 ```flix
 mod Zoo {
-    sealed trait Animal[a] {
+    pub sealed trait Animal[a] {
         pub def isMammal(x: a): Bool
     }
 
@@ -367,8 +381,8 @@ mod Zoo {
 }
 ```
 
-Here we can implement instances for `Animal` and `Giraffe` because they occur in
-the same module as the `Animal` trait. But we cannot implement `Animal` from
+Here we can implement instances for `Giraffe` and `Penguin` because they occur
+in the same module as the `Animal` trait. But we cannot implement `Animal` from
 outside the `Zoo` module. If we try: 
 
 ```flix
@@ -384,14 +398,28 @@ mod Lake {
 then Flix reports:
 
 ```
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E1467] -------------------------------------- src/Main.flix
 
 >> Trait 'Zoo.Animal' is sealed from the module 'Lake'.
 
 21 |     instance Zoo.Animal[Swan] {
                   ^^^^^^^^^^
-                  sealed trait.
+                  sealed trait
+
+Explanation: A sealed trait can only be implemented within its declaring module.
+
+  mod M {
+      pub sealed trait T[a]
+      instance T[Int32]       // OK: same module
+  }
+  mod N {
+      use M.T
+      instance T[String]      // not OK: different module
+  }
 ```
+
+> **Note:** A sealed trait must be declared inside a module. A trait at the top
+> level of a file cannot be sealed.
 
 
 ## Malformed Traits

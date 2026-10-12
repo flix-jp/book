@@ -11,16 +11,16 @@ Flix は、他の多くのプログラミング言語で知られているよう
 例えば、次のようにモジュールを宣言できます：
 
 ```flix
-mod Math {
+mod Calc {
     pub def sum(x: Int32, y: Int32): Int32 = x + y
 }
 ```
 
-ここでは、`sum` という関数を内部に持つ `Math` というモジュールを宣言しました。モジュールの外側からは、完全修飾名(Fully-qualified name)を使って `sum` 関数を参照できます：
+ここでは、`sum` という関数を内部に持つ `Calc` というモジュールを宣言しました。モジュールの外側からは、完全修飾名(Fully-qualified name)を使って `sum` 関数を参照できます：
 
 ```flix
 def main(): Unit \ IO = 
-    let result = Math.sum(123, 456);
+    let result = Calc.sum(123, 456);
     println(result)
 ```
 
@@ -28,7 +28,7 @@ def main(): Unit \ IO =
 
 ```flix
 def main(): Unit \ IO = 
-    use Math.sum;
+    use Calc.sum;
     let result = sum(123, 456);
     println(result)
 ```
@@ -38,7 +38,7 @@ def main(): Unit \ IO =
 モジュール内に複数の宣言がある場合：
 
 ```flix
-mod Math {
+mod Calc {
     pub def sum(x: Int32, y: Int32): Int32 = x + y
     pub def mul(x: Int32, y: Int32): Int32 = x * y
 }
@@ -47,8 +47,8 @@ mod Math {
 もちろん、それぞれの宣言を個別に `use` することもできます：
 
 ```flix
-use Math.sum;
-use Math.mul;
+use Calc.sum;
+use Calc.mul;
 
 def main(): Unit \ IO =
     mul(42, 84) |> sum(21) |> println
@@ -57,13 +57,15 @@ def main(): Unit \ IO =
 しかし、複数の `use` を 1 つにまとめる、より短い書き方もあります：
 
 ```flix
-use Math.{sum, mul};
+use Calc.{sum, mul};
 
 def main(): Unit \ IO =
     mul(42, 84) |> sum(21) |> println
 ```
 
 > **注意:** Flix はワイルドカードによる use をサポートしていません。これは、分かりにくいバグにつながる可能性があるためです。
+
+> **注意:** `use` は、それが記述されているファイルまたはモジュールの宣言より前に書かなければなりません。
 
 ## リネームによる名前衝突の回避
 
@@ -163,9 +165,9 @@ enum Animal with ToString {
 
 instance Zoo.Speakable[Animal] {
     pub def say(a: Animal): String = match a {
-        case Cat => "Meow"
-        case Dog => "Woof"
-        case Fox => "Roar"
+        case Animal.Cat => "Meow"
+        case Animal.Dog => "Woof"
+        case Animal.Fox => "Roar"
     }
 }
 ```
@@ -204,18 +206,18 @@ the module.
 For example, we can declare a module:
 
 ```flix
-mod Math {
+mod Calc {
     pub def sum(x: Int32, y: Int32): Int32 = x + y
 }
 ```
 
-Here we have declared a module called `Math` with a function called `sum` inside
+Here we have declared a module called `Calc` with a function called `sum` inside
 it. We can refer to the `sum` function, from outside of its module, using its
 fully-qualified name:
 
 ```flix
 def main(): Unit \ IO = 
-    let result = Math.sum(123, 456);
+    let result = Calc.sum(123, 456);
     println(result)
 ```
 
@@ -223,7 +225,7 @@ Alternatively, we can bring the `sum` function into local scope with `use`:
 
 ```flix
 def main(): Unit \ IO = 
-    use Math.sum;
+    use Calc.sum;
     let result = sum(123, 456);
     println(result)
 ```
@@ -233,7 +235,7 @@ def main(): Unit \ IO =
 If we have multiple declarations in a module:
 
 ```flix
-mod Math {
+mod Calc {
     pub def sum(x: Int32, y: Int32): Int32 = x + y
     pub def mul(x: Int32, y: Int32): Int32 = x * y
 }
@@ -242,8 +244,8 @@ mod Math {
 We can, of course, `use` each declaration:
 
 ```flix
-use Math.sum;
-use Math.mul;
+use Calc.sum;
+use Calc.mul;
 
 def main(): Unit \ IO =
     mul(42, 84) |> sum(21) |> println
@@ -252,7 +254,7 @@ def main(): Unit \ IO =
 but a shorter way is to group the `use`s together into one:
 
 ```flix
-use Math.{sum, mul};
+use Calc.{sum, mul};
 
 def main(): Unit \ IO =
     mul(42, 84) |> sum(21) |> println
@@ -260,6 +262,9 @@ def main(): Unit \ IO =
 
 > **Note:** Flix does not support wildcard uses since they can lead to subtle
 > bugs.
+
+> **Note:** A `use` must be written before the declarations of the file or
+> module that it occurs in.
 
 ## Avoiding Name Clashes with Renaming
 
@@ -363,9 +368,9 @@ enum Animal with ToString {
 
 instance Zoo.Speakable[Animal] {
     pub def say(a: Animal): String = match a {
-        case Cat => "Meow"
-        case Dog => "Woof"
-        case Fox => "Roar"
+        case Animal.Cat => "Meow"
+        case Animal.Dog => "Woof"
+        case Animal.Fox => "Roar"
     }
 }
 ```

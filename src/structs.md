@@ -22,7 +22,7 @@ Flix は、構造体を扱うために 3 つの操作をサポートしていま
 - `struct->field` による、構造体のフィールドへのアクセス。
 - `struct->field = ...` による、_ミュータブル_ なフィールドの更新。
 
-それぞれの操作は、その構造体が属するリージョンにおいてエフェクトを持ちます。
+それぞれの操作は、その構造体が属するリージョンにおいてエフェクトを持ちます。ただし、イミュータブルなフィールドへのアクセスは例外で、純粋です。
 
 ## 構造体の宣言
 
@@ -54,6 +54,8 @@ mod Person {
 
 ```flix
 mod Person {
+    // ... 構造体は上記のとおり ...
+
     pub def mkLuckyLuke(rc: Region[r]): Person[r] \ r =
         new Person @ rc { name = "Lucky Luke", age = 30, height = 185 }
 }
@@ -79,6 +81,8 @@ new Person @ rc { name = "Lucky Luke", age = 30, height = 185 }
 
 ```flix
 mod Person {
+    // ... 構造体は上記のとおり ...
+
     pub def birthday(p: Person[r]): Unit \ r =
         p->age = p->age + 1;
         if(p->age < 18) {
@@ -124,26 +128,26 @@ mod Point {
     }
 }
 
-def area(p: Point[r]): Int32 \ r = 
+def area(p: Point[r]): Int32 =
     p->x * p->y
 ```
 
 Flix コンパイラは 2 つのエラーを出力します。
 
 ```
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E3574] -------------------------------------- src/Main.flix
 
 >> Undefined struct field 'x'.
 
-7 |     p->x * p->y
+9 |     p->x * p->y
            ^
            undefined field
 
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E3574] -------------------------------------- src/Main.flix
 
 >> Undefined struct field 'y'.
 
-7 |     p->x * p->y
+9 |     p->x * p->y
                   ^
                   undefined field
 ```
@@ -157,7 +161,7 @@ mod Point {
         y: Int32
     }
 
-    pub def area(p: Point[r]): Int32 \ r = 
+    pub def area(p: Point[r]): Int32 =
         p->x * p->y
 }
 ```
@@ -168,10 +172,14 @@ mod Point {
 
 ```flix
 mod Point {
-    pub def getX(p: Point[r]): Int32 \ r = p->x
-    pub def getY(p: Point[r]): Int32 \ r = p->y
+    // ... 構造体は上記のとおり ...
+
+    pub def getX(p: Point[r]): Int32 = p->x
+    pub def getY(p: Point[r]): Int32 = p->y
 }
 ```
+
+ここで、これらの関数が純粋なのは、`x` フィールドと `y` フィールドがイミュータブルだからです。
 
 このように、構造体のフィールドへのアクセスは厳密に制御されます。
 
@@ -201,6 +209,8 @@ mod User {
 
 ```flix
 mod User {
+    // ... 構造体は上記のとおり ...
+
     pub def changeId(u: User[r]): Unit \ r =
         u->id = 0
 }
@@ -209,15 +219,21 @@ mod User {
 Flix コンパイラはエラーを出力します。
 
 ```
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E9956] -------------------------------------- src/Main.flix
 
->> Modification of immutable field 'id' on User'.
+>> Modification of immutable field 'id' on 'User'.
 
 9 |         u->id = 0
                ^^
                immutable field
 
-Mark the field as 'mut' in the declaration of the struct.
+Explanation: Struct fields are immutable by default.
+To allow modification, mark the field as mutable:
+
+  struct S[r] {
+      x: Int32,         // immutable
+      mut y: Int32      // mutable
+  }
 ```
 
 フィールドの immutability（不変性）は _推移的ではない_ ことに注意してください。
@@ -239,6 +255,8 @@ mod Book {
 
 ```flix
 mod Book {
+    // ... 構造体は上記のとおり ...
+
     pub def addAuthor(a: String, b: Book[r]): Unit \ r =
         MutList.push(a, b->authors)
 }
@@ -268,6 +286,8 @@ mod Tree {
 
 ```flix
 mod Tree {
+    // ... 構造体は上記のとおり ...
+
     // 木 `t` から指定されたキー `k` を探索する関数。
     pub def search(k: k, t: Tree[k, v, r]): Option[v] \ r with Order[k] =
         match (Order.compare(k, t->key)) {
@@ -309,7 +329,8 @@ Flix supports three operations for working with structs:
 - Accessing a field of a struct with `struct->field`.
 - Updating a _mutable_ field of a struct with `struct->field = ...`.
 
-Each operation has an effect in the region of the struct.
+Each operation has an effect in the region of the struct, except that accessing
+an immutable field is pure.
 
 ## Declaring a Struct
 
@@ -341,6 +362,8 @@ We can create an instance of the `Person` struct as follows:
 
 ```flix
 mod Person {
+    // ... the struct, as above ...
+
     pub def mkLuckyLuke(rc: Region[r]): Person[r] \ r =
         new Person @ rc { name = "Lucky Luke", age = 30, height = 185 }
 }
@@ -365,6 +388,8 @@ We can read and write fields of a struct using the field access operator `->`. F
 
 ```flix
 mod Person {
+    // ... the struct, as above ...
+
     pub def birthday(p: Person[r]): Unit \ r =
         p->age = p->age + 1;
         if(p->age < 18) {
@@ -409,26 +434,26 @@ mod Point {
     }
 }
 
-def area(p: Point[r]): Int32 \ r = 
+def area(p: Point[r]): Int32 =
     p->x * p->y
 ```
 
 The Flix compiler emits two errors:
 
 ```
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E3574] -------------------------------------- src/Main.flix
 
 >> Undefined struct field 'x'.
 
-7 |     p->x * p->y
+9 |     p->x * p->y
            ^
            undefined field
 
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E3574] -------------------------------------- src/Main.flix
 
 >> Undefined struct field 'y'.
 
-7 |     p->x * p->y
+9 |     p->x * p->y
                   ^
                   undefined field
 ```
@@ -442,7 +467,7 @@ mod Point {
         y: Int32
     }
 
-    pub def area(p: Point[r]): Int32 \ r = 
+    pub def area(p: Point[r]): Int32 =
         p->x * p->y
 }
 ```
@@ -452,10 +477,14 @@ module, we can introduce explicit getters and setters. For example:
 
 ```flix
 mod Point {
-    pub def getX(p: Point[r]): Int32 \ r = p->x
-    pub def getY(p: Point[r]): Int32 \ r = p->y
+    // ... the struct, as above ...
+
+    pub def getX(p: Point[r]): Int32 = p->x
+    pub def getY(p: Point[r]): Int32 = p->y
 }
 ```
+
+Here the functions are pure because the `x` and `y` fields are immutable.
 
 Thus access to the fields of struct is tightly controlled. 
 
@@ -485,6 +514,8 @@ If we try to modify an immutable field:
 
 ```flix
 mod User {
+    // ... the struct, as above ...
+
     pub def changeId(u: User[r]): Unit \ r =
         u->id = 0
 }
@@ -493,15 +524,21 @@ mod User {
 The Flix compiler emits an error:
 
 ```
-❌ -- Resolution Error -------------------------------------------------- 
+-- Resolution Error [E9956] -------------------------------------- src/Main.flix
 
->> Modification of immutable field 'id' on User'.
+>> Modification of immutable field 'id' on 'User'.
 
 9 |         u->id = 0
                ^^
                immutable field
 
-Mark the field as 'mut' in the declaration of the struct.
+Explanation: Struct fields are immutable by default.
+To allow modification, mark the field as mutable:
+
+  struct S[r] {
+      x: Int32,         // immutable
+      mut y: Int32      // mutable
+  }
 ```
 
 We remark that field immutability is _not_ transitive. 
@@ -523,6 +560,8 @@ However, since a `MutList` can be changed, we can write:
 
 ```flix
 mod Book {
+    // ... the struct, as above ...
+
     pub def addAuthor(a: String, b: Book[r]): Unit \ r =
         MutList.push(a, b->authors)
 }
@@ -550,6 +589,8 @@ If we assume that `Tree[k, v, r]` is sorted, we can define a `search` function:
 
 ```flix
 mod Tree {
+    // ... the struct, as above ...
+
     // A function to search the tree `t` for the given key `k`.
     pub def search(k: k, t: Tree[k, v, r]): Option[v] \ r with Order[k] =
         match (Order.compare(k, t->key)) {

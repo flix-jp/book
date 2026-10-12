@@ -55,11 +55,11 @@ Added 'flix/museum-giftshop' v2.0.2, mounted at 'giftshop'.
 ```
 Found 'flix.toml'. Checking dependencies...
 Resolving Flix dependencies...
-  Downloading `flix/museum-giftshop.toml` (v2.0.2)... OK.
-  Downloading `flix/museum-clerk.toml` (v2.1.2)... OK.
+  Downloading `flix.toml` from `flix/museum-giftshop` (v2.0.2)... OK.
+  Downloading `flix.toml` from `flix/museum-clerk` (v2.1.2)... OK.
 Downloading Flix dependencies...
-  Downloading `flix/museum-giftshop.fpkg` (v2.0.2)... OK.
-  Downloading `flix/museum-clerk.fpkg` (v2.1.2)... OK.
+  Downloading `package.fpkg` from `flix/museum-clerk` (v2.1.2)... OK.
+  Downloading `package.fpkg` from `flix/museum-giftshop` (v2.0.2)... OK.
 Resolving Maven dependencies...
   Running Maven dependency resolver.
 Downloading external jar dependencies...
@@ -81,7 +81,9 @@ def main(): Unit \ IO =
 
 mount はパッケージ自身ではなく私たち自身のマニフェストの中で宣言するため、2 つのプロジェクトが同じパッケージを別々の名前で参照することもできます。
 
-> **注意:** mount は単純な名前でなければなりません。文字の後に文字・数字・アンダースコアが続く形式です。したがって、名前にハイフンを含むリポジトリには別の mount 名が必要です。だからこそ `github:flix/museum-giftshop` は `giftshop` としてマウントされ、`install` が mount 名を尋ねてくるのもそのためです。
+mount を宣言しない依存関係は、そのリポジトリの名前でマウントされます。したがって `"github:flix/museum" = "4.0.0"` はパッケージを `museum` としてマウントします。これがうまくいくのは、その名前が mount になれる場合、つまり文字の後に文字・数字・アンダースコアが続き、かつキーワードでない場合だけです。`museum-giftshop` のように名前にハイフンを含むリポジトリにはそのようなデフォルトがないため、mount を宣言するまで Flix はそのエントリを拒否します。これが `install` が mount を尋ねてくる理由でもあります。Flix が導き出すものと同じ mount であっても、明示的に書くべきです。それは私たちのコードがそのパッケージにアクセスする際の名前であり、マニフェストは読む人がその名前を探す場所だからです。
+
+> **注意:** アクセスできるのは、自分自身のマニフェストが宣言しているパッケージだけです。ここでの `flix/museum-clerk` のように、依存関係が持ち込むパッケージには、自分のマニフェストに mount がないため、Flix がそれをダウンロードしてビルドしても、自分のコードからはそれを `use` できません。アクセスするためには、`[dependencies]` に自分で独自のエントリを追加するか、`install flix/museum-clerk` を実行して自分でそれを宣言し、与えた mount を通じてアクセスします。
 
 > **注意:** `::` を書けるのは `use` の中だけです。式の中で `giftshop::Giftshop.buyGift()` と書いたり、型の中で `giftshop::Giftshop` と書いたりすることはできません。
 
@@ -101,7 +103,7 @@ remove flix/museum-giftshop
 Removed 'flix/museum-giftshop' v2.0.2, which was mounted at 'giftshop'.
 ```
 
-どちらの方法でも、削除できるのは自分のマニフェストが宣言しているパッケージだけです。ここでの `flix/museum-clerk` のように、他の依存関係を通じて到達しているパッケージは、その依存関係によって宣言されているため、その依存関係と一緒になくなります。
+どちらの方法でも、削除できるのは自分のマニフェストが宣言しているパッケージだけです。ここでの `flix/museum-clerk` のように、他の依存関係が持ち込むパッケージは、その依存関係によって宣言されているため、その依存関係と一緒になくなります。
 
 削除されたパッケージのために Flix がダウンロードしたファイルは、[lib ディレクトリ](#the-lib-directory) で説明するように、無視される状態のまま `lib` ディレクトリに残ります。
 
@@ -268,11 +270,11 @@ a command, such as `check`:
 ```
 Found 'flix.toml'. Checking dependencies...
 Resolving Flix dependencies...
-  Downloading `flix/museum-giftshop.toml` (v2.0.2)... OK.
-  Downloading `flix/museum-clerk.toml` (v2.1.2)... OK.
+  Downloading `flix.toml` from `flix/museum-giftshop` (v2.0.2)... OK.
+  Downloading `flix.toml` from `flix/museum-clerk` (v2.1.2)... OK.
 Downloading Flix dependencies...
-  Downloading `flix/museum-giftshop.fpkg` (v2.0.2)... OK.
-  Downloading `flix/museum-clerk.fpkg` (v2.1.2)... OK.
+  Downloading `package.fpkg` from `flix/museum-clerk` (v2.1.2)... OK.
+  Downloading `package.fpkg` from `flix/museum-giftshop` (v2.0.2)... OK.
 Resolving Maven dependencies...
   Running Maven dependency resolver.
 Downloading external jar dependencies...
@@ -300,10 +302,20 @@ def main(): Unit \ IO =
 The mount is declared in our own manifest, not by the package, so two projects may
 reach the same package under different names.
 
-> **Note:** A mount must be a simple name: a letter followed by letters, digits,
-> and underscores. A repository whose name contains a hyphen therefore needs a
-> different one, which is why `github:flix/museum-giftshop` is mounted as
-> `giftshop`, and why `install` asks for its mount.
+A dependency that declares no mount is mounted at the name of its repository, so
+`"github:flix/museum" = "4.0.0"` mounts the package at `museum`. This works only when
+the name can be a mount: a letter followed by letters, digits, and underscores, and
+not a keyword. A repository whose name contains a hyphen, like `museum-giftshop`, has
+no such default, and Flix refuses the entry until we declare one, which is also why
+`install` asks for its mount. We should write the mount even when it is the one Flix
+would derive: it is the name our code reaches the package under, and the manifest is
+where a reader looks for it.
+
+> **Note:** We can reach only the packages that our own manifest declares. A package
+> that a dependency brings with it, like `flix/museum-clerk` here, has no mount in our
+> manifest, so our code cannot `use` it, even though Flix downloads and builds it. To
+> reach it, we declare it ourselves, with its own entry in `[dependencies]` or with
+> `install flix/museum-clerk`, and reach it through the mount we give it.
 
 > **Note:** The `::` can be written in a `use` only. We cannot write
 > `giftshop::Giftshop.buyGift()` in an expression, nor `giftshop::Giftshop` in a
@@ -328,8 +340,8 @@ Removed 'flix/museum-giftshop' v2.0.2, which was mounted at 'giftshop'.
 ```
 
 Either way, we can only remove a package that our manifest declares. A package that
-is reached through another dependency, like `flix/museum-clerk` here, is declared by
-that dependency, and goes away with it.
+another dependency brings with it, like `flix/museum-clerk` here, is declared by that
+dependency, and goes away with it.
 
 The files that Flix downloaded for a removed package stay in the `lib` directory,
 where they are ignored, as described in [The lib Directory](#the-lib-directory).

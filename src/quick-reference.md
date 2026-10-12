@@ -112,15 +112,20 @@ r#name                            // フィールドへのアクセス
 ## モジュール
 
 ```flix
+use Calc.sum                      // 名前を use する
+use Calc.{mul, neg}               // 複数の名前を use する
+use Calc.{sum => plus}            // 別の名前で use する
+
 mod Calc {
     pub def sum(x: Int32, y: Int32): Int32 = x + y
+    pub def mul(x: Int32, y: Int32): Int32 = x * y
+    pub def neg(x: Int32): Int32 = -x
 }
-
-use Calc.sum;
-use Calc.{sum};
 ```
 
-[モジュール](./modules.md)を参照してください。
+`use` は、それが記述されているファイルまたはモジュールの宣言より前に書きます。モジュールの宣言は一度だけであり、`pub mod` でない限り、それが宣言されているモジュールに対してプライベートです。`pub mod` はそれ専用のファイルに置きます：`pub mod Museum.Entrance` は `src/Museum/Entrance.flix` に置きます。
+
+[モジュール](./modules.md)と[モジュールの宣言](./declaring-modules.md)を参照してください。
 
 ## トレイトとインスタンス
 
@@ -285,15 +290,23 @@ See [Records](./records.md).
 ## Modules
 
 ```flix
+use Calc.sum                      // use a name
+use Calc.{mul, neg}               // use several names
+use Calc.{sum => plus}            // use a name under another name
+
 mod Calc {
     pub def sum(x: Int32, y: Int32): Int32 = x + y
+    pub def mul(x: Int32, y: Int32): Int32 = x * y
+    pub def neg(x: Int32): Int32 = -x
 }
-
-use Calc.sum;
-use Calc.{sum};
 ```
 
-See [Modules](./modules.md).
+A `use` goes before the declarations of its file or module. A module is declared
+once, and is private to the module it is declared in unless it is a `pub mod`,
+which goes in a file of its own: `pub mod Museum.Entrance` in
+`src/Museum/Entrance.flix`.
+
+See [Modules](./modules.md) and [Declaring Modules](./declaring-modules.md).
 
 ## Traits and instances
 

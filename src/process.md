@@ -46,12 +46,12 @@ pub eff Process {
 }
 ```
 
-## Process モジュール
+## Sys.Process モジュール
 
-`Process` モジュールは、`Process` エフェクトの上に構築された便利な関数を提供しています。
+`Sys.Process` モジュールは、`Process` エフェクトの上に構築された便利な関数を提供しています。
 
 ```flix
-mod Process {
+mod Sys.Process {
     /// コマンド `cmd` を引数 `args` で実行します。
     def exec(cmd: String, args: List[String]):
         Result[IoError, ProcessHandle] \ Process
@@ -194,11 +194,11 @@ pub eff Process {
 
 ## The Process Module
 
-The `S` module provides convenience functions built on the `Process`
+The `Sys.Process` module provides convenience functions built on the `Process`
 effect:
 
 ```flix
-mod Process {
+mod Sys.Process {
     /// Executes the command `cmd` with the arguments `args`.
     def exec(cmd: String, args: List[String]):
         Result[IoError, ProcessHandle] \ Process

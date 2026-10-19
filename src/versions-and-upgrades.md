@@ -123,6 +123,8 @@ fpkg    = "sha256:f7817d79093be36bcf9bf1ed66fa920d1e6eab6b1ac3759c1cc6581568b6ff
 
 > **注意:** ロックファイルが記録するのは Flix パッケージのみです。Maven ライブラリや URL からダウンロードした JAR ファイルはこれには含まれません。
 
+> **注意:** プロジェクトには `effects.lock` ファイルも存在する場合があります。これは、依存関係のファイルではなく、そのシグネチャを記録するものであり、詳しくは[エフェクトのロック](./locking-effects.md)で説明しています。
+
 ## 古くなったパッケージの確認 <a name="finding-outdated-packages"></a>
 
 `outdated` コマンドを使うと、使用している Flix パッケージに新しいリリースがあるかどうかを確認できます。例えば次のような依存関係を持つプロジェクトでは：
@@ -347,6 +349,10 @@ longer the same.
 
 > **Note:** The lock file records Flix packages only. Maven libraries and JAR-files
 > downloaded from a URL are not covered by it.
+
+> **Note:** A project may also have an `effects.lock` file, which records the
+> signatures of its dependencies rather than their files, as described in
+> [Locking Effects](./locking-effects.md).
 
 ## Finding Outdated Packages
 

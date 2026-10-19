@@ -56,7 +56,7 @@ mod Logger {
 これらの便利な関数は、`Formattable` を実装している任意の値を受け取ります。
 
 ```flix
-def main(): Unit \ { Logger } =
+def main(): Unit \ Logger =
     Logger.info("Application started");
     Logger.debug("Loading configuration...");
     Logger.warn("Cache size exceeds threshold");
@@ -129,7 +129,7 @@ mod Logger {
 The convenience functions accept any value that implements `Formattable`:
 
 ```flix
-def main(): Unit \ { Logger } =
+def main(): Unit \ Logger =
     Logger.info("Application started");
     Logger.debug("Loading configuration...");
     Logger.warn("Cache size exceeds threshold");

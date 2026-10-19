@@ -9,6 +9,7 @@
 - 文字列補間の使い方。
 - 未完成のプログラムで匿名ホールおよび名前付きホールを使う方法。
 - 型注釈(Type ascription)を使って、コンパイラに一部の型を明示的に伝える方法。
+- `@Test` や `@Tailrec` のような注釈(Annotation)の使い方。
 
 <!--
 # Everyday Programming
@@ -20,4 +21,5 @@ In this chapter we cover some everyday programming features:
 - How to use string interpolation.
 - How to use anonymous and named holes for incomplete programs.
 - How to use type ascriptions to explicitly provide some types to the compiler.
+- How to use annotations such as `@Test` and `@Tailrec`.
 -->

@@ -14,7 +14,7 @@ Flix は **デフォルトハンドラ（default handler）** をサポートし
 use Sys.Env
 use Time.Clock
 
-def main(): Unit \ {Clock, Env, Logger} =
+def main(): Unit \ { Clock, Env, Logger } =
     let ts = Clock.currentTime(TimeUnit.Milliseconds);
     let os = Env.getOsName();
     Logger.info("UNIX Timestamp:   ${ts}");
@@ -67,7 +67,7 @@ def runWithIO(f: Unit -> a \ ef): a \ (ef - E) + IO
 
 ```flix
 @Test
-def myTest01(): Unit \ {Assert, Logger} = 
+def myTest01(): Unit \ { Assert, Logger } = 
     Logger.info("Running test!");
     Assert.assertEq(expected = 42, 42)
 ```
@@ -91,7 +91,7 @@ mod Emit {
         }
 }
 
-def main(): Unit \ {Emit[Int32], IO} =
+def main(): Unit \ { Emit[Int32], IO } =
     Emit.emit(42);
     println("Done")
 ```
@@ -120,7 +120,7 @@ For example, we can write:
 use Sys.Env
 use Time.Clock
 
-def main(): Unit \ {Clock, Env, Logger} =
+def main(): Unit \ { Clock, Env, Logger } =
     let ts = Clock.currentTime(TimeUnit.Milliseconds);
     let os = Env.getOsName();
     Logger.info("UNIX Timestamp:   ${ts}");
@@ -173,7 +173,7 @@ We can use effects with default handlers in tests. For example:
 
 ```flix
 @Test
-def myTest01(): Unit \ {Assert, Logger} = 
+def myTest01(): Unit \ { Assert, Logger } = 
     Logger.info("Running test!");
     Assert.assertEq(expected = 42, 42)
 ```
@@ -198,7 +198,7 @@ mod Emit {
         }
 }
 
-def main(): Unit \ {Emit[Int32], IO} =
+def main(): Unit \ { Emit[Int32], IO } =
     Emit.emit(42);
     println("Done")
 ```

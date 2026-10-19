@@ -44,7 +44,7 @@ def main(): Unit \ IO =
 チャネルを介してメッセージを送受信する例を示します：
 
 ```flix
-def main(): Int32 \ {Chan, NonDet, IO} = region rc {
+def main(): Int32 \ { Chan, NonDet, IO } = region rc {
     let (tx, rx) = Channel.unbuffered();
     spawn Channel.send(42, tx) @ rc;
     Channel.recv(rx)
@@ -66,7 +66,7 @@ def meow(tx: Sender[String]): Unit \ Chan =
 def woof(tx: Sender[String]): Unit \ Chan =
     Channel.send("Woof!", tx)
 
-def main(): Unit \ {Chan, NonDet, IO} = region rc {
+def main(): Unit \ { Chan, NonDet, IO } = region rc {
     let (tx1, rx1) = Channel.buffered(1);
     let (tx2, rx2) = Channel.buffered(1);
     spawn meow(tx1) @ rc;
@@ -85,7 +85,7 @@ def main(): Unit \ {Chan, NonDet, IO} = region rc {
 場合によっては、メッセージが届くまでブロックして、永遠に待ち続けるかもしれない状況を避けたいことがあります。そのような場合は、メッセージがすぐに利用できないときに代わりのアクションを取りたくなります。これは、以下に示すように*デフォルトケース(Default case)*で実現できます：
 
 ```flix
-def main(): String \ {Chan, NonDet} = region rc {
+def main(): String \ { Chan, NonDet } = region rc {
     let (_, rx1) = Channel.buffered(1);
     let (_, rx2) = Channel.buffered(1);
     select {
@@ -105,12 +105,12 @@ def main(): String \ {Chan, NonDet} = region rc {
 例えば、次のプログラムには、チャネルにメッセージを送るまでに1分かかる遅い関数がありますが、`select` 式は `Channel.timeout` を利用して、`5` 秒だけ待って諦めるようになっています：
 
 ```flix
-def slow(tx: Sender[String]): Unit \ {Chan, NonDet, IO} =
+def slow(tx: Sender[String]): Unit \ { Chan, NonDet, IO } =
     let delay = Channel.timeout(60, Time.TimeUnit.Seconds);
     Channel.recv(delay);
     Channel.send("I am very slow", tx)
 
-def main(): Unit \ {Chan, NonDet, IO} = region rc {
+def main(): Unit \ { Chan, NonDet, IO } = region rc {
     let (tx, rx) = Channel.buffered(1);
     spawn slow(tx) @ rc;
     let timeout = Channel.timeout(5, Time.TimeUnit.Seconds);
@@ -193,7 +193,7 @@ Here is an example of sending and receiving a message
 over a channel:
 
 ```flix
-def main(): Int32 \ {Chan, NonDet, IO} = region rc {
+def main(): Int32 \ { Chan, NonDet, IO } = region rc {
     let (tx, rx) = Channel.unbuffered();
     spawn Channel.send(42, tx) @ rc;
     Channel.recv(rx)
@@ -223,7 +223,7 @@ def meow(tx: Sender[String]): Unit \ Chan =
 def woof(tx: Sender[String]): Unit \ Chan =
     Channel.send("Woof!", tx)
 
-def main(): Unit \ {Chan, NonDet, IO} = region rc {
+def main(): Unit \ { Chan, NonDet, IO } = region rc {
     let (tx1, rx1) = Channel.buffered(1);
     let (tx2, rx2) = Channel.buffered(1);
     spawn meow(tx1) @ rc;
@@ -249,7 +249,7 @@ We can achieve this with a _default case_ as shown
 below:
 
 ```flix
-def main(): String \ {Chan, NonDet} = region rc {
+def main(): String \ { Chan, NonDet } = region rc {
     let (_, rx1) = Channel.buffered(1);
     let (_, rx2) = Channel.buffered(1);
     select {
@@ -280,12 +280,12 @@ a channel, but the `select` expression relies on
 giving up:
 
 ```flix
-def slow(tx: Sender[String]): Unit \ {Chan, NonDet, IO} =
+def slow(tx: Sender[String]): Unit \ { Chan, NonDet, IO } =
     let delay = Channel.timeout(60, Time.TimeUnit.Seconds);
     Channel.recv(delay);
     Channel.send("I am very slow", tx)
 
-def main(): Unit \ {Chan, NonDet, IO} = region rc {
+def main(): Unit \ { Chan, NonDet, IO } = region rc {
     let (tx, rx) = Channel.buffered(1);
     spawn slow(tx) @ rc;
     let timeout = Channel.timeout(5, Time.TimeUnit.Seconds);

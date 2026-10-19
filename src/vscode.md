@@ -53,6 +53,9 @@ Flix 拡張機能は本物の Flix コンパイラを使用しているため、
     - ローカル変数や仮引数をリネームできます。
     - 関数をリネームできます。
 
+* __整形__
+    - 現在のファイルを整形できます。
+
 * __コードレンズ__
     - エディタ内から `main` を実行できます。
     - エディタ内からテストを実行できます。
@@ -125,6 +128,9 @@ Flix also comes with an (optional) Visual Studio Code color theme called "Flixif
 * __Rename__
     - Rename local variables or formal parameters.
     - Rename functions.
+
+* __Formatting__
+    - Format the current file.
 
 * __Code Lenses__
     - Run `main` from within the editor.

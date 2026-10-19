@@ -16,6 +16,8 @@ security context は次のとおりです：
 
 これが `plain` と `paranoid` を信頼して依存できる理由です。Java に手を伸ばせず、型システムを迂回することもできないパッケージは、その型とエフェクトが示すことしか行えません。呼び出す関数のシグネチャを読めば、それを呼び出すことで何が起こりうるかがエフェクトシステムからわかります。`paranoid` パッケージが純粋な値を返す場合、内部でどう書かれていようと、ファイルシステムに触れることも、ソケットを開くことも、時刻を読み取ることもできません。`unrestricted` context には、そのような保証がなく、シグネチャはそのコードが何をするかについて何も教えてくれません。
 
+私たちが読むシグネチャは、現在ビルドしているリリースのものであり、後のリリースではそれが変わるかもしれません。[エフェクトのロック](./locking-effects.md)では、シグネチャが変わったときにそれを知らせてもらえるよう、シグネチャを記録しておく方法を説明しています。
+
 ## security context の設定
 
 各依存関係の security context は、マニフェストの中で設定できます：
@@ -44,7 +46,7 @@ security context は推移的に適用されます。ある依存関係の secur
 
 > **警告:** `unrestricted` は、依存関係と、それが依存するすべてのものが*何でも*できてしまうため、可能な限り避けてください。`unrestricted` な依存関係を含むコードは、ビルドやコンパイルをするだけでもサプライチェーン攻撃にさらされる可能性があります。
 
-## エフェクトを必要とするライブラリを書く
+## エフェクトを必要とするライブラリを書く <a name="writing-a-library-that-needs-effects"></a>
 
 エフェクトを必要とする Flix ライブラリの作者である場合のベストプラクティスは、`IO` エフェクトを直接使うのではなく独自のカスタムエフェクトを導入し、ライブラリを 2 つのパッケージに分割することです：
 
@@ -87,6 +89,10 @@ system tells us what calling it can bring about — a `paranoid` package that re
 pure value cannot touch the file system, open a socket, or read the clock, however it
 is written inside. In the `unrestricted` context we have no such guarantee, and the
 signatures tell us nothing about what the code may do.
+
+The signatures we read are those of the release we are building, and a later
+release may change them. [Locking Effects](./locking-effects.md) describes how to
+record them, so that we are told when they change.
 
 ## Setting the Security Context
 

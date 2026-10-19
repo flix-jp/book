@@ -25,13 +25,39 @@ println(l)
 
 ```flix
 eff Console {
-    def readln(): String
-    def print(s: String): Unit
-    def eprint(s: String): Unit
-    def println(s: String): Unit
-    def eprintln(s: String): Unit
+    def readln(): Option[String]
+    def write(s: String): Unit
+    def writeLine(s: String): Unit
+    def writeErr(s: String): Unit
+    def writeErrLine(s: String): Unit
 }
 ```
+
+これらの操作はプレーンな `String` を対象としています。`Console` エフェクトは `Sys.Console` モジュールの[コンパニオン](./companion-modules.md)であり、このモジュールは上記の操作を基にした4つの出力用関数を定義しています：
+
+```flix
+mod Sys.Console {
+    def print(x: a): Unit \ Console with ToString[a]
+    def println(x: a): Unit \ Console with ToString[a]
+    def eprint(x: a): Unit \ Console with ToString[a]
+    def eprintln(x: a): Unit \ Console with ToString[a]
+}
+```
+
+Prelude の `println` と同様に、これらの関数も `ToString` のインスタンスを持つあらゆる値を受け取りますが、`IO` ではなく `Console` エフェクトを持ちます。`eprint` と `eprintln` は標準エラー出力へ書き込みます。例えば：
+
+```flix
+use Sys.Console
+
+def main(): Unit \ Console =
+    let o = Some(123);
+    let l = 1 :: 2 :: 3 :: Nil;
+    Console.println(o);
+    Console.println(l);
+    Console.eprintln("Printed two values.")
+```
+
+入力の読み取りやプロンプトについては、[Console](./console.md) の章を参照してください。
 
 <!--
 # Printing to Standard Out
@@ -64,11 +90,41 @@ terminal:
 
 ```flix
 eff Console {
-    def readln(): String
-    def print(s: String): Unit
-    def eprint(s: String): Unit
-    def println(s: String): Unit
-    def eprintln(s: String): Unit
+    def readln(): Option[String]
+    def write(s: String): Unit
+    def writeLine(s: String): Unit
+    def writeErr(s: String): Unit
+    def writeErrLine(s: String): Unit
 }
 ```
+
+The operations work on plain `String`s. The `Console` effect is the
+[companion](./companion-modules.md) of the `Sys.Console` module, which defines
+four printing functions on top of the operations:
+
+```flix
+mod Sys.Console {
+    def print(x: a): Unit \ Console with ToString[a]
+    def println(x: a): Unit \ Console with ToString[a]
+    def eprint(x: a): Unit \ Console with ToString[a]
+    def eprintln(x: a): Unit \ Console with ToString[a]
+}
+```
+
+Like the `println` of the Prelude, these accept any value with a `ToString`
+instance, but they have the `Console` effect rather than `IO`. The `eprint` and
+`eprintln` functions write to standard error. For example:
+
+```flix
+use Sys.Console
+
+def main(): Unit \ Console =
+    let o = Some(123);
+    let l = 1 :: 2 :: 3 :: Nil;
+    Console.println(o);
+    Console.println(l);
+    Console.eprintln("Printed two values.")
+```
+
+See the [Console](./console.md) chapter for reading input and for prompts.
 -->

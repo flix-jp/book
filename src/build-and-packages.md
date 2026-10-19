@@ -21,6 +21,7 @@ Flix プロジェクトは、`flix.toml` マニフェスト、`src` 内の Flix 
 | `run`             | プロジェクトの `main` を実行します。                       |
 | `test`            | プロジェクトのすべてのテストを実行します。                 |
 | `doc`             | プロジェクトの API ドキュメントを生成します。               |
+| `format`          | プロジェクトのソースコードを整形します。                   |
 | `stat`            | プロジェクトに関する統計情報を表示します。                 |
 | `build`           | プロジェクト全体をコンパイルします。                       |
 | `build-classes`   | プロジェクトを Java クラスファイルにコンパイルします。      |
@@ -74,6 +75,7 @@ every test.
 | `run`           | runs `main` in the project.                             |
 | `test`          | runs all tests in the project.                          |
 | `doc`           | generates API documentation for the project.            |
+| `format`        | formats the source code of the project.                 |
 | `stat`          | prints statistics about the project.                    |
 | `build`         | compiles the entire project.                            |
 | `build-classes` | compiles the project to Java class files.               |

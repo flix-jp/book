@@ -79,6 +79,28 @@ build
 
 このドキュメントは、`build/doc/index.html` をブラウザで開くことで読めます。
 
+## ソースコードの整形
+
+`format` コマンドを使うと、プロジェクトのソースコードを整形できます。このコマンドは、`src` と `test` 内のすべてのファイルをその場で書き換えます。`src/Main.flix` が次のような内容であるとき：
+
+```flix
+def   main( ) : Unit \ IO =
+  println(  "Hello World!" )
+
+def add(x:Int32,y:Int32):Int32=x+y
+```
+
+`format` を実行した後は次のようになります：
+
+```flix
+def main(): Unit \ IO =
+    println("Hello World!")
+
+def add(x: Int32, y: Int32): Int32 = x + y
+```
+
+プロジェクトがコンパイルできない場合、`format` はエラーを報告し、ファイルには手を加えません。
+
 ## 統計情報の表示
 
 `stat` コマンドを使うと、プロジェクトに関する統計情報を表示できます：
@@ -184,6 +206,30 @@ build
 ```
 
 We read it by opening `build/doc/index.html` in a browser.
+
+## Formatting the Source Code
+
+We can format the source code of the project with the `format` command. The
+command rewrites every file in `src` and `test` in place. If `src/Main.flix` reads:
+
+```flix
+def   main( ) : Unit \ IO =
+  println(  "Hello World!" )
+
+def add(x:Int32,y:Int32):Int32=x+y
+```
+
+then after `format` it reads:
+
+```flix
+def main(): Unit \ IO =
+    println("Hello World!")
+
+def add(x: Int32, y: Int32): Int32 = x + y
+```
+
+If the project does not compile, `format` reports the errors and leaves the
+files untouched.
 
 ## Printing Statistics
 

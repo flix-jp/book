@@ -79,6 +79,7 @@
   - [末尾再帰](./tail-recursion.md)
   - [匿名ホールと名前付きホール](./holes.md)
   - [型注釈](./type-ascriptions.md)
+  - [注釈](./annotations.md)
   - [冗長性](./redundancy.md)
   - [デバッグ](./debugging.md)
 - [ツール](./tools.md)
@@ -91,6 +92,7 @@
   - [依存関係の使用](./using-dependencies.md)
   - [バージョンとアップグレード](./versions-and-upgrades.md)
   - [依存関係の信頼](./trusting-dependencies.md)
+  - [エフェクトのロック](./locking-effects.md)
   - [パッケージの公開](./publishing-a-package.md)
 ---
 
@@ -98,7 +100,6 @@
   - [検査付きキャスト](./checked-casts.md)
   - [未検査キャスト](./unchecked-casts.md)
   - [バグと到達不能コード](./bug-and-unreachable.md)
-  - [遅延評価](./laziness.md)
   - [純粋性リフレクション](./purity-reflection.md)
   - [型レベルプログラミング](./type-level-programming.md)
   - [停止性検査](./termination-checking.md)

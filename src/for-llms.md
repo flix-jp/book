@@ -225,11 +225,11 @@ def main(): Unit \ { Logger, Random, Sleep, IO } =
 &#x274C; **誤り（ネストしたコールバックによる手書きの CPS）:**
 
 ```
-def handleSleep(f: Unit -> a \ { Sleep, ef }): a \ ef + IO = ...
+def handleSleep(f: Unit -> a \ ef + Sleep): a \ ef + IO = ...
 
-def withLogging(f: Unit -> a \ { Sleep, ef }): a \ ef + { Sleep, Logger } = ...
+def withLogging(f: Unit -> a \ ef + Sleep): a \ ef + { Sleep, Logger } = ...
 
-def withJitter(factor: Float64, f: Unit -> a \ { Sleep, ef }): a \ ef + { Sleep, Random } = ...
+def withJitter(factor: Float64, f: Unit -> a \ ef + Sleep): a \ ef + { Sleep, Random } = ...
 
 def main(): Unit \ { Logger, Random, Sleep, IO } =
     handleSleep(() ->
@@ -379,7 +379,7 @@ def testAdd01(): Unit \ Assert =
     Assert.assertEq(expected = 3, 1 + 2)
 ```
 
-注意: `@test` ではなく `@Test` を使用してください。他のアノテーションも同様に大文字で始まります。例: `@Parallel`、`@Lazy`、`@MustUse`。
+注意: `@test` ではなく `@Test` を使用してください。他のアノテーションも同様に大文字で始まります。例: `@Parallel`、`@Lazy`、`@Tailrec`。
 
 ## コンパニオンはモジュールの内側に置く
 
@@ -800,11 +800,11 @@ use `run`/`with handler` blocks instead.
 &#x274C; **Incorrect (manual CPS with nested callbacks):**
 
 ```
-def handleSleep(f: Unit -> a \ { Sleep, ef }): a \ ef + IO = ...
+def handleSleep(f: Unit -> a \ ef + Sleep): a \ ef + IO = ...
 
-def withLogging(f: Unit -> a \ { Sleep, ef }): a \ ef + { Sleep, Logger } = ...
+def withLogging(f: Unit -> a \ ef + Sleep): a \ ef + { Sleep, Logger } = ...
 
-def withJitter(factor: Float64, f: Unit -> a \ { Sleep, ef }): a \ ef + { Sleep, Random } = ...
+def withJitter(factor: Float64, f: Unit -> a \ ef + Sleep): a \ ef + { Sleep, Random } = ...
 
 def main(): Unit \ { Logger, Random, Sleep, IO } =
     handleSleep(() ->
@@ -972,7 +972,7 @@ def testAdd01(): Unit \ Assert =
 ```
 
 Note: Use `@Test`, not `@test`. Other annotations are similarly uppercase, e.g.
-`@Parallel`, `@Lazy`, `@MustUse`.
+`@Parallel`, `@Lazy`, `@Tailrec`.
 
 ## Companions Go Inside the Module
 

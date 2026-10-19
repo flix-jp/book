@@ -130,7 +130,7 @@ def age(): Int32 \ Ask[String, Int32] =
 例えば、次のように書いた場合を考えます。
 
 ```flix
-def f(): Unit \ Emit[Int32] + Emit[String] =
+def f(): Unit \ { Emit[Int32], Emit[String] } =
     Emit.emit(42);
     Emit.emit("Hello")
 ```
@@ -142,7 +142,7 @@ Flix コンパイラは次のエラーメッセージを出力します。
 
 >> Mismatched type arguments for effect 'Emit': 'Int32' and 'String'.
 
-5 | def f(): Unit \ Emit[Int32] + Emit[String] =
+5 | def f(): Unit \ { Emit[Int32], Emit[String] } =
                                   ^^^^^^^^^^^^
                                   mismatched effect type argument.
 
@@ -327,7 +327,7 @@ must be used with the same type arguments everywhere.
 For example, if we write:
 
 ```flix
-def f(): Unit \ Emit[Int32] + Emit[String] =
+def f(): Unit \ { Emit[Int32], Emit[String] } =
     Emit.emit(42);
     Emit.emit("Hello")
 ```
@@ -339,9 +339,9 @@ The Flix compiler emits the error message:
 
 >> Mismatched type arguments for effect 'Emit': 'Int32' and 'String'.
 
-5 | def f(): Unit \ Emit[Int32] + Emit[String] =
-                                  ^^^^^^^^^^^^
-                                  mismatched effect type argument.
+5 | def f(): Unit \ { Emit[Int32], Emit[String] } =
+                                   ^^^^^^^^^^^^
+                                   mismatched effect type argument.
 
 The effect 'Emit' is used with different types for its 1st type parameter 't'.
 

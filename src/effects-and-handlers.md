@@ -77,7 +77,7 @@ eff HourOfDay {
     def getCurrentHour(): Int32
 }
 
-def greeting(): String \ {HourOfDay} = 
+def greeting(): String \ HourOfDay = 
     let h = HourOfDay.getCurrentHour();
     if (h <= 12) 
         "Good morning"
@@ -113,7 +113,7 @@ eff Say {
     def say(s: String): Unit
 }
 
-def greeting(): Unit \ {Ask, Say} = 
+def greeting(): Unit \ { Ask, Say } = 
     let name = Ask.ask();
     Say.say("Hello Mr. ${name}")
 
@@ -144,7 +144,7 @@ eff Exc {
     def raise(m: String): Void
 }
 
-def drunkFlip(): String \ {Amb, Exc} = {
+def drunkFlip(): String \ { Amb, Exc } = {
     if (Amb.flip()) {
         let heads = Amb.flip();
         if (heads) "heads" else "tails"
@@ -334,7 +334,7 @@ eff HourOfDay {
     def getCurrentHour(): Int32
 }
 
-def greeting(): String \ {HourOfDay} = 
+def greeting(): String \ HourOfDay = 
     let h = HourOfDay.getCurrentHour();
     if (h <= 12) 
         "Good morning"
@@ -377,7 +377,7 @@ eff Say {
     def say(s: String): Unit
 }
 
-def greeting(): Unit \ {Ask, Say} = 
+def greeting(): Unit \ { Ask, Say } = 
     let name = Ask.ask();
     Say.say("Hello Mr. ${name}")
 
@@ -415,7 +415,7 @@ eff Exc {
     def raise(m: String): Void
 }
 
-def drunkFlip(): String \ {Amb, Exc} = {
+def drunkFlip(): String \ { Amb, Exc } = {
     if (Amb.flip()) {
         let heads = Amb.flip();
         if (heads) "heads" else "tails"
